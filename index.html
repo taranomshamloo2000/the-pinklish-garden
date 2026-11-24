@@ -281,7 +281,7 @@
 /* Heart rhythm and tactile focus feedback */
 .unified-object[data-key="heart"]>svg{transform-origin:50% 58%;animation:heartRhythm 1.05s ease-in-out infinite}
 @keyframes heartRhythm{0%,100%{transform:scale(1)}12%{transform:scale(1.045)}24%{transform:scale(1)}38%{transform:scale(1.025)}52%{transform:scale(1)}}
-</style>
+.bank-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}.bank-option{width:100%;min-height:46px;text-align:right;white-space:normal;line-height:1.7;cursor:pointer;border:1px solid var(--line);border-radius:13px;background:#fff9f6;color:var(--ink);padding:10px 12px}.bank-option:disabled{opacity:1;cursor:default}.bank-option.correct,.option.correct{background:#d9f5df!important;border-color:#35a853!important;color:#145b2a!important}.bank-option.wrong,.option.wrong{background:#ffe2e2!important;border-color:#df6666!important;color:#8d2020!important}.bank-answer{width:100%;min-height:85px;resize:vertical;margin-top:10px}.bank-option:focus-visible,.bank-answer:focus-visible{outline:3px solid #d98da2;outline-offset:2px}@media(max-width:600px){.bank-options{grid-template-columns:1fr}}</style>
 <body>
 <main class="wrap">
 <section id="home" class="page">
@@ -508,12 +508,46 @@ const bankMCQ=[
 [1,'vocab','The Persian lion … about 75 years ago.',['died out','went out','paid attention','saved'],0],[1,'vocab','The cheetah lives in the … of Iran.',['plains','roads','boxes','laptops'],0],[1,'vocab','A person who catches or kills animals is a … .',['zookeeper','visitor','hunter','scientist'],2],[1,'vocab','We should … our natural resources.',['destroy','protect','hunt','lose'],1],[1,'vocab','The opposite of increase is … .',['rise','decrease','grow','save'],1],[1,'grammar','Look at the clouds! It … rain.',['will','is going to','rains','rained'],1],[1,'grammar','The phone is ringing. I … answer it.',['am going to','will','answered','answering'],1],[1,'grammar','They … visit us tonight. They planned it last week.',['will','are going to','visit','visited'],1],[1,'grammar','She has three … .',['child','childs','children','childes'],2],[1,'grammar','I need some … to write on.',['paper','papers','a paper','the paper'],0],[1,'reading','What is the main danger to the cheetah in the passage?',['Cutting trees and hunting','Cold weather','Lack of water','Other planets'],0],[1,'reading','The word them in “protect them” refers to … .',['roads','people','cheetahs','trees'],2],
 [2,'vocab','Something like water or milk is a … .',['solid','gas','liquid','drop'],2],[2,'vocab','A very small amount of liquid is a … .',['sea','drop','pump','wave'],1],[2,'vocab','White blood cells … our body against microbes.',['donate','defend','carry','collect'],1],[2,'vocab','The … helps us think.',['heart','brain','blood','cell'],1],[2,'vocab','We need a … to see very small things.',['telescope','microscope','lamp','ball'],1],[2,'grammar','This is … film I have ever seen.',['good','better','the best','as good'],2],[2,'grammar','The blue whale is … animal on Earth.',['large','larger','the largest','as large'],2],[2,'grammar','This book is … than that one.',['expensive','more expensive','the most expensive','as expensive'],1],[2,'grammar','She speaks English … than her sister.',['fluent','more fluently','the most fluently','as fluent'],1],[2,'reading','More than half of blood is … .',['red cells','white cells','plasma','oxygen'],2],[2,'reading','What do red blood cells carry?',['Carbon dioxide','Oxygen','Plasma','Microbes'],1]
 ].map(x=>({l:x[0],t:'mcq',c:x[1],q:x[2],o:x[3],a:x[4]}));
+let bankCurrentData=[],bankDone={};
+function bankEscape(v){return String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
 function renderQuestionBank(){
  const l=document.getElementById('bankLesson')?.value||'all',t=document.getElementById('bankType')?.value||'all',c=document.getElementById('bankCategory')?.value||'all';
  const old=questions.filter(q=>q[3]>=1&&q[3]<=4).map(q=>({l:q[3],t:'mcq',c:'vocab',q:q[0],o:q[1],a:q[2]}));
- const data=[...old,...bankMCQ,...bankEssays].filter(x=>(l==='all'||x.l===+l)&&(t==='all'||x.t===t)&&(c==='all'||x.c===c));
- document.getElementById('bankCount').textContent=data.length+' سؤال مطابق فیلتر';
- document.getElementById('questionBankList').innerHTML=data.map((x,i)=>'<article class="panel" style="margin:0 0 11px"><div class="toolbar"><span class="pill">درس '+x.l+' · '+(x.t==='mcq'?'چهارگزینه‌ای':'تشریحی')+'</span><span class="muted">'+({vocab:'واژگان',grammar:'گرامر',reading:'درک مطلب و نوشتار'}[x.c])+'</span></div><h3 style="font-size:16px;line-height:1.9">'+(i+1)+'. '+x.q+'</h3>'+(x.t==='mcq'?'<ol style="line-height:2">'+x.o.map(o=>'<li>'+o+'</li>').join('')+'</ol>':'')+'<details style="margin-top:9px"><summary style="cursor:pointer;color:var(--wine);font-weight:700">نمایش پاسخ</summary><div class="feedback">'+(x.t==='mcq'?x.o[x.a]:x.a)+'</div></details></article>').join('')||'<div class="empty">سؤالی در این دسته نیست.</div>';
+ bankCurrentData=[...old,...bankMCQ,...bankEssays].filter(x=>(l==='all'||x.l===+l)&&(t==='all'||x.t===t)&&(c==='all'||x.c===c));
+ bankDone={};
+ document.getElementById('bankCount').textContent=bankCurrentData.length+' سؤال در این فیلتر · برای پاسخ دادن گزینه را لمس کن یا جواب تشریحی را بنویس.';
+ document.getElementById('questionBankList').innerHTML=bankCurrentData.map((x,i)=>{
+ const tag=({vocab:'واژگان',grammar:'گرامر',reading:'درک مطلب و نوشتار'}[x.c]||'تمرین');
+ const body=x.t==='mcq'
+ ?'<div class="bank-options">'+x.o.map((o,k)=>'<button type="button" class="option bank-option" onclick="bankChoose('+i+','+k+')" id="bankOpt'+i+'_'+k+'">'+['الف','ب','ج','د'][k]+') '+bankEscape(o)+'</button>').join('')+'</div><div id="bankResult'+i+'" aria-live="polite"></div>'
+ :'<textarea class="field bank-answer" id="bankEssay'+i+'" rows="3" placeholder="پاسخت را اینجا بنویس..."></textarea><div class="actions"><button type="button" class="btn" onclick="bankGradeEssay('+i+')">ثبت پاسخ و دریافت نمره</button></div><div id="bankResult'+i+'" aria-live="polite"></div>';
+ return '<article class="panel" style="margin:0 0 11px"><div class="toolbar"><span class="pill">درس '+x.l+' · '+(x.t==='mcq'?'چهارگزینه‌ای':'تشریحی')+'</span><span class="muted">'+tag+'</span><span class="muted">'+(i+1)+' / '+bankCurrentData.length+'</span></div><h3 style="font-size:16px;line-height:1.9">'+(i+1)+'. '+bankEscape(x.q)+'</h3>'+body+'</article>';
+ }).join('')||'<div class="empty">سؤالی در این دسته نیست.</div>';
+}
+function bankChoose(i,k){
+ if(bankDone[i])return;
+ const x=bankCurrentData[i],right=k===x.a;
+ bankDone[i]=true;
+ x.o.forEach((o,j)=>{const b=document.getElementById('bankOpt'+i+'_'+j);if(!b)return;b.disabled=true;if(j===x.a)b.classList.add('correct');else if(j===k)b.classList.add('wrong');});
+ document.getElementById('bankResult'+i).innerHTML='<div class="feedback">'+(right?'آفرین! دقیقاً درست گفتی! 🌸🌷 یک امتیاز گرفتی.':'اشکالی نداره، از اشتباه‌ها یاد می‌گیریم! 💗 پاسخ درست: '+bankEscape(x.o[x.a]))+'</div>';
+}
+function bankNormalize(s){
+ return String(s||'').toLowerCase().replace(/[ًٌٍَُِّْـ]/g,'').replace(/[ي]/g,'ی').replace(/[ك]/g,'ک').replace(/[^a-z0-9\u0600-\u06ff]+/g,' ').trim();
+}
+function bankGradeEssay(i){
+ if(bankDone[i])return;
+ const x=bankCurrentData[i],typed=bankNormalize(document.getElementById('bankEssay'+i)?.value||'');
+ if(!typed){document.getElementById('bankResult'+i).innerHTML='<div class="feedback">اول جوابت رو بنویس تا بتونم بررسیش کنم. 🌷</div>';return;}
+ const sample=bankNormalize(x.a);
+ const stop=new Set(['the','and','for','with','from','that','this','are','was','were','you','your','they','them','our','their','into','about','very','must','should','will','can','not','is','to','of','in','a','an','be','we','it','on','as','by','do','has','have','در','را','به','از','و','که','برای','است','یک','با','تا','شود','می','کند','آنها','این']);
+ const keys=[...new Set(sample.split(' ').filter(w=>w.length>2&&!stop.has(w)))];
+ const matched=keys.filter(w=>typed.includes(w));
+ const ratio=keys.length?matched.length/keys.length:0;
+ const full=ratio>=.65,partial=ratio>=.35;
+ const points=full?1:partial?.5:0;
+ bankDone[i]=true;
+ const pct=Math.round(ratio*100);
+ document.getElementById('bankResult'+i).innerHTML='<div class="feedback">'+(full?'آفرین! واژه‌های کلیدی اصلی رو آوردی. 🌸 یک نمره کامل گرفتی!':partial?'خوبه! بخشی از واژه‌های کلیدی رو درست نوشتی. 🌷 نیم‌نمره گرفتی.':'تلاشت عالیه که جواب دادی! 💗 این بار واژه‌های کلیدی کافی نبود؛ نمره این سؤال صفر شد.')+'<br>تطبیق واژه‌های کلیدی: '+pct+'٪ · نمره: '+points+' از ۱<br><b>پاسخ نمونه:</b> '+bankEscape(x.a)+'</div>';
 }
 function renderFurther(){const box=document.getElementById('furtherCards');if(!box)return;box.innerHTML=furtherTexts.map((t,i)=>`<article class="lesson-card"><span class="pill">درس ${t.lesson} · ${t.part}</span><h3 class="latin">${t.title}</h3><details style="margin-top:12px"><summary style="cursor:pointer;color:var(--wine);font-weight:700">متن انگلیسی و ترجمه فارسی</summary><h4>English transcript</h4><p class="latin" style="white-space:pre-line;color:var(--ink);font-size:15px;line-height:2">${t.en}</p><h4>ترجمه فارسی</h4><p style="white-space:pre-line;line-height:2">${t.fa}</p></details></article>`).join('')}
 
