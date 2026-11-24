@@ -383,24 +383,33 @@ const pictureSearchTerms={
 function setBloomImage(img,emoji,word,url,alt){if(!activeBloomWord||activeBloomWord[0].toLowerCase()!==word.toLowerCase())return;img.onload=()=>{if(img.naturalWidth>=img.naturalHeight*1.12){img.hidden=false;emoji.hidden=true}else{img.hidden=true;emoji.hidden=false}};img.onerror=()=>{img.hidden=true;emoji.hidden=false};img.src=url;img.alt=alt||word+' photograph'}
 function loadModalPicture(word){
  const img=document.getElementById('modalPicture'),emoji=document.getElementById('modalEmoji');
- img.hidden=true;img.removeAttribute('src');img.onload=null;img.onerror=null;img.alt=word+' illustration';emoji.hidden=false;
- const key=word.toLowerCase(),query=pictureSearchTerms[key]||word+' photograph';
- const params=new URLSearchParams({action:'query',generator:'search',gsrsearch:'filetype:bitmap '+query,gsrnamespace:'6',gsrlimit:'30',prop:'imageinfo',iiprop:'url|size',iiurlwidth:'800',format:'json',origin:'*'});
- fetch('https://commons.wikimedia.org/w/api.php?'+params.toString()).then(r=>{if(!r.ok)throw new Error('Commons search unavailable');return r.json()}).then(data=>{
+ img.hidden=true;img.removeAttribute('src');img.onload=null;img.onerror=null;emoji.hidden=false;
+ const key=word.toLowerCase(),query=pictureSearchTerms[key]||word;
+ const searchParams=new URLSearchParams({action:'query',list:'search',srsearch:query,srnamespace:'6',srlimit:'30',format:'json',origin:'*'});
+ fetch('https://commons.wikimedia.org/w/api.php?'+searchParams.toString()).then(r=>{if(!r.ok)throw new Error('Commons search failed');return r.json()}).then(searchData=>{
   if(!activeBloomWord||activeBloomWord[0].toLowerCase()!==key)return;
-  const pages=Object.values(data.query?.pages||{});
-  const candidates=pages.map(p=>({page:p,info:p.imageinfo?.[0]})).filter(x=>x.info?.thumburl&&x.info.width>=x.info.height*1.12&&x.info.width>=500).sort((a,b)=>(b.info.width/b.info.height)-(a.info.width/a.info.height));
-  if(candidates.length){const best=candidates[0];setBloomImage(img,emoji,word,best.info.thumburl,best.page.title.replace(/^File:/,''));return}
+  const hits=(searchData.query?.search||[]).filter(x=>x.title&&/^File:/i.test(x.title));
+  if(!hits.length)throw new Error('No Commons files found');
+  const titles=hits.map(x=>x.title).slice(0,25).join('|');
+  const infoParams=new URLSearchParams({action:'query',titles,prop:'imageinfo',iiprop:'url|size',iiurlwidth:'1000',format:'json',origin:'*'});
+  return fetch('https://commons.wikimedia.org/w/api.php?'+infoParams.toString()).then(r=>{if(!r.ok)throw new Error('Image details failed');return r.json()});
+ }).then(infoData=>{
+  if(!infoData||!activeBloomWord||activeBloomWord[0].toLowerCase()!==key)return;
+  const candidates=Object.values(infoData.query?.pages||{}).map(p=>({page:p,info:p.imageinfo?.[0]})).filter(x=>x.info?.thumburl&&x.info.width>=x.info.height*1.12&&x.info.width>=480&&x.info.height>=260);
+  candidates.sort((a,b)=>{
+   const score=x=>Math.abs((x.info.width/x.info.height)-1.65)+((x.info.width<800)?0.35:0);
+   return score(a)-score(b);
+  });
+  if(candidates.length){
+   const best=candidates[0];
+   img.onload=()=>{if(img.naturalWidth>=img.naturalHeight*1.12){img.hidden=false;emoji.hidden=true}else{img.hidden=true;emoji.hidden=false}};
+   img.onerror=()=>{img.hidden=true;emoji.hidden=false};
+   img.alt=best.page.title.replace(/^File:/,'');
+   img.src=best.info.thumburl;
+   return;
+  }
   loadWikipediaLandscapeFallback(word,img,emoji);
  }).catch(()=>loadWikipediaLandscapeFallback(word,img,emoji));
-}
-function loadWikipediaLandscapeFallback(word,img,emoji){
- const title=pictureTitles[word.toLowerCase()]||word;
- const url='https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(title.replace(/ /g,'_'));
- fetch(url,{headers:{'Accept':'application/json'}}).then(r=>{if(!r.ok)throw new Error('image unavailable');return r.json()}).then(data=>{
-  if(!activeBloomWord||activeBloomWord[0].toLowerCase()!==word.toLowerCase())return;
-  if(data.thumbnail?.source&&data.thumbnail.width>=data.thumbnail.height*1.12)setBloomImage(img,emoji,word,data.thumbnail.source,data.title||word);
- }).catch(()=>{img.hidden=true;emoji.hidden=false});
 }
 function openWordBloom(word){let w=words.find(x=>x[0].toLowerCase()===String(word).toLowerCase());if(!w)return;activeBloomWord=w;document.getElementById('modalWord').textContent=w[0];document.getElementById('modalPhonetic').textContent=w[1];document.getElementById('modalPersianPronunciation').textContent=persianPronunciation(w[0]);document.getElementById('modalMeaning').textContent=w[2];document.getElementById('modalEmoji').textContent=bloomEmoji[w[0].toLowerCase()]||'🌸';loadModalPicture(w[0]);const examples=wordExamplesFor(w[0]);document.getElementById('modalExample').textContent='1. '+examples[0];document.getElementById('modalExample2').textContent='2. '+examples[1];document.getElementById('wordModal').classList.add('open')}
 function closeWordModal(){document.getElementById('wordModal').classList.remove('open')}
