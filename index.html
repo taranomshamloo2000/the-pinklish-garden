@@ -182,6 +182,32 @@
 .lesson-world[data-world="2"] .world-info{top:96px}
 .lesson-world .world-info .wi-note{font-size:10px;color:#987c88;margin-top:9px}
 @media(max-width:600px){.lesson-world .world-info{top:86px;right:9px;width:calc(100% - 18px);max-height:55%;padding:13px}.world-info h4{font-size:21px}.lesson-world[data-world="1"] .world-info{top:82px}}
+
+/* Museum-grade remote GLB model gallery for every lesson */
+.lesson-world{min-height:720px!important;background:radial-gradient(ellipse at 50% 8%,#fff5ee 0%,#f5dfe1 43%,#d9c3d1 100%)!important;color:#332b36!important}
+.lesson-world .world-title{position:relative;z-index:6;padding:22px 22px 8px;color:#382c38}
+.lesson-world .world-title small{letter-spacing:.2em;color:#8a657b;font-weight:800}
+.lesson-world .world-title h3{color:#352b36;text-shadow:none;font-size:clamp(21px,3vw,30px)}
+.lesson-world .world-title p{color:#705c6b}
+.lesson-world .forest3d-stage{inset:108px 0 158px!important;overflow:auto!important;padding:12px 16px 20px;scrollbar-width:thin;scrollbar-color:#b88ca5 transparent}
+.world-model-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;max-width:980px;margin:0 auto;align-content:start}
+.world-model-card{min-width:0;overflow:hidden;border:1px solid #ffffffc9;border-radius:19px;background:linear-gradient(155deg,#fffdf9ed,#f7edf2e8);box-shadow:0 12px 28px #58435320;backdrop-filter:blur(10px)}
+.world-model-top{height:26px;padding:8px 12px 0;display:flex;justify-content:space-between;align-items:center;color:#9b7890;font-size:9px;font-weight:800;letter-spacing:.16em}
+.world-model-dot{width:7px;height:7px;border-radius:50%;background:#83a58a;box-shadow:0 0 0 4px #83a58a22}
+.world-model-card model-viewer{display:block;width:100%;height:190px;background:radial-gradient(ellipse at 50% 62%,#eadde2 0%,#f6eef1 58%,#f9f4f2 100%);--poster-color:transparent}
+.model-poster{height:100%;display:grid;place-items:center;color:#8c7484;font-size:12px}
+.model-load-error{height:100%;display:grid;place-items:center;padding:18px;text-align:center;color:#8a5d6c;font-size:12px}
+.world-model-label{display:flex;flex-direction:column;gap:3px;width:100%;padding:9px 12px 5px;text-align:left;border:0;background:transparent;color:#3b3039;cursor:pointer}
+.world-model-label b{font-size:13px;font-weight:800}
+.world-model-label small{font-size:11px;color:#826e7d}
+.world-model-credit{padding:0 12px 10px;color:#a28b9a;font-size:9px}
+.world-model-foot{max-width:980px;margin:12px auto 0;text-align:center;color:#775e70;font-size:11px}
+.model-gallery-error{height:100%;min-height:250px;display:grid;place-items:center;text-align:center;padding:24px;color:#7b596c;font-weight:700}
+.lesson-world .world-info{color:#3c3039;background:#fffaf4ed;border:1px solid #fff;z-index:9}
+.lesson-world .world-animals{z-index:7}
+.lesson-world .world-controls{z-index:8}
+@media(max-width:600px){.lesson-world{min-height:850px!important}.lesson-world .world-title{padding:18px 15px 8px}.lesson-world .forest3d-stage{inset:105px 0 175px!important;padding:8px 9px 16px}.world-model-grid{gap:9px}.world-model-card{border-radius:15px}.world-model-card model-viewer{height:175px}.world-model-label{padding:8px 9px 4px}.world-model-label b{font-size:11px}.world-model-label small{font-size:10px}.world-model-credit{padding:0 9px 8px;font-size:8px}.world-model-foot{font-size:10px;padding:0 10px}}
+
 </style>
 <body>
 <main class="wrap">
@@ -254,6 +280,7 @@
 </main>
 <footer class="footer"><div class="latin">THE PINKLISH GARDEN</div><p>Where English blooms.</p><p>طراحی و ساخته‌شده با عشق به یادگیری توسط <b>ترنم شاملو</b></p><p><a href="mailto:taranomshamloo2000@gmail.com">taranomshamloo2000@gmail.com</a></p><p style="font-size:11px;opacity:.65">© THE PINKLISH GARDEN</p></footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 <script>
 const words=[
 ['avicenna','/ˌævɪˈsenə/','ابن سینا',1],['leopard','/ˈlepərd/','پلنگ',1],['visitor','/ˈvɪzɪtər/','بازدیدکننده',1],['die out','/daɪ aʊt/','منقرض شدن',1],['elephant','/ˈelɪfənt/','فیل',1],['human','/ˈhjuːmən/','انسان',1],['endangered','/ɪnˈdeɪndʒərd/','در معرض انقراض',1],['gazelle','/ɡəˈzel/','غزال',1],['information','/ˌɪnfərˈmeɪʃən/','اطلاعات',1],['protect','/prəˈtekt/','محافظت کردن',1],['destroy','/dɪˈstrɔɪ/','نابود کردن',1],['wildlife','/ˈwaɪldlaɪf/','حیات وحش',1],['nature','/ˈneɪtʃər/','طبیعت',1],['zookeeper','/ˈzuːkiːpər/','نگهبان باغ‌وحش',1],['telescope','/ˈtelɪskoʊp/','تلسکوپ',2],['microscope','/ˈmaɪkrəˌskoʊp/','میکروسکوپ',2],['orbit','/ˈɔːrbɪt/','مدار',2],['planet','/ˈplænɪt/','سیاره',2],['Neptune','/ˈneptjuːn/','نپتون',2],['oxygen','/ˈɑːksɪdʒən/','اکسیژن',2],['carbon dioxide','/ˌkɑːrbən daɪˈɑːksaɪd/','دی‌اکسید کربن',2],['energy','/ˈenərdʒi/','انرژی',2],['creation','/kriˈeɪʃən/','آفرینش',2],['donate','/ˈdoʊneɪt/','اهدا کردن',2],['knowledge','/ˈnɑːlɪdʒ/','دانش',3],['value','/ˈvæljuː/','ارزش',3],['scientist','/ˈsaɪəntɪst/','دانشمند',3],['mathematics','/ˌmæθəˈmætɪks/','ریاضیات',3],['medicine','/ˈmedɪsɪn/','پزشکی',3],['experiment','/ɪkˈsperɪmənt/','آزمایش',3],['discover','/dɪˈskʌvər/','کشف کردن',3],['achievement','/əˈtʃiːvmənt/','دستاورد',3],['effort','/ˈefərt/','تلاش',3],['translate','/trænsˈleɪt/','ترجمه کردن',3],['patient','/ˈpeɪʃənt/','بیمار؛ صبور',3],['treatment','/ˈtriːtmənt/','درمان',3],['travel agent','/ˈtrævəl ˌeɪdʒənt/','کارمند آژانس مسافرتی',4],['vacation','/veɪˈkeɪʃən/','تعطیلات',4],['abroad','/əˈbrɔːd/','در خارج از کشور',4],['destination','/ˌdestɪˈneɪʃən/','مقصد',4],['culture','/ˈkʌltʃər/','فرهنگ',4],['embassy','/ˈembəsi/','سفارت',4],['historical','/hɪˈstɔːrɪkəl/','تاریخی',4],['comfortable','/ˈkʌmftəbəl/','راحت',4],['traditional','/trəˈdɪʃənəl/','سنتی',4],['safely','/ˈseɪfli/','به سلامت',4],['pilgrim','/ˈpɪlɡrɪm/','زائر',4]
@@ -606,10 +633,51 @@ function closeWorldExplorer(){document.getElementById('worldInfo')?.classList.re
 function renderLessonWorld(n){
  activeWorldLesson=n;activeWorldStep=0;
  const title=lessonWorldTitles[n-1],items=lessonWorldItems[n-1];
- setTimeout(()=>{if(n===1)initForest3D();else initLesson3D(n)},140);
- const hint=n===1?'حیوانات را در جنگل تماشا کن؛ روی هر حیوان یا نامش بزن تا واژه را یاد بگیری.':n===2?'درون بدن انسان را کشف کن؛ روی اندام‌ها و اجزای سه‌بعدی بزن.':n===3?'آزمایشگاه را کاوش کن؛ ابزارها را لمس کن تا نام و معنی‌شان را یاد بگیری.':'کره زمین را بچرخان و سرزمین‌ها و بناها را کشف کن.';
- return '<div class="lesson-world" id="lessonWorld" data-world="'+n+'"><div class="world-title"><small>'+title[0]+'</small><h3>'+title[1]+'</h3><p>'+title[2]+'</p></div><div class="forest3d-stage" id="forest3dStage" aria-label="Interactive animated 3D lesson scene"></div><div class="world-info" id="worldInfo" aria-live="polite"></div><div class="world-animals" id="worldAnimals">'+items.map(x=>'<button class="world-animal" onclick="openWorldItem(\''+x.key+'\')"><b>'+x.en+'</b><small>'+x.fa+'</small></button>').join('')+'</div><div class="world-controls"><button class="primary" id="forestPauseBtn" onclick="toggleForestMotion()">Ⅱ توقف حرکت</button><button id="forestFullBtn" onclick="toggleForestFullscreen()">⛶ تمام‌صفحه</button></div><div class="world-hint" id="worldHint">'+hint+'</div></div>';
+ setTimeout(()=>initOnlineModelGallery(n),220);
+ const hint=n===1?'مدل‌های واقعی حیوانات را بچرخان و از زاویه‌های مختلف تماشا کن.':n===2?'اندام‌های بدن را در مدل‌های سه‌بعدی آموزشی از نزدیک بررسی کن.':n===3?'ابزارهای آزمایشگاهی را بچرخان و جزئیاتشان را کشف کن.':'زمین و سازه‌های تاریخی را از هر زاویه بررسی کن.';
+ return '<div class="lesson-world" id="lessonWorld" data-world="'+n+'"><div class="world-title"><small>'+title[0]+'</small><h3>'+title[1]+'</h3><p>'+title[2]+'</p></div><div class="forest3d-stage" id="forest3dStage" aria-label="Interactive online 3D models"></div><div class="world-info" id="worldInfo" aria-live="polite"></div><div class="world-animals" id="worldAnimals">'+items.map(x=>'<button class="world-animal" onclick="openWorldItem(\''+x.key+'\')"><b>'+x.en+'</b><small>'+x.fa+'</small></button>').join('')+'</div><div class="world-controls"><button class="primary" id="forestPauseBtn" onclick="toggleForestMotion()">Ⅱ توقف چرخش</button><button id="forestFullBtn" onclick="toggleForestFullscreen()">⛶ تمام‌صفحه</button></div><div class="world-hint" id="worldHint">'+hint+'</div></div>';
 }
+const lesson3DAssets={
+ 1:[
+  {key:'lion',name:'Lion',fa:'شیر',src:'https://models.vinish.dev/wildlife/lion.glb',credit:'Vinish.dev · CC BY 4.0'},
+  {key:'elephant',name:'African Elephant',fa:'فیل آفریقایی',src:'https://models.vinish.dev/wildlife/elephant.glb',credit:'Vinish.dev · CC BY 4.0'},
+  {key:'giraffe',name:'Giraffe',fa:'زرافه',src:'https://models.vinish.dev/wildlife/giraffe.glb',credit:'Vinish.dev · CC BY 4.0'},
+  {key:'fox',name:'Red Fox',fa:'روباه قرمز',src:'https://models.vinish.dev/wildlife/fox.glb',credit:'Vinish.dev · CC BY 4.0'}
+ ],
+ 2:[
+  {key:'human',name:'Human Anatomy Torso',fa:'تنه انسان با اندام‌های داخلی',src:'https://files.innerscene.com/library/torso-with-removable-organs-1fe1b70a/a936acb02dad8ad7352a/torso-with-removable-organs.glb',credit:'Innerscene · CC0'},
+  {key:'heart',name:'Human Heart',fa:'قلب انسان',src:'https://files.innerscene.com/library/heart-e9f72b0e/14accaedb5b055c561f3/heart.glb',credit:'Innerscene · CC0'},
+  {key:'brain',name:'Human Brain',fa:'مغز انسان',src:'https://files.innerscene.com/library/brain-10d8f88f/d62e30032a36fa53fa70/brain.glb',credit:'Innerscene · CC0'}
+ ],
+ 3:[
+  {key:'laboratory',name:'Laboratory Bench',fa:'میز و فضای آزمایشگاه',src:'https://grab3d.com/dl/lab-bench/lab-bench.glb',credit:'Grab3D · CC0'},
+  {key:'microscope',name:'Compound Microscope',fa:'میکروسکوپ',src:'https://grab3d.com/dl/microscope/microscope.glb',credit:'Grab3D · CC0'},
+  {key:'experiment',name:'Erlenmeyer Flask',fa:'ارلن آزمایشگاهی',src:'https://grab3d.com/dl/erlenmeyer-flask/erlenmeyer-flask.glb',credit:'Grab3D · CC0'},
+  {key:'telescope',name:'Telescope',fa:'تلسکوپ',src:'https://grab3d.com/dl/telescope/telescope.glb',credit:'Grab3D · CC0'}
+ ],
+ 4:[
+  {key:'planet',name:'Earth & Moon',fa:'زمین و ماه',src:'https://grab3d.com/dl/earth-and-moon/earth-and-moon.glb',credit:'Grab3D · CC0'},
+  {key:'historical',name:'Roman Arch',fa:'طاق تاریخی رومی',src:'https://grab3d.com/dl/roman-arch/roman-arch.glb',credit:'Grab3D · CC0'},
+  {key:'culture',name:'Classical Museum',fa:'موزه با معماری کلاسیک',src:'https://grab3d.com/dl/museum/museum.glb',credit:'Grab3D · CC0'}
+ ]
+};
+function initOnlineModelGallery(n){
+ const host=document.getElementById('forest3dStage');if(!host||!document.getElementById('lessonWorld'))return;
+ const assets=lesson3DAssets[n]||[];
+ if(!assets.length){host.innerHTML='<div class="model-gallery-error">مدل‌های این درس هنوز آماده نیستند.</div>';return}
+ if(!window.customElements||!customElements.get('model-viewer')){
+  host.innerHTML='<div class="model-gallery-error">نمایشگر سه‌بعدی در حال بارگذاری است. اتصال اینترنت را بررسی و صفحه را تازه‌سازی کن.</div>';
+  if(window.customElements)customElements.whenDefined('model-viewer').then(()=>{if(document.getElementById('forest3dStage')===host)paintOnlineModels(host,assets)});
+  return;
+ }
+ paintOnlineModels(host,assets);
+}
+function paintOnlineModels(host,assets){
+ host.innerHTML='<div class="world-model-grid">'+assets.map((a,i)=>'<article class="world-model-card"><div class="world-model-top"><span>3D OBJECT '+String(i+1).padStart(2,'0')+'</span><span class="world-model-dot"></span></div><model-viewer src="'+a.src+'" alt="'+a.name+' interactive 3D model" camera-controls auto-rotate rotation-per-second="18deg" shadow-intensity="1.1" exposure="1.12" environment-image="neutral" camera-orbit="0deg 75deg auto" loading="lazy" reveal="auto" interaction-prompt="auto" ar-modes="webxr scene-viewer quick-look"><div slot="poster" class="model-poster">در حال بارگذاری مدل سه‌بعدی…</div></model-viewer><button class="world-model-label" onclick="openWorldItem(\''+a.key+'\')"><b>'+a.name+'</b><small>'+a.fa+'</small></button><div class="world-model-credit">'+a.credit+'</div></article>').join('')+'</div><div class="world-model-foot">برای چرخاندن مدل انگشتت را روی آن بکش؛ برای نزدیک‌شدن دو انگشت را باز کن.</div>';
+ const viewers=host.querySelectorAll('model-viewer');
+ viewers.forEach((v,i)=>{v.addEventListener('error',()=>{v.innerHTML='<div class="model-load-error">این مدل از منبع بیرونی بارگذاری نشد. اتصال اینترنت را بررسی کن.</div>'},{once:true});});
+}
+
 
 /* A small real-time 3D forest made from animated Three.js meshes (not stickers). */
 let forest3DState=null;
