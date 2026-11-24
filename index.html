@@ -263,7 +263,19 @@
 
 #forest3dStage.motion-paused .local-art-stage svg{animation-play-state:paused!important}
 
-.unified-world{position:relative;overflow:hidden;border-radius:18px;background:#263b39;box-shadow:inset 0 0 0 1px #ffffff40,0 12px 28px #23172520}.unified-world-heading{position:absolute;z-index:2;top:9px;left:14px;display:flex;flex-direction:column;gap:3px;color:#fff;text-shadow:0 2px 8px #17232b99;direction:ltr}.unified-world-heading span{font-size:8px;letter-spacing:.18em;opacity:.8}.unified-world-heading b{font:600 15px Georgia,serif;letter-spacing:.04em}.unified-world-canvas{display:block;width:100%;height:auto;min-height:0;max-height:none;aspect-ratio:1000/360}.unified-object{cursor:pointer;outline:none;transform-box:fill-box;transform-origin:center bottom;transition:filter .22s,transform .22s}.unified-object:hover,.unified-object.is-selected{filter:drop-shadow(0 0 10px #fff9);transform:translateY(-5px)}.unified-object:focus-visible{filter:drop-shadow(0 0 12px #fff)}.unified-world-note{position:absolute;bottom:7px;right:10px;color:#fff;background:#17232bbd;border:1px solid #ffffff40;border-radius:16px;padding:5px 9px;font-size:9px;backdrop-filter:blur(8px)}@media(max-width:600px){.unified-world{border-radius:13px}.unified-world-heading{top:6px;left:9px}.unified-world-heading b{font-size:12px}.unified-world-note{font-size:8px;bottom:5px;right:6px;padding:4px 7px}}</style>
+/* Compact two-row immersive lesson viewport */
+.lesson-world{min-height:0!important;height:auto!important;padding:14px 12px 12px!important;margin:14px 0 18px!important;border-radius:20px!important;display:flex!important;flex-direction:column!important;gap:8px!important}
+.lesson-world .world-title{position:relative!important;inset:auto!important;margin:0!important;padding:0 4px 5px!important}
+.lesson-world .forest3d-stage{position:relative!important;inset:auto!important;width:100%!important;height:auto!important;min-height:0!important;overflow:visible!important;flex:none!important;touch-action:pan-y!important}
+.lesson-world .unified-world{width:100%;border-radius:15px;overflow:hidden;box-shadow:inset 0 0 0 1px #ffffff55,0 9px 20px #23172520}
+.lesson-world .unified-world-canvas{display:block;width:100%;height:auto;aspect-ratio:1000/520;min-height:0;max-height:none}
+.lesson-world .unified-world-heading{top:7px;left:10px}.lesson-world .unified-world-heading span{font-size:7px}.lesson-world .unified-world-heading b{font-size:12px}
+.lesson-world .world-animals{display:none!important}.lesson-world .world-info{position:relative!important;inset:auto!important;margin:0!important;min-height:0!important}
+.lesson-world .world-controls{position:relative!important;inset:auto!important;padding:3px 0 0!important;gap:7px}.lesson-world .world-controls button{padding:7px 12px;font-size:11px}
+.lesson-world .world-hint,.lesson-world .unified-world-note{display:none!important}
+.lesson-world .unified-object{cursor:pointer;transition:filter .2s,transform .2s;transform-box:fill-box;transform-origin:center bottom}
+.lesson-world .unified-object:hover,.lesson-world .unified-object.is-selected{filter:drop-shadow(0 0 12px #fff);transform:translateY(-4px)}
+@media(max-width:600px){.lesson-world{padding:10px 8px!important;border-radius:16px!important}.lesson-world .world-title h3{font-size:19px}.lesson-world .world-title p{font-size:11px}}</style>
 <body>
 <main class="wrap">
 <section id="home" class="page">
@@ -698,46 +710,12 @@ function renderLessonWorld(n){
  return '<div class="lesson-world" id="lessonWorld" data-world="'+n+'"><div class="world-title"><small>'+title[0]+'</small><h3>'+title[1]+'</h3><p>'+title[2]+'</p></div><div class="forest3d-stage" id="forest3dStage" aria-label="Interactive online 3D models"></div><div class="world-info" id="worldInfo" aria-live="polite"></div><div class="world-animals" id="worldAnimals">'+items.map(x=>'<button class="world-animal" onclick="openWorldItem(\''+x.key+'\')"><b>'+x.en+'</b><small>'+x.fa+'</small></button>').join('')+'</div><div class="world-controls"><button class="primary" id="forestPauseBtn" onclick="toggleForestMotion()">Ⅱ توقف چرخش</button><button id="forestFullBtn" onclick="toggleForestFullscreen()">⛶ تمام‌صفحه</button></div><div class="world-hint" id="worldHint">'+hint+'</div></div>';
 }
 const lesson3DAssets={
- 1:[
-  {key:'lion',name:'Lion',fa:'شیر'},
-  {key:'elephant',name:'African Elephant',fa:'فیل آفریقایی'},
-  {key:'giraffe',name:'Giraffe',fa:'زرافه'},
-  {key:'tiger',name:'Bengal Tiger',fa:'ببر بنگال'},
-  {key:'elephant',name:'African Elephant',fa:'فیل آفریقایی'},
-  {key:'giraffe',name:'Giraffe',fa:'زرافه'},
-  {key:'lion',name:'Lion',fa:'شیر'}
- ],
- 2:[
-  {key:'human',name:'Human Anatomy',fa:'بدن انسان'},
-  {key:'heart',name:'Human Heart',fa:'قلب انسان'},
-  {key:'brain',name:'Human Brain',fa:'مغز انسان'},
-  {key:'planet',name:'Earth & Moon',fa:'زمین و ماه'},
-  {key:'human',name:'Human Body',fa:'اندام‌های بدن'},
-  {key:'heart',name:'Blood Circulation',fa:'گردش خون'},
-  {key:'brain',name:'Nervous System',fa:'دستگاه عصبی'},
-  {key:'planet',name:'Solar System',fa:'منظومه شمسی'}
- ],
- 3:[
-  {key:'laboratory',name:'Laboratory',fa:'آزمایشگاه'},
-  {key:'microscope',name:'Microscope',fa:'میکروسکوپ'},
-  {key:'experiment',name:'Experiment Flask',fa:'ارلن آزمایش'},
-  {key:'telescope',name:'Telescope',fa:'تلسکوپ'},
-  {key:'experiment',name:'Glassware',fa:'ظروف شیشه‌ای'},
-  {key:'microscope',name:'Lens System',fa:'عدسی‌ها'},
-  {key:'laboratory',name:'Work Bench',fa:'میز کار'},
-  {key:'telescope',name:'Optical Instrument',fa:'ابزار نوری'}
- ],
- 4:[
-  {key:'planet',name:'Earth & Moon',fa:'زمین و ماه'},
-  {key:'historical',name:'Roman Arch',fa:'طاق تاریخی رومی'},
-  {key:'culture',name:'Classical Museum',fa:'موزه کلاسیک'},
-  {key:'historical',name:'Ancient Architecture',fa:'معماری باستان'},
-  {key:'culture',name:'Museum Hall',fa:'تالار موزه'},
-  {key:'historical',name:'Stone Monument',fa:'بنای سنگی'},
-  {key:'culture',name:'Ancient Artifacts',fa:'اشیای تاریخی'},
-  {key:'planet',name:'Ancient World Map',fa:'نقشه جهان'}
- ]
+1:[['lion','Lion','شیر'],['elephant','Elephant','فیل'],['giraffe','Giraffe','زرافه'],['tiger','Tiger','ببر'],['zebra','Zebra','گورخر'],['deer','Deer','گوزن'],['bird','Forest Bird','پرنده جنگلی'],['monkey','Monkey','میمون']],
+2:[['human','Human Body','بدن انسان'],['heart','Heart','قلب'],['brain','Brain','مغز'],['planet','Earth','زمین'],['sun','Sun','خورشید'],['atom','Atom','اتم'],['skeleton','Skeleton','اسکلت'],['moon','Moon','ماه']],
+3:[['laboratory','Laboratory','آزمایشگاه'],['microscope','Microscope','میکروسکوپ'],['experiment','Flask','ارلن'],['telescope','Telescope','تلسکوپ'],['book','Science Book','کتاب علوم'],['beaker','Beaker','بشر آزمایشگاهی'],['bulb','Light Bulb','لامپ'],['lens','Optical Lens','عدسی']],
+4:[['historical','Roman Arch','طاق رومی'],['culture','Museum','موزه'],['pyramid','Pyramid','هرم'],['column','Stone Column','ستون سنگی'],['vase','Ancient Vase','گلدان باستانی'],['scroll','Ancient Scroll','طومار'],['sundial','Sundial','ساعت آفتابی'],['planet','Ancient World','جهان باستان']]
 };
+for(const n of [1,2,3,4])lesson3DAssets[n]=lesson3DAssets[n].map(([key,name,fa])=>({key,name,fa}));
 function localObjectArt(key){
  const common='<defs><linearGradient id="fur" x2="0" y2="1"><stop stop-color="#e8bd82"/><stop offset="1" stop-color="#9c633d"/></linearGradient><linearGradient id="leaf" x2="0" y2="1"><stop stop-color="#a8c78a"/><stop offset="1" stop-color="#426b4b"/></linearGradient><linearGradient id="metal" x2="0" y2="1"><stop stop-color="#f9ffff"/><stop offset=".5" stop-color="#9fb6c2"/><stop offset="1" stop-color="#536b7c"/></linearGradient><linearGradient id="glass" x2="0" y2="1"><stop stop-color="#e9fbff" stop-opacity=".25"/><stop offset="1" stop-color="#74b8c5" stop-opacity=".7"/></linearGradient><radialGradient id="glow"><stop stop-color="#fff7c4"/><stop offset="1" stop-color="#f1b65d" stop-opacity="0"/></radialGradient></defs>';
  const animals={
@@ -758,6 +736,25 @@ function localObjectArt(key){
  historical:'<path d="M70 252V124Q70 55 180 55Q290 55 290 124V252H260V128Q260 85 180 85Q100 85 100 128V252Z" fill="#d6b78b" stroke="#987858" stroke-width="6"/><path d="M54 252H306V275H54Z" fill="#aa8c67"/><path d="M118 250V147Q118 110 180 110Q242 110 242 147V250" fill="#826e59"/><path d="M130 250V149Q130 125 180 125Q230 125 230 149V250" fill="#bba17d"/><path d="M83 115L108 92M252 92L277 115M180 55V25" stroke="#f3dfbb" stroke-width="5"/>',
  culture:'<path d="M55 112L180 42L305 112Z" fill="#c6a77e" stroke="#8e7355" stroke-width="5"/><path d="M68 113H292V135H68Z" fill="#e4cfaa"/><path d="M82 135V250M126 135V250M234 135V250M278 135V250" stroke="#c5a982" stroke-width="23"/><path d="M55 250H305V272H55Z" fill="#8e7355"/><path d="M163 245V170Q163 143 180 143Q197 143 197 170V245" fill="#7e6b58"/><rect x="97" y="171" width="19" height="37" rx="8" fill="#b47d4e"/><path d="M106 170Q92 153 106 143Q120 153 106 170Z" fill="#d9b56f"/><rect x="254" y="171" width="17" height="37" rx="8" fill="#b47d4e"/>'
  };
+
+ drawings.zebra='<ellipse cx="180" cy="180" rx="82" ry="48" fill="#f2eee4" stroke="#34383a" stroke-width="5"/><path d="M113 142l24 4-17 62-24-8ZM153 132l23 4-14 87-22-4ZM197 132l24-4-4 91-24 2ZM238 145l24-9-4 65-25 8Z" fill="#30383b"/><path d="M232 156Q270 128 278 91L252 70 220 90 215 151Z" fill="#eee9df" stroke="#34383a" stroke-width="5"/><circle cx="252" cy="106" r="4" fill="#222"/><path d="M120 218l-8 60m45-57-4 59m59-59 8 58m34-70 12 70" stroke="#eee9df" stroke-width="17" stroke-linecap="round"/>';
+ drawings.deer='<ellipse cx="166" cy="185" rx="76" ry="46" fill="#a87549"/><path d="M220 166q20-55 34-72l24 10-9 48-27 28Z" fill="#b98251"/><path d="M244 102l-17-40m17 40 22-45m-22 45-1-52m13 53 28-30" stroke="#8a633f" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="267" cy="119" r="4" fill="#211d19"/><path d="M120 211l-7 67m38-62-3 62m62-62 8 62m18-82 14 82" stroke="#986640" stroke-width="13" stroke-linecap="round"/>';
+ drawings.bird='<path d="M80 205Q112 116 198 126Q258 130 278 194Q226 177 190 215Q143 251 80 205Z" fill="#4d8290" stroke="#315b66" stroke-width="5"/><path d="M143 194Q163 131 236 151Q211 192 143 194Z" fill="#d6a45d"/><circle cx="239" cy="146" r="6" fill="#17252a"/><path d="M272 158l37 10-35 12Z" fill="#d99b45"/>';
+ drawings.monkey='<circle cx="178" cy="137" r="65" fill="#93613f"/><ellipse cx="178" cy="153" rx="43" ry="38" fill="#d9b18a"/><circle cx="155" cy="132" r="7" fill="#201b18"/><circle cx="201" cy="132" r="7" fill="#201b18"/><ellipse cx="178" cy="160" rx="13" ry="9" fill="#6e4936"/><path d="M155 179q23 18 46 0" stroke="#704735" stroke-width="5" fill="none"/><path d="M126 194q-25 28-12 66m111-66q33 29 20 66" stroke="#93613f" stroke-width="18" fill="none" stroke-linecap="round"/><path d="M150 208l-6 65m57-65 7 65" stroke="#93613f" stroke-width="17" stroke-linecap="round"/>';
+ drawings.sun='<circle cx="180" cy="160" r="72" fill="#f5c95d" stroke="#e7a83e" stroke-width="8"/><g stroke="#e7a83e" stroke-width="10" stroke-linecap="round"><path d="M180 48v-24m0 272v-24M68 160H44m272 0h-24M101 81L83 63m194 194-18-18m0-158 18-18M83 257l18-18"/></g><circle cx="155" cy="145" r="6" fill="#8a5b35"/><circle cx="205" cy="145" r="6" fill="#8a5b35"/>';
+ drawings.atom='<ellipse cx="180" cy="160" rx="126" ry="48" fill="none" stroke="#6b9ec1" stroke-width="7" transform="rotate(35 180 160)"/><ellipse cx="180" cy="160" rx="126" ry="48" fill="none" stroke="#b27ac3" stroke-width="7" transform="rotate(-35 180 160)"/><ellipse cx="180" cy="160" rx="126" ry="48" fill="none" stroke="#79b8a5" stroke-width="7"/><circle cx="180" cy="160" r="23" fill="#e8a45c"/><circle cx="76" cy="94" r="13" fill="#6b9ec1"/><circle cx="286" cy="103" r="13" fill="#b27ac3"/>';
+ drawings.skeleton='<circle cx="180" cy="70" r="30" fill="#eee6d5" stroke="#9b968b" stroke-width="5"/><path d="M180 102v105m-48-75 48 26 48-26m-48 26-42 61m42-61 42 61m-42-12-28 75m28-75 28 75" stroke="#eee6d5" stroke-width="13" stroke-linecap="round" fill="none"/><path d="M151 130q29-24 58 0m-57 16q28-20 56 0m-56 16q28-20 56 0" stroke="#9b968b" stroke-width="4" fill="none"/>';
+ drawings.moon='<circle cx="174" cy="160" r="91" fill="#d8d6d0" stroke="#a5a6ad" stroke-width="6"/><circle cx="139" cy="119" r="19" fill="#b8b7b1"/><circle cx="203" cy="179" r="26" fill="#b8b7b1"/><circle cx="151" cy="210" r="12" fill="#aaa9a3"/>';
+ drawings.book='<path d="M65 95Q126 72 180 110V264Q119 226 65 249Z" fill="#f1e6d2" stroke="#846d58" stroke-width="7"/><path d="M295 95Q234 72 180 110V264Q241 226 295 249Z" fill="#fff6e7" stroke="#846d58" stroke-width="7"/><path d="M180 110V264" stroke="#a78d70" stroke-width="6"/><path d="M92 133q40-14 66 2m-66 22q40-14 66 2m-66 22q40-14 66 2m60-26q30-17 66-2" stroke="#b5a38d" stroke-width="5" fill="none"/>';
+ drawings.beaker='<path d="M125 76h110M142 76v56l-40 120q-5 17 14 17h129q19 0 13-18l-40-119V76" fill="url(#glass)" stroke="#648d9b" stroke-width="7"/><path d="M111 220q70-22 178 0l-10 34H122Z" fill="#79c5bd"/><circle cx="166" cy="213" r="6" fill="#fff"/><circle cx="207" cy="198" r="5" fill="#fff"/>';
+ drawings.bulb='<path d="M180 40Q100 40 100 122q0 47 44 82 15 12 16 38h40q1-26 16-38 44-35 44-82 0-82-80-82Z" fill="#fff3bb" stroke="#d4a94f" stroke-width="7"/><path d="M150 240h60m-56 15h52m-44 14h36" stroke="#77858b" stroke-width="9" stroke-linecap="round"/><path d="M155 183l25 32 25-32" fill="none" stroke="#e1b85d" stroke-width="7"/>';
+ drawings.lens='<ellipse cx="180" cy="160" rx="82" ry="111" fill="#a9dce8" fill-opacity=".55" stroke="#648c9d" stroke-width="8"/><ellipse cx="180" cy="160" rx="52" ry="85" fill="#fff" fill-opacity=".35"/><path d="M132 85q-25 65 0 145" stroke="#fff" stroke-width="10" fill="none" opacity=".75"/>';
+ drawings.pyramid='<path d="M42 270L177 49 310 270Z" fill="#d6b77e" stroke="#8d714c" stroke-width="6"/><path d="M177 49L310 270H180Z" fill="#b89460"/><path d="M100 222h158M126 179h102M151 135h52" stroke="#98784f" stroke-width="4" opacity=".7"/>';
+ drawings.column='<path d="M105 80h150v25H105zM118 105h124v150H118zM100 255h160v28H100z" fill="#d8c5a4" stroke="#927d60" stroke-width="6"/><path d="M139 110v140m28-140v140m28-140v140m28-140v140" stroke="#b09a78" stroke-width="7"/>';
+ drawings.vase='<path d="M145 62h70q-2 45 24 82 27 38 2 96-20 35-61 35t-61-35q-25-58 2-96 26-37 24-82Z" fill="#b86f58" stroke="#75483e" stroke-width="7"/><path d="M145 70h70m-67 29h64m-85 75q53 34 106 0m-103 49q50 25 100 0" stroke="#e5b18d" stroke-width="7" fill="none"/>';
+ drawings.scroll='<path d="M78 100q0-28 32-28h145q30 0 30 28v132q0 28-30 28H110q-32 0-32-28Z" fill="#e6d2a9" stroke="#927956" stroke-width="7"/><path d="M110 72q-26 28 0 56m145-56q26 28 0 56M110 232q-26 28 0 56m145-56q26 28 0 56" stroke="#a88758" stroke-width="12" fill="none"/><path d="M130 123h105m-105 25h105m-105 25h78" stroke="#9a8060" stroke-width="5"/>';
+ drawings.sundial='<circle cx="180" cy="170" r="100" fill="#d8c29b" stroke="#947c59" stroke-width="8"/><circle cx="180" cy="170" r="76" fill="none" stroke="#a38b65" stroke-width="4"/><path d="M180 170L220 70 196 177Z" fill="#78664d"/><path d="M180 91v15m0 128v15m-76-79h15m122 0h15m-130-54 11 11m87 87 11 11m0-109-11 11m-87 87-11 11" stroke="#8e7857" stroke-width="5"/>';
+
  let body=animals[key]||drawings[key]||drawings.planet;
  if(key==='lion'||key==='elephant'||key==='giraffe'||key==='tiger')body+= '<path d="M25 286Q65 270 105 286T185 286T265 286T335 286V320H25Z" fill="#75956a" opacity=".8"/><path d="M38 286q-10-30 3-44q14 18 4 44m260 0q-8-28 6-43q12 18 3 43" fill="none" stroke="#527b55" stroke-width="5"/>';
  return '<svg viewBox="0 0 360 320" role="img" aria-label="'+key+'" xmlns="http://www.w3.org/2000/svg">'+common+'<circle cx="300" cy="48" r="62" fill="url(#glow)" opacity=".6"/>'+body+'</svg>';
@@ -772,16 +769,14 @@ function initOnlineModelGallery(n){
 function paintOnlineModels(host,assets){
  const scene=document.getElementById('lessonWorld');if(!scene)return;const n=Number(scene.dataset.world)||1;
  const titles=['','THE WILDLIFE RESERVE','THE COSMIC & HUMAN WORLD','THE RESEARCH LABORATORY','THE ANCIENT WORLD'];
- const count=assets.length,slot=1000/count;
- const art=assets.map((a,i)=>{const w=Math.min(122,slot*.92),x=i*slot+(slot-w)/2,y=82,h=178;const raw=localObjectArt(a.key),inner=raw.slice(raw.indexOf('>')+1,raw.lastIndexOf('</svg>'));return '<g class="unified-object" data-key="'+a.key+'" tabindex="0" role="button" aria-label="'+a.name+'" onclick="focusWorldObject(\''+a.key+'\')"><ellipse cx="'+(x+w/2)+'" cy="270" rx="'+(w*.32)+'" ry="9" fill="#17232b" opacity=".25"/><svg x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" viewBox="0 0 360 320" preserveAspectRatio="xMidYMid meet">'+inner+'</svg><rect x="'+(x+2)+'" y="277" width="'+(w-4)+'" height="34" rx="10" fill="#17232bdc" stroke="#ffffff66"/><text x="'+(x+w/2)+'" y="291" text-anchor="middle" fill="#fff" font-size="11" font-family="Georgia,serif" font-weight="700">'+a.name.replace(/&/g,'&amp;')+'</text><text x="'+(x+w/2)+'" y="303" text-anchor="middle" fill="#f5dce5" font-size="9" font-family="Tahoma,sans-serif">'+a.fa+'</text></g>';}).join('');
+ const art=assets.map((a,i)=>{const col=i%4,row=Math.floor(i/4),x=col*250+25,w=200,y=row*245+18;const raw=localObjectArt(a.key),inner=raw.slice(raw.indexOf('>')+1,raw.lastIndexOf('</svg>'));return '<g class="unified-object" data-key="'+a.key+'" tabindex="0" role="button" aria-label="'+a.name+'" onclick="focusWorldObject(\''+a.key+'\')"><ellipse cx="'+(x+w/2)+'" cy="'+(y+190)+'" rx="65" ry="8" fill="#17232b" opacity=".2"/><svg x="'+x+'" y="'+y+'" width="'+w+'" height="165" viewBox="0 0 360 320" preserveAspectRatio="xMidYMid meet">'+inner+'</svg><rect x="'+(x+3)+'" y="'+(y+170)+'" width="'+(w-6)+'" height="34" rx="10" fill="#17232bdc" stroke="#ffffff66"/><text x="'+(x+w/2)+'" y="'+(y+184)+'" text-anchor="middle" fill="#fff" font-size="13" font-family="Georgia,serif" font-weight="700">'+a.name+'</text><text x="'+(x+w/2)+'" y="'+(y+197)+'" text-anchor="middle" fill="#f5dce5" font-size="10" font-family="Tahoma,sans-serif">'+a.fa+'</text></g>';}).join('');
  let bg='';
- if(n===1)bg='<defs><linearGradient id="s1sky" x2="0" y2="1"><stop stop-color="#b9d7d0"/><stop offset="1" stop-color="#dce4c8"/></linearGradient></defs><rect width="1000" height="360" fill="url(#s1sky)"/><circle cx="850" cy="65" r="34" fill="#fff0c1" opacity=".8"/><path d="M0 205Q180 155 350 203T700 190T1000 200V360H0Z" fill="#88a47d"/><path d="M0 260Q230 220 450 255T1000 240V360H0Z" fill="#577c55"/>'+Array.from({length:25},(_,i)=>{let x=i*43-12,h=45+(i*29%65);return '<g opacity=".8"><path d="M'+x+' 245v-'+h+'" stroke="#72543b" stroke-width="7"/><circle cx="'+x+'" cy="'+(245-h)+'" r="'+(17+i%3*4)+'" fill="'+(i%2?'#527c58':'#6c9163')+'"/></g>';}).join('')+'<path d="M0 320q100-18 200 0t200 0t200 0t200 0t200 0v40H0Z" fill="#456c49"/>';
- if(n===2)bg='<defs><linearGradient id="s2sky" x2="0" y2="1"><stop stop-color="#111831"/><stop offset="1" stop-color="#49446f"/></linearGradient><radialGradient id="s2neb"><stop stop-color="#b18fc8" stop-opacity=".65"/><stop offset="1" stop-color="#8b83c5" stop-opacity="0"/></radialGradient></defs><rect width="1000" height="360" fill="url(#s2sky)"/><ellipse cx="500" cy="105" rx="430" ry="145" fill="url(#s2neb)"/>'+Array.from({length:120},(_,i)=>'<circle cx="'+((i*137)%1000)+'" cy="'+((i*71)%245)+'" r="'+(i%5===0?2:1)+'" fill="#fff" opacity=".55"/>').join('')+'<path d="M0 285Q230 250 500 286T1000 270V360H0Z" fill="#252c4a"/>';
- if(n===3)bg='<defs><linearGradient id="s3wall" x2="0" y2="1"><stop stop-color="#d9e7e3"/><stop offset="1" stop-color="#a8c0bb"/></linearGradient></defs><rect width="1000" height="360" fill="url(#s3wall)"/>'+Array.from({length:7},(_,i)=>'<g><rect x="'+(18+i*142)+'" y="45" width="116" height="120" rx="5" fill="#eff7f4" stroke="#78918d" stroke-width="5"/><path d="M'+(32+i*142)+' 147h88" stroke="#b5ccc4" stroke-width="4"/></g>').join('')+'<path d="M0 240H1000V360H0Z" fill="#718e87"/><path d="M0 260H1000" stroke="#dce7dd" stroke-width="7"/>';
- if(n===4)bg='<defs><linearGradient id="s4sky" x2="0" y2="1"><stop stop-color="#ead9b9"/><stop offset="1" stop-color="#c6ae87"/></linearGradient></defs><rect width="1000" height="360" fill="url(#s4sky)"/><circle cx="850" cy="65" r="36" fill="#fff0c9" opacity=".7"/><path d="M0 250H1000V360H0Z" fill="#b39a72"/>'+Array.from({length:14},(_,i)=>'<path d="M'+(i*78)+' 35v205" stroke="#a58c68" stroke-width="2" opacity=".3"/>').join('');
- host.innerHTML='<div class="unified-world world-scene-theme-'+n+'"><div class="unified-world-heading"><span>THE PINKLISH GARDEN</span><b>'+titles[n]+'</b></div><svg class="unified-world-canvas" viewBox="0 0 1000 360" role="img" aria-label="'+titles[n]+'">'+bg+art+'</svg><div class="unified-world-note">روی هر عنصر بزن تا واژه و توضیحاتش را ببینی</div></div>';
-}
-function focusWorldObject(key){
+ if(n===1)bg='<defs><linearGradient id="s1sky" x2="0" y2="1"><stop stop-color="#b9d7d0"/><stop offset="1" stop-color="#dce4c8"/></linearGradient></defs><rect width="1000" height="520" fill="url(#s1sky)"/><circle cx="850" cy="65" r="34" fill="#fff0c1" opacity=".8"/><path d="M0 250Q180 195 350 248T700 230T1000 240V520H0Z" fill="#88a47d"/><path d="M0 360Q230 315 450 350T1000 335V520H0Z" fill="#577c55"/>'+Array.from({length:28},(_,i)=>'<g opacity=".75"><path d="M'+(i*38)+' 355v-'+(60+(i*19%70))+'" stroke="#72543b" stroke-width="8"/><circle cx="'+(i*38)+'" cy="'+(295-(i*19%70))+'" r="22" fill="'+(i%2?'#527c58':'#6c9163')+'"/></g>').join('');
+ if(n===2)bg='<defs><linearGradient id="s2sky" x2="0" y2="1"><stop stop-color="#111831"/><stop offset="1" stop-color="#49446f"/></linearGradient><radialGradient id="s2neb"><stop stop-color="#b18fc8" stop-opacity=".65"/><stop offset="1" stop-color="#8b83c5" stop-opacity="0"/></radialGradient></defs><rect width="1000" height="520" fill="url(#s2sky)"/><ellipse cx="500" cy="150" rx="430" ry="170" fill="url(#s2neb)"/>'+Array.from({length:150},(_,i)=>'<circle cx="'+((i*137)%1000)+'" cy="'+((i*71)%480)+'" r="'+(i%5===0?2:1)+'" fill="#fff" opacity=".55"/>').join('')+'<path d="M0 425Q230 390 500 426T1000 410V520H0Z" fill="#252c4a"/>';
+ if(n===3)bg='<defs><linearGradient id="s3wall" x2="0" y2="1"><stop stop-color="#d9e7e3"/><stop offset="1" stop-color="#a8c0bb"/></linearGradient></defs><rect width="1000" height="520" fill="url(#s3wall)"/>'+Array.from({length:8},(_,i)=>'<g><rect x="'+(10+i*124)+'" y="30" width="104" height="145" rx="5" fill="#eff7f4" stroke="#78918d" stroke-width="5"/><path d="M'+(22+i*124)+' 157h80" stroke="#b5ccc4" stroke-width="4"/></g>').join('')+'<path d="M0 380H1000V520H0Z" fill="#718e87"/><path d="M0 400H1000" stroke="#dce7dd" stroke-width="7"/>';
+ if(n===4)bg='<defs><linearGradient id="s4sky" x2="0" y2="1"><stop stop-color="#ead9b9"/><stop offset="1" stop-color="#c6ae87"/></linearGradient></defs><rect width="1000" height="520" fill="url(#s4sky)"/><circle cx="850" cy="65" r="36" fill="#fff0c9" opacity=".7"/><path d="M0 385H1000V520H0Z" fill="#b39a72"/>'+Array.from({length:16},(_,i)=>'<path d="M'+(i*66)+' 20v350" stroke="#a58c68" stroke-width="2" opacity=".3"/>').join('');
+ host.innerHTML='<div class="unified-world world-scene-theme-'+n+'"><div class="unified-world-heading"><span>THE PINKLISH GARDEN</span><b>'+titles[n]+'</b></div><svg class="unified-world-canvas" viewBox="0 0 1000 520" role="img" aria-label="'+titles[n]+'">'+bg+art+'</svg></div>';
+}function focusWorldObject(key){
  const host=document.getElementById('forest3dStage');
  if(host){host.querySelectorAll('.unified-object').forEach(o=>o.classList.toggle('is-selected',o.dataset.key===key));}
  openWorldExplorer(key);
