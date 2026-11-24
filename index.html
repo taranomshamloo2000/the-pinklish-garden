@@ -636,7 +636,7 @@ function initForest3D(){
 }
 
 function initLesson3D(n){
- const host=document.getElementById('forest3dStage');if(!host||!window.THREE)return;
+ const host=document.getElementById('forest3dStage');if(!host)return;if(!window.THREE){host.innerHTML='<p style="padding:40px;color:white;text-align:center">برای نمایش دنیای سه‌بعدی، اتصال اینترنت را بررسی کن و صفحه را دوباره باز کن.</p>';return;}
  if(forest3DState&&forest3DState.renderer){cancelAnimationFrame(forest3DState.raf);try{forest3DState.ro.disconnect();forest3DState.renderer.dispose();forest3DState.renderer.domElement.remove()}catch(e){}}
  const T=window.THREE,scene=new T.Scene(),bg=[0x9bcbd0,0x9bcbd0,0x9cbfce,0x83b9c7][n];scene.background=new T.Color(bg);scene.fog=new T.Fog(bg,13,30);
  const camera=new T.PerspectiveCamera(43,1,.1,80);camera.position.set(0,5.1,12);camera.lookAt(0,1,0);
@@ -684,7 +684,7 @@ function initLesson3D(n){
  renderer.domElement.addEventListener('pointermove',e=>{if(e.buttons){let dx=e.clientX-downX;if(Math.abs(dx)>4)drag=true;angle+=dx*.002;camera.position.x=Math.sin(angle)*1.4;camera.lookAt(0,1,0);downX=e.clientX}});
  renderer.domElement.addEventListener('pointerup',e=>{if(drag)return;const r=renderer.domElement.getBoundingClientRect();pointer.x=(e.clientX-r.left)/r.width*2-1;pointer.y=-(e.clientY-r.top)/r.height*2+1;ray.setFromCamera(pointer,camera);const h=ray.intersectObjects(objects,true);if(h.length){let o=h[0].object;while(o.parent&&!o.userData.wordKey)o=o.parent;if(o.userData.wordKey)openWorldItem(o.userData.wordKey)}});
  let paused=false;const clock=new T.Clock();let raf=0;function resize(){const w=Math.max(1,host.clientWidth),h=Math.max(1,host.clientHeight);camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h,false)}resize();const ro=new ResizeObserver(resize);ro.observe(host);
- function animate(){raf=requestAnimationFrame(animate);const t=clock.getElapsedTime();objects.forEach((o,i)=>{if(o.userData.heartbeat){const q=1+Math.sin(t*3.5)*.07;o.scale.setScalar(q)}if(o.userData.breath)o.scale.y=1+Math.sin(t*1.3)*.018;if(o.userData.sway)o.rotation.y=Math.sin(t*.6)*.12;if(o.userData.spin)o.rotation.y=t*.2;if(o.userData.floatPhase!==undefined)o.position.y+=Math.sin(t*1.2+o.userData.floatPhase)*.0015;if(n===3&&o.userData.wordKey==='experiment')o.rotation.y=Math.sin(t*.8)*.06});renderer.render(scene,camera)}
+ function animate(){raf=requestAnimationFrame(animate);const t=clock.getElapsedTime();if(!paused)objects.forEach((o,i)=>{if(o.userData.heartbeat){const q=1+Math.sin(t*3.5)*.07;o.scale.setScalar(q)}if(o.userData.breath)o.scale.y=1+Math.sin(t*1.3)*.018;if(o.userData.sway)o.rotation.y=Math.sin(t*.6)*.12;if(o.userData.spin)o.rotation.y=t*.2;if(o.userData.floatPhase!==undefined)o.position.y+=Math.sin(t*1.2+o.userData.floatPhase)*.0015;if(n===3&&o.userData.wordKey==='experiment')o.rotation.y=Math.sin(t*.8)*.06});renderer.render(scene,camera)}
  animate();forest3DState={renderer,scene,camera,animals:[],raf:0,get raf(){return raf},setPaused(v){paused=v},isPaused(){return paused},resize,ro};
  
 }
