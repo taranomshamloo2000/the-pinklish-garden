@@ -757,7 +757,8 @@ function localObjectArt(key){
  drawings.scroll='<path d="M78 100q0-28 32-28h145q30 0 30 28v132q0 28-30 28H110q-32 0-32-28Z" fill="#e6d2a9" stroke="#927956" stroke-width="7"/><path d="M110 72q-26 28 0 56m145-56q26 28 0 56M110 232q-26 28 0 56m145-56q26 28 0 56" stroke="#a88758" stroke-width="12" fill="none"/><path d="M130 123h105m-105 25h105m-105 25h78" stroke="#9a8060" stroke-width="5"/>';
  drawings.sundial='<circle cx="180" cy="170" r="100" fill="#d8c29b" stroke="#947c59" stroke-width="8"/><circle cx="180" cy="170" r="76" fill="none" stroke="#a38b65" stroke-width="4"/><path d="M180 170L220 70 196 177Z" fill="#78664d"/><path d="M180 91v15m0 128v15m-76-79h15m122 0h15m-130-54 11 11m87 87 11 11m0-109-11 11m-87 87-11 11" stroke="#8e7857" stroke-width="5"/>';
 
- let body=animals[key]||drawings[key]||drawings.planet;
+ const animalGlyphs={leopard:'🐆',elephant:'🐘',gazelle:'🦌',tiger:'🐅',dolphin:'🐬',goat:'🐐',whale:'🐋',bear:'🐻',bird:'🐦',giraffe:'🦒',wolf:'🐺',cheetah:'🐆',cat:'🐈',lion:'🦁',zebra:'🦓',panda:'🐼',duck:'🦆',ant:'🐜',camel:'🐪'};
+ let body=animalGlyphs[key]?'<text x="180" y="230" text-anchor="middle" font-size="190">'+animalGlyphs[key]+'</text>':(animals[key]||drawings[key]||'<text x="180" y="230" text-anchor="middle" font-size="170">✦</text>');
  if(key==='lion'||key==='elephant'||key==='giraffe'||key==='tiger')body+= '<path d="M25 286Q65 270 105 286T185 286T265 286T335 286V320H25Z" fill="#75956a" opacity=".8"/><path d="M38 286q-10-30 3-44q14 18 4 44m260 0q-8-28 6-43q12 18 3 43" fill="none" stroke="#527b55" stroke-width="5"/>';
  return '<svg viewBox="0 0 360 320" role="img" aria-label="'+key+'" xmlns="http://www.w3.org/2000/svg">'+common+'<circle cx="300" cy="48" r="62" fill="url(#glow)" opacity=".6"/>'+body+'</svg>';
 }
