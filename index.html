@@ -137,6 +137,35 @@
 .lesson-world[data-world="1"].is-fullscreen .world-hint{bottom:55px}
 @media(max-width:560px){.lesson-world[data-world="1"]{min-height:380px}.lesson-world[data-world="1"] .forest3d-stage{inset:70px 0 125px}.lesson-world[data-world="1"] .world-animals{bottom:74px;gap:6px;padding:0 7px}.lesson-world[data-world="1"] .world-animal{min-width:0;padding:6px 9px}.lesson-world[data-world="1"] .world-animal b{font-size:12px}.lesson-world[data-world="1"] .world-hint{bottom:49px;font-size:10px}.lesson-world[data-world="1"].is-fullscreen .forest3d-stage{inset:75px 0 145px}.lesson-world[data-world="1"].is-fullscreen .world-animals{bottom:82px}.lesson-world[data-world="1"].is-fullscreen .world-controls{bottom:15px}}
 
+
+/* Full interactive 3D worlds for lessons 2-4 */
+.lesson-world[data-world="2"],.lesson-world[data-world="3"],.lesson-world[data-world="4"]{min-height:390px;position:relative;overflow:hidden}
+.lesson-world[data-world="2"] .world-title,.lesson-world[data-world="3"] .world-title,.lesson-world[data-world="4"] .world-title{position:relative;z-index:5;pointer-events:none}
+.lesson-world[data-world="2"] .world-sky,.lesson-world[data-world="2"] .world-ground,.lesson-world[data-world="2"] .world-floor,.lesson-world[data-world="2"] .world-constellation,.lesson-world[data-world="3"] .world-sky,.lesson-world[data-world="3"] .world-ground,.lesson-world[data-world="3"] .world-floor,.lesson-world[data-world="3"] .world-constellation,.lesson-world[data-world="4"] .world-sky,.lesson-world[data-world="4"] .world-ground,.lesson-world[data-world="4"] .world-floor,.lesson-world[data-world="4"] .world-constellation{display:none}
+.lesson-world[data-world="2"] .world-title{ text-shadow:0 2px 12px #293b52}
+.lesson-world[data-world="3"] .world-title{ text-shadow:0 2px 12px #354252}
+.lesson-world[data-world="4"] .world-title{ text-shadow:0 2px 12px #324c57}
+.lesson-world[data-world="2"]{background:linear-gradient(180deg,#9ac8d7,#7b9eac 52%,#4d6877)}
+.lesson-world[data-world="3"]{background:linear-gradient(180deg,#b3cbd1,#8e9caa 55%,#495c70)}
+.lesson-world[data-world="4"]{background:linear-gradient(180deg,#8dc6d2,#5d9aa5 55%,#315c67)}
+.lesson-world[data-world="2"] .world-animals,.lesson-world[data-world="3"] .world-animals,.lesson-world[data-world="4"] .world-animals{display:flex!important;position:absolute;z-index:6;left:0;right:0;bottom:66px;max-width:none;margin:0;padding:0 12px;justify-content:center;gap:7px;flex-wrap:wrap;pointer-events:auto}
+.lesson-world[data-world="2"] .world-animal,.lesson-world[data-world="3"] .world-animal,.lesson-world[data-world="4"] .world-animal{min-width:80px;padding:7px 11px;background:#fffdf0e8;border:1px solid #fff;box-shadow:0 5px 16px #142d2944;border-radius:13px;backdrop-filter:blur(8px)}
+.lesson-world[data-world="2"] .world-animal .animal-art,.lesson-world[data-world="3"] .world-animal .animal-art,.lesson-world[data-world="4"] .world-animal .animal-art{display:none}
+.lesson-world[data-world="2"] .world-animal b,.lesson-world[data-world="3"] .world-animal b,.lesson-world[data-world="4"] .world-animal b{font-size:13px;margin:0}
+.lesson-world[data-world="2"] .world-animal small,.lesson-world[data-world="3"] .world-animal small,.lesson-world[data-world="4"] .world-animal small{font-size:10px}
+.lesson-world[data-world="2"] .world-controls,.lesson-world[data-world="3"] .world-controls,.lesson-world[data-world="4"] .world-controls{position:absolute;z-index:8;bottom:12px;left:0;right:0;padding:0 12px 8px}
+.lesson-world[data-world="2"] .world-hint,.lesson-world[data-world="3"] .world-hint,.lesson-world[data-world="4"] .world-hint{position:absolute;z-index:7;bottom:48px;left:0;right:0;padding:0 10px;font-size:11px;text-shadow:0 1px 6px #243c49}
+.lesson-world[data-world="2"] .forest3d-stage,.lesson-world[data-world="3"] .forest3d-stage,.lesson-world[data-world="4"] .forest3d-stage{position:absolute;z-index:1;inset:72px 0 112px;overflow:hidden;touch-action:pan-y;cursor:grab}
+.lesson-world[data-world="2"] .forest3d-stage canvas,.lesson-world[data-world="3"] .forest3d-stage canvas,.lesson-world[data-world="4"] .forest3d-stage canvas{display:block;width:100%;height:100%}
+.lesson-world[data-world="2"].is-fullscreen,.lesson-world[data-world="3"].is-fullscreen,.lesson-world[data-world="4"].is-fullscreen{position:fixed;inset:0;z-index:99999;width:100vw;height:100dvh;min-height:100dvh;margin:0;border-radius:0}
+.lesson-world[data-world="2"].is-fullscreen .forest3d-stage,.lesson-world[data-world="3"].is-fullscreen .forest3d-stage,.lesson-world[data-world="4"].is-fullscreen .forest3d-stage{inset:78px 0 135px}
+.lesson-world[data-world="2"].is-fullscreen .world-animals,.lesson-world[data-world="3"].is-fullscreen .world-animals,.lesson-world[data-world="4"].is-fullscreen .world-animals{bottom:78px}
+.lesson-world[data-world="2"].is-fullscreen .world-controls,.lesson-world[data-world="3"].is-fullscreen .world-controls,.lesson-world[data-world="4"].is-fullscreen .world-controls{bottom:17px}
+.lesson-world[data-world="2"].is-fullscreen .world-hint,.lesson-world[data-world="3"].is-fullscreen .world-hint,.lesson-world[data-world="4"].is-fullscreen .world-hint{bottom:55px}
+@media(max-width:560px){.lesson-world[data-world="2"],.lesson-world[data-world="3"],.lesson-world[data-world="4"]{min-height:380px}.lesson-world[data-world="2"] .forest3d-stage,.lesson-world[data-world="3"] .forest3d-stage,.lesson-world[data-world="4"] .forest3d-stage{inset:70px 0 125px}.lesson-world[data-world="2"] .world-animals,.lesson-world[data-world="3"] .world-animals,.lesson-world[data-world="4"] .world-animals{bottom:74px;gap:6px;padding:0 7px}.lesson-world[data-world="2"] .world-animal,.lesson-world[data-world="3"] .world-animal,.lesson-world[data-world="4"] .world-animal{min-width:0;padding:6px 9px}.lesson-world[data-world="2"] .world-animal b,.lesson-world[data-world="3"] .world-animal b,.lesson-world[data-world="4"] .world-animal b{font-size:12px}.lesson-world[data-world="2"] .world-hint,.lesson-world[data-world="3"] .world-hint,.lesson-world[data-world="4"] .world-hint{bottom:49px;font-size:10px}}
+/* Landscape-only vocabulary photos */
+#modalPicture{width:100%;height:100%;object-fit:cover;object-position:center;border-radius:16px}
+
 </style>
 <body>
 <main class="wrap">
@@ -376,6 +405,10 @@ function persianPronunciation(word){const p={'leopard':'لِپِرد','elephant'
 const pictureTitles={'avicenna':'Avicenna','die out':'Extinction','endangered':'Endangered species','wildlife':'Wildlife','zookeeper':'Zookeeper','carbon dioxide':'Carbon dioxide','travel agent':'Travel agent','abroad':'Study abroad','pilgrim':'Pilgrim'};
 const pictureSearchTerms={
 'avicenna':'Avicenna historical site statue',
+'leopard':'leopard wild animal horizontal wildlife photography',
+'elephant':'African elephant herd savanna landscape photograph',
+'human':'human body anatomy full body educational illustration',
+'gazelle':'gazelle herd grassland wildlife landscape photograph',
 'visitor':'museum visitors',
 'die out':'wildlife extinction endangered species',
 'endangered':'endangered animal wildlife',
@@ -419,6 +452,7 @@ const pictureSearchTerms={
 'safely':'road safety traffic',
 'pilgrim':'pilgrimage religious site'
 };
+function loadWikipediaLandscapeFallback(word,img,emoji){const key=word.toLowerCase();const query=pictureSearchTerms[key]||word;const p=new URLSearchParams({action:'query',generator:'search',gsrsearch:query,gsrnamespace:'6',gsrlimit:'20',prop:'imageinfo',iiprop:'url|size',iiurlwidth:'1000',format:'json',origin:'*'});fetch('https://commons.wikimedia.org/w/api.php?'+p.toString()).then(r=>r.json()).then(data=>{if(!activeBloomWord||activeBloomWord[0].toLowerCase()!==key)return;const picks=Object.values(data.query?.pages||{}).map(x=>x.imageinfo?.[0]).filter(x=>x?.thumburl&&x.width>=x.height*1.12&&x.width>=480&&x.height>=260).sort((a,b)=>(b.width*b.height)-(a.width*a.height));if(!picks.length)throw new Error('No landscape image');img.onload=()=>{if(img.naturalWidth>=img.naturalHeight*1.12){img.hidden=false;emoji.hidden=true}else{img.hidden=true;emoji.hidden=false}};img.onerror=()=>{img.hidden=true;emoji.hidden=false};img.src=picks[0].thumburl}).catch(()=>{img.hidden=true;emoji.hidden=false})}
 function setBloomImage(img,emoji,word,url,alt){if(!activeBloomWord||activeBloomWord[0].toLowerCase()!==word.toLowerCase())return;img.onload=()=>{if(img.naturalWidth>=img.naturalHeight*1.12){img.hidden=false;emoji.hidden=true}else{img.hidden=true;emoji.hidden=false}};img.onerror=()=>{img.hidden=true;emoji.hidden=false};img.src=url;img.alt=alt||word+' photograph'}
 function loadModalPicture(word){
  const img=document.getElementById('modalPicture'),emoji=document.getElementById('modalEmoji');
@@ -519,16 +553,11 @@ function openWorldItem(key){openWordBloom(key)}
 
 function renderLessonWorld(n){
  activeWorldLesson=n;activeWorldStep=0;
- const title=lessonWorldTitles[n-1],items=lessonWorldItems[n-1],forest=n===1;
- if(forest){
-  const forestLabels=[items[0],items[2],items[3],items[1]];
-  setTimeout(()=>initForest3D(),120);
-  return '<div class="lesson-world" id="lessonWorld" data-world="1"><div class="world-title"><small>'+title[0]+'</small><h3>'+title[1]+'</h3><p>'+title[2]+'</p></div><div class="forest3d-stage" id="forest3dStage" aria-label="Interactive 3D forest scene"></div><div class="world-animals" id="worldAnimals">'+forestLabels.map(x=>'<button class="world-animal" onclick="openWorldItem(\''+x.key+'\')"><b>'+x.en+'</b><small>'+x.fa+'</small></button>').join('')+'</div><div class="world-controls"><button class="primary" id="forestPauseBtn" onclick="toggleForestMotion()">Ⅱ توقف حرکت</button><button id="forestFullBtn" onclick="toggleForestFullscreen()">⛶ تمام‌صفحه</button></div><div class="world-hint" id="worldHint">حیوانات را در جنگل تماشا کن؛ روی هر حیوان یا نامش بزن تا واژه را یاد بگیری. برای چرخاندن منظره، انگشتت را روی تصویر بکش.</div></div>';
- }
- const scenery='<div class="world-sky"><div class="world-sun"></div><div class="world-cloud"></div><div class="world-cloud two"></div></div><div class="world-ground"></div><div class="world-floor"></div><div class="world-constellation">'+items.slice(0,4).map(x=>'<button class="world-token" onclick="openWorldItem(\''+x.key+'\')"><span>'+x.emoji+'</span><b>'+x.en+'</b></button>').join('')+'</div>';
- return '<div class="lesson-world" id="lessonWorld" data-world="'+n+'">'+scenery+'<div class="world-title"><small>'+title[0]+'</small><h3>'+title[1]+'</h3><p>'+title[2]+'</p></div><div class="world-animals" id="worldAnimals">'+items.map(x=>'<button class="world-animal" onclick="openWorldItem(\''+x.key+'\')"><span class="animal-art">'+x.emoji+'</span><b>'+x.en+'</b><small>'+x.fa+'</small></button>').join('')+'</div><div class="world-controls"><button class="primary" onclick="worldExplore()">✨ کشف این دنیا</button><button onclick="worldNext()">⟶ بخش بعدی</button></div><div class="world-hint" id="worldHint">روی هر نماد شناور بزن تا واژه‌اش را یاد بگیری.</div></div>';
+ const title=lessonWorldTitles[n-1],items=lessonWorldItems[n-1];
+ setTimeout(()=>{if(n===1)initForest3D();else initLesson3D(n)},140);
+ const hint=n===1?'حیوانات را در جنگل تماشا کن؛ روی هر حیوان یا نامش بزن تا واژه را یاد بگیری.':n===2?'درون بدن انسان را کشف کن؛ روی اندام‌ها و اجزای سه‌بعدی بزن.':n===3?'آزمایشگاه را کاوش کن؛ ابزارها را لمس کن تا نام و معنی‌شان را یاد بگیری.':'کره زمین را بچرخان و سرزمین‌ها و بناها را کشف کن.';
+ return '<div class="lesson-world" id="lessonWorld" data-world="'+n+'"><div class="world-title"><small>'+title[0]+'</small><h3>'+title[1]+'</h3><p>'+title[2]+'</p></div><div class="forest3d-stage" id="forest3dStage" aria-label="Interactive animated 3D lesson scene"></div><div class="world-animals" id="worldAnimals">'+items.map(x=>'<button class="world-animal" onclick="openWorldItem(\''+x.key+'\')"><b>'+x.en+'</b><small>'+x.fa+'</small></button>').join('')+'</div><div class="world-controls"><button class="primary" id="forestPauseBtn" onclick="toggleForestMotion()">Ⅱ توقف حرکت</button><button id="forestFullBtn" onclick="toggleForestFullscreen()">⛶ تمام‌صفحه</button></div><div class="world-hint" id="worldHint">'+hint+'</div></div>';
 }
-
 
 /* A small real-time 3D forest made from animated Three.js meshes (not stickers). */
 let forest3DState=null;
@@ -605,6 +634,61 @@ function initForest3D(){
  animate();
  forest3DState={renderer,scene,camera,animals,raf:0,get raf(){return raf},setPaused(v){paused=v},isPaused(){return paused},resize,ro};
 }
+
+function initLesson3D(n){
+ const host=document.getElementById('forest3dStage');if(!host||!window.THREE)return;
+ if(forest3DState&&forest3DState.renderer){cancelAnimationFrame(forest3DState.raf);try{forest3DState.ro.disconnect();forest3DState.renderer.dispose();forest3DState.renderer.domElement.remove()}catch(e){}}
+ const T=window.THREE,scene=new T.Scene(),bg=[0x9bcbd0,0x9bcbd0,0x9cbfce,0x83b9c7][n];scene.background=new T.Color(bg);scene.fog=new T.Fog(bg,13,30);
+ const camera=new T.PerspectiveCamera(43,1,.1,80);camera.position.set(0,5.1,12);camera.lookAt(0,1,0);
+ const renderer=new T.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5));renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;host.appendChild(renderer.domElement);
+ scene.add(new T.HemisphereLight(0xe5f4ff,0x42566a,2.1));const sun=new T.DirectionalLight(0xfff0d3,2.5);sun.position.set(-5,9,5);sun.castShadow=true;scene.add(sun);
+ const floorColor=n===2?0x668b86:n===3?0x647b8a:0x548e8d;const floor=new T.Mesh(new T.PlaneGeometry(40,40),new T.MeshStandardMaterial({color:floorColor,roughness:1}));floor.rotation.x=-Math.PI/2;floor.position.y=-.05;floor.receiveShadow=true;scene.add(floor);
+ const mat=(color,roughness=.75,metalness=0)=>new T.MeshStandardMaterial({color,roughness,metalness});
+ const objects=[];
+ function group(key,x,z){const g=new T.Group();g.position.set(x,0,z);g.userData.wordKey=key;scene.add(g);objects.push(g);return g}
+ function mesh(parent,geo,material,x,y,z,sx=1,sy=1,sz=1){const m=new T.Mesh(geo,material);m.position.set(x,y,z);m.scale.set(sx,sy,sz);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m}
+ if(n===2){
+  // Human body: torso, head, limbs, a beating heart, brain and floating blood cells.
+  const body=group('human',0,-1);const skin=mat(0xd8a17f),shirt=mat(0x4d718f),pants=mat(0x384b68),red=mat(0xc94c59,.45),pink=mat(0xf0a4a9),white=mat(0xf4e8db);
+  mesh(body,new T.SphereGeometry(1,18,14),shirt,0,1.55,0,.72,1.05,.42);
+  mesh(body,new T.SphereGeometry(.43,16,12),skin,0,2.95,0,1,1.1,.9);
+  mesh(body,new T.CylinderGeometry(.13,.17,.95,10),skin,-.88,1.65,0,1,1,1).rotation.z=-.35;
+  mesh(body,new T.CylinderGeometry(.13,.17,.95,10),skin,.88,1.65,0,1,1,1).rotation.z=.35;
+  mesh(body,new T.CylinderGeometry(.18,.22,1.25,10),pants,-.35,.35,0,1,1,1);
+  mesh(body,new T.CylinderGeometry(.18,.22,1.25,10),pants,.35,.35,0,1,1,1);
+  const heart=group('heart',-2.25,0);const h1=mesh(heart,new T.SphereGeometry(.42,16,12),red,-.2,1.5,0,.7,.72,.62);const h2=mesh(heart,new T.SphereGeometry(.42,16,12),red,.2,1.5,0,.7,.72,.62);mesh(heart,new T.ConeGeometry(.42,.7,12),red,0,1.13,0,1,1,1).rotation.x=Math.PI;
+  const brain=group('brain',2.2,0);for(let i=0;i<9;i++){const a=i*Math.PI*2/9;mesh(brain,new T.SphereGeometry(.28,10,8),pink,Math.cos(a)*.28,1.65+Math.sin(a)*.22,0,.9,1,.8)}mesh(brain,new T.TorusGeometry(.28,.045,8,20),white,0,1.65,.02,1,1,1);
+  const oxygen=group('oxygen',0,-4);for(let i=0;i<8;i++){const b=mesh(oxygen,new T.SphereGeometry(.12+(i%3)*.04,10,8),mat(0xbceaf1,.25),Math.sin(i*1.4)*1.1,.6+i*.28,Math.cos(i*1.8)*.5);b.userData.floatPhase=i}
+  for(let i=0;i<13;i++){const cell=mesh(scene,new T.SphereGeometry(.14,10,8),mat(i%2?0xd45c68:0x9c3949),-4+Math.random()*8,1+Math.random()*2,-3-Math.random()*3,1,.6,1);cell.userData.floatPhase=i;objects.push(cell)}
+  body.userData.breath=true;heart.userData.heartbeat=true;brain.userData.sway=true;
+ }else if(n===3){
+  // Laboratory bench with a detailed microscope, flasks, books and telescope.
+  const bench=group('laboratory',0,-1.3);mesh(bench,new T.BoxGeometry(6,.24,2),mat(0x805d48),0,1,0);mesh(bench,new T.BoxGeometry(.22,1.1,.22),mat(0x624633),-2.5,.42,0);mesh(bench,new T.BoxGeometry(.22,1.1,.22),mat(0x624633),2.5,.42,0);
+  const micro=group('microscope',-1.65,0);const metal=mat(0x465c70,.35,.55),lens=mat(0x25394d,.25,.45),glass=mat(0x9ddde2,.2,.1);mesh(micro,new T.BoxGeometry(.95,.12,.55),metal,0,1.2,0);mesh(micro,new T.CylinderGeometry(.11,.16,.9,12),metal,-.15,1.7,0,1,1,1).rotation.z=-.5;mesh(micro,new T.CylinderGeometry(.09,.12,.4,12),lens,-.48,2.02,0,1,1,1).rotation.z=-.5;mesh(micro,new T.CylinderGeometry(.07,.07,.55,12),lens,.2,1.48,0);mesh(micro,new T.BoxGeometry(.75,.1,.5),metal,0,1.38,0);mesh(micro,new T.CylinderGeometry(.3,.38,.12,14),metal,0,.9,0);
+  const flask=group('experiment',.1,0);mesh(flask,new T.CylinderGeometry(.28,.18,.65,16),glass,0,1.52,0);mesh(flask,new T.CylinderGeometry(.12,.12,.3,12),glass,0,2,0);mesh(flask,new T.CylinderGeometry(.24,.2,.3,16),mat(0x63c7bc,.3),0,1.35,0);mesh(flask,new T.TorusGeometry(.25,.035,8,20),mat(0xe4f7f4,.25),0,1.85,0);
+  const books=group('knowledge',1.7,0);for(let i=0;i<4;i++){const b=mesh(books,new T.BoxGeometry(.8,.14,.55),mat([0x9a526b,0x527a93,0xc29a59,0x5d8a72][i]),0,1.18+i*.15,0);b.rotation.z=(i%2?-.05:.05)}
+  const scope=group('telescope',2.65,-2);mesh(scope,new T.CylinderGeometry(.16,.2,1.7,12),mat(0x7c6b8c,.35,.35),0,1.8,0).rotation.z=-.7;mesh(scope,new T.CylinderGeometry(.22,.22,.15,12),lens,-.55,2.02,0).rotation.z=-.7;
+  for(let i=0;i<7;i++){const bubble=mesh(flask,new T.SphereGeometry(.045,8,6),mat(0xe8ffff,.15),Math.sin(i*2)*.13,1.45+i*.07,0);bubble.userData.floatPhase=i}
+ }else{
+  // A rotating blue planet, raised green continents and miniature monuments.
+  const globe=group('planet',0,-1.4);const ocean=mat(0x267eaa,.28,.2),land=mat(0x6da56b,.8),cloud=mat(0xe7f4f4,.25);
+  const sphere=mesh(globe,new T.SphereGeometry(1.85,36,28),ocean,0,1.7,0);sphere.userData.spin=true;
+  for(let i=0;i<11;i++){const a=i*2.4,lat=Math.sin(i*1.7)*.95;const patch=mesh(globe,new T.SphereGeometry(.45+(i%3)*.12,12,8),land,Math.cos(a)*1.42,1.7+lat,Math.sin(a)*1.42,.9,.65,.25);patch.lookAt(0,1.7,0)}
+  for(let i=0;i<4;i++){const c=mesh(globe,new T.TorusGeometry(1.95+i*.07,.018,6,64),cloud,0,1.7,0);c.rotation.x=Math.PI/2+(i*.18);c.rotation.y=i*.6}
+  const tower=group('historical',-3.2,-.5);mesh(tower,new T.CylinderGeometry(.45,.58,1.7,12),mat(0xd8c3a1),0,.85,0);mesh(tower,new T.ConeGeometry(.52,.7,12),mat(0x9d6254),0,2.05,0);for(let i=0;i<3;i++)mesh(tower,new T.BoxGeometry(.12,.5,.16),mat(0x5d5550),-.2+i*.2,1.2,.48);
+  const temple=group('culture',3.1,-.5);mesh(temple,new T.BoxGeometry(1.5,.22,.8),mat(0xe3d4b4),0,.12,0);for(let i=0;i<4;i++)mesh(temple,new T.CylinderGeometry(.09,.13,1.35,10),mat(0xf0dfbf),-.55+i*.37,.8,0);mesh(temple,new T.ConeGeometry(.9,.4,4),mat(0x9e8b73),0,1.6,0);
+  const flags=group('abroad',0,-4);for(let i=0;i<3;i++){mesh(flags,new T.CylinderGeometry(.025,.025,1.4,6),mat(0xf0e9dd),-.5+i*.5,.8,0);mesh(flags,new T.BoxGeometry(.42,.25,.02),mat([0xc65353,0x5b8eaa,0x68a66c][i]),-.3+i*.5,1.25,0)}
+ }
+ const ray=new T.Raycaster(),pointer=new T.Vector2();let downX=0,drag=false,angle=0;
+ renderer.domElement.addEventListener('pointerdown',e=>{downX=e.clientX;drag=false});
+ renderer.domElement.addEventListener('pointermove',e=>{if(e.buttons){let dx=e.clientX-downX;if(Math.abs(dx)>4)drag=true;angle+=dx*.002;camera.position.x=Math.sin(angle)*1.4;camera.lookAt(0,1,0);downX=e.clientX}});
+ renderer.domElement.addEventListener('pointerup',e=>{if(drag)return;const r=renderer.domElement.getBoundingClientRect();pointer.x=(e.clientX-r.left)/r.width*2-1;pointer.y=-(e.clientY-r.top)/r.height*2+1;ray.setFromCamera(pointer,camera);const h=ray.intersectObjects(objects,true);if(h.length){let o=h[0].object;while(o.parent&&!o.userData.wordKey)o=o.parent;if(o.userData.wordKey)openWorldItem(o.userData.wordKey)}});
+ let paused=false;const clock=new T.Clock();let raf=0;function resize(){const w=Math.max(1,host.clientWidth),h=Math.max(1,host.clientHeight);camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h,false)}resize();const ro=new ResizeObserver(resize);ro.observe(host);
+ function animate(){raf=requestAnimationFrame(animate);const t=clock.getElapsedTime();objects.forEach((o,i)=>{if(o.userData.heartbeat){const q=1+Math.sin(t*3.5)*.07;o.scale.setScalar(q)}if(o.userData.breath)o.scale.y=1+Math.sin(t*1.3)*.018;if(o.userData.sway)o.rotation.y=Math.sin(t*.6)*.12;if(o.userData.spin)o.rotation.y=t*.2;if(o.userData.floatPhase!==undefined)o.position.y+=Math.sin(t*1.2+o.userData.floatPhase)*.0015;if(n===3&&o.userData.wordKey==='experiment')o.rotation.y=Math.sin(t*.8)*.06});renderer.render(scene,camera)}
+ animate();forest3DState={renderer,scene,camera,animals:[],raf:0,get raf(){return raf},setPaused(v){paused=v},isPaused(){return paused},resize,ro};
+ 
+}
+
 function toggleForestMotion(){if(!forest3DState)return;const paused=!forest3DState.isPaused();forest3DState.setPaused(paused);const b=document.getElementById('forestPauseBtn');if(b)b.textContent=paused?'▶ ادامه حرکت':'Ⅱ توقف حرکت'}
 async function toggleForestFullscreen(){const el=document.getElementById('lessonWorld');if(!el)return;const active=el.classList.toggle('is-fullscreen'),b=document.getElementById('forestFullBtn');if(b)b.textContent=active?'↙ خروج از تمام‌صفحه':'⛶ تمام‌صفحه';if(active){document.body.style.overflow='hidden';try{if(el.requestFullscreen)await el.requestFullscreen()}catch(e){}}else{document.body.style.overflow='';try{if(document.fullscreenElement)await document.exitFullscreen()}catch(e){}}if(forest3DState)forest3DState.resize()}
 document.addEventListener('fullscreenchange',()=>{const el=document.getElementById('lessonWorld');if(el&&!document.fullscreenElement){el.classList.remove('is-fullscreen');document.body.style.overflow='';const b=document.getElementById('forestFullBtn');if(b)b.textContent='⛶ تمام‌صفحه';if(forest3DState)forest3DState.resize()}});
