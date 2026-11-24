@@ -166,6 +166,22 @@
 /* Landscape-only vocabulary photos */
 #modalPicture{width:100%;height:100%;object-fit:cover;object-position:center;border-radius:16px}
 
+
+/* Immersive discovery panels + richer 3D presentation */
+.lesson-world .world-info{position:absolute;z-index:12;right:clamp(10px,3vw,28px);top:104px;width:min(360px,calc(100% - 20px));max-height:min(58%,440px);overflow:auto;padding:17px 18px 16px;border:1px solid #ffffffa8;border-radius:22px;background:linear-gradient(145deg,#fffdf7f2,#f8e8eff2);color:#352632;box-shadow:0 22px 65px #170d1e66;backdrop-filter:blur(18px);opacity:0;transform:translateX(18px) scale(.97);pointer-events:none;transition:.3s}
+.lesson-world .world-info.open{opacity:1;transform:none;pointer-events:auto}
+.world-info .wi-kicker{font:700 10px Georgia,serif;letter-spacing:.18em;color:#ad6682;text-transform:uppercase}
+.world-info h4{font:600 25px 'Playfair Display',Georgia,serif;direction:ltr;text-align:left;margin:5px 0 8px;color:#553147}
+.world-info p{font-size:13px;line-height:1.9;margin:6px 0;color:#614e58}
+.world-info .wi-fact{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0}
+.world-info .wi-fact span{background:#fff;border:1px solid #efdce3;border-radius:11px;padding:8px;font-size:11px}
+.world-info .wi-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.world-info button{border:1px solid #e5c7d3;background:#fff;color:#653b51;border-radius:30px;padding:7px 11px;font-size:11px}
+.world-info button.primary{background:#63384f;color:#fff;border-color:#63384f}
+.world-info .wi-close{float:left;border:0;background:#f2dfe7;width:30px;height:30px;padding:0;font-size:17px}
+.lesson-world[data-world="2"] .world-info{top:96px}
+.lesson-world .world-info .wi-note{font-size:10px;color:#987c88;margin-top:9px}
+@media(max-width:600px){.lesson-world .world-info{top:86px;right:9px;width:calc(100% - 18px);max-height:55%;padding:13px}.world-info h4{font-size:21px}.lesson-world[data-world="1"] .world-info{top:82px}}
 </style>
 <body>
 <main class="wrap">
@@ -549,14 +565,50 @@ const lessonStudy=[
 const lessonWorldItems=[[{en:'Cheetah',fa:'یوزپلنگ',emoji:'🐆',key:'cheetah'},{en:'Leopard',fa:'پلنگ',emoji:'🐆',key:'leopard'},{en:'Elephant',fa:'فیل',emoji:'🐘',key:'elephant'},{en:'Gazelle',fa:'غزال',emoji:'🦌',key:'gazelle'},{en:'Tiger',fa:'ببر',emoji:'🐅',key:'tiger'},{en:'Lion',fa:'شیر',emoji:'🦁',key:'lion'},{en:'Bear',fa:'خرس',emoji:'🐻',key:'bear'},{en:'Bird',fa:'پرنده',emoji:'🦜',key:'bird'},{en:'Giraffe',fa:'زرافه',emoji:'🦒',key:'giraffe'}],[{en:'Heart',fa:'قلب',emoji:'❤️',key:'heart'},{en:'Blood',fa:'خون',emoji:'🩸',key:'blood'},{en:'Brain',fa:'مغز',emoji:'🧠',key:'brain'},{en:'Oxygen',fa:'اکسیژن',emoji:'💨',key:'oxygen'},{en:'Cell',fa:'سلول',emoji:'🧫',key:'cell'},{en:'Microbe',fa:'میکروب',emoji:'🦠',key:'microbe'}],[{en:'Scientist',fa:'دانشمند',emoji:'🧑‍🔬',key:'scientist'},{en:'Laboratory',fa:'آزمایشگاه',emoji:'🧪',key:'laboratory'},{en:'Medicine',fa:'دارو',emoji:'💊',key:'medicine'},{en:'Book',fa:'کتاب',emoji:'📚',key:'book'},{en:'Microscope',fa:'میکروسکوپ',emoji:'🔬',key:'microscope'},{en:'Telescope',fa:'تلسکوپ',emoji:'🔭',key:'telescope'}],[{en:'Iran',fa:'ایران',emoji:'🇮🇷',key:'iran'},{en:'Peru',fa:'پرو',emoji:'🇵🇪',key:'peru'},{en:'Chile',fa:'شیلی',emoji:'🇨🇱',key:'chile'},{en:'Italy',fa:'ایتالیا',emoji:'🇮🇹',key:'italy'},{en:'India',fa:'هند',emoji:'🇮🇳',key:'india'},{en:'Egypt',fa:'مصر',emoji:'🇪🇬',key:'egypt'}]];
 const lessonWorldTitles=[['THE GREEN KINGDOM','The Secret Forest','به جنگل حفاظت از طبیعت خوش آمدی'],['THE HUMAN WONDER','Inside the Living World','به دنیای شگفت‌انگیز بدن و آفرینش خوش آمدی'],['THE WORLD OF DISCOVERY','The Inventors’ Lab','به آزمایشگاه دانش و کشف خوش آمدی'],['A JOURNEY AROUND EARTH','Explore the World','آماده‌ی سفر به فرهنگ‌ها و سرزمین‌ها هستی؟']];
 let activeWorldLesson=1,activeWorldStep=0;
-function openWorldItem(key){openWordBloom(key)}
+function openWorldItem(key){openWorldExplorer(key)}
+const worldExplorerData={
+ human:{title:'Human Body',fa:'بدن انسان',desc:'Explore the human body as an interconnected living system. Select a structure to see how it works and how it connects to the circulatory system.',facts:['Body systems · Organ systems','Main focus · Anatomy'],links:[['Heart','heart'],['Brain','brain'],['Arteries','artery'],['Veins','vein'],['Capillaries','capillary'],['Blood cells','blood']]},
+ heart:{title:'Heart',fa:'قلب',desc:'The heart is a muscular pump. It sends blood to the lungs to receive oxygen, then pumps oxygen-rich blood around the body.',facts:['4 chambers','Pumps blood continuously'],links:[['Arteries','artery'],['Veins','vein'],['Capillaries','capillary']]},
+ brain:{title:'Brain',fa:'مغز',desc:'The brain is the control center of the nervous system. It receives information, processes it and coordinates movement, memory and thought.',facts:['Nervous system','Protected by the skull'],links:[['Human body','human']]},
+ blood:{title:'Blood',fa:'خون',desc:'Blood transports oxygen, nutrients, hormones and waste products. It contains plasma, red blood cells, white blood cells and platelets.',facts:['Red blood cells · Oxygen transport','White blood cells · Defense'],links:[['Arteries','artery'],['Veins','vein'],['Capillaries','capillary']]},
+ artery:{title:'Arteries',fa:'سرخرگ‌ها',desc:'Arteries carry blood away from the heart. Their thick, elastic walls withstand high pressure. Most arteries carry oxygen-rich blood.',facts:['Direction · Away from heart','Color key · Red'],links:[['Veins','vein'],['Capillaries','capillary'],['Heart','heart']]},
+ vein:{title:'Veins',fa:'سیاهرگ‌ها',desc:'Veins return blood toward the heart. Many contain one-way valves that help prevent blood from flowing backward. Most veins carry oxygen-poor blood.',facts:['Direction · Toward the heart','Color key · Blue'],links:[['Arteries','artery'],['Capillaries','capillary']]},
+ capillary:{title:'Capillaries',fa:'مویرگ‌ها',desc:'Capillaries are microscopic vessels with walls only one cell thick. Oxygen, nutrients and waste products move between blood and surrounding tissues here.',facts:['Smallest blood vessels','Exchange with body cells'],links:[['Arteries','artery'],['Veins','vein']]},
+ oxygen:{title:'Oxygen',fa:'اکسیژن',desc:'Oxygen enters the blood in the lungs and is carried mainly by hemoglobin inside red blood cells to body tissues.',facts:['Symbol · O₂','Needed for cellular respiration'],links:[['Blood','blood'],['Heart','heart']]},
+ solar:{title:'The Solar System',fa:'منظومه شمسی',desc:'Our Solar System includes the Sun, eight planets, their moons, dwarf planets, asteroids and comets. The planets orbit the Sun because of gravity.',facts:['1 star · The Sun','8 planets'],links:[['Mercury','mercury'],['Venus','venus'],['Earth','earth'],['Mars','mars'],['Jupiter','jupiter'],['Saturn','saturn'],['Uranus','uranus'],['Neptune','neptune']]},
+ mercury:{title:'Mercury',fa:'عطارد',desc:'Mercury is the closest planet to the Sun and the smallest planet in the Solar System. It has a rocky, heavily cratered surface.',facts:['Planet 1','Rocky planet'],links:[['Solar System','solar']]},
+ venus:{title:'Venus',fa:'زهره',desc:'Venus is the second planet from the Sun. Its dense carbon-dioxide atmosphere traps heat, making it the hottest planet.',facts:['Planet 2','Thick atmosphere'],links:[['Solar System','solar']]},
+ earth:{title:'Earth',fa:'زمین',desc:'Earth is the third planet from the Sun and the only known world with life on its surface. Most of its surface is covered by liquid water.',facts:['Planet 3','One natural moon'],links:[['Solar System','solar']]},
+ mars:{title:'Mars',fa:'مریخ',desc:'Mars is a cold, rocky world known as the Red Planet because iron minerals in its soil have oxidized, or rusted.',facts:['Planet 4','Two small moons'],links:[['Solar System','solar']]},
+ jupiter:{title:'Jupiter',fa:'مشتری',desc:'Jupiter is the largest planet. It is a gas giant with powerful storms, including the famous Great Red Spot.',facts:['Planet 5','Largest planet'],links:[['Solar System','solar']]},
+ saturn:{title:'Saturn',fa:'زحل',desc:'Saturn is a gas giant famous for its spectacular rings, made mostly of countless pieces of ice and rock.',facts:['Planet 6','Bright ring system'],links:[['Solar System','solar']]},
+ uranus:{title:'Uranus',fa:'اورانوس',desc:'Uranus is an ice giant that rotates on its side. Methane in its atmosphere gives it a blue-green appearance.',facts:['Planet 7','Extreme axial tilt'],links:[['Solar System','solar']]},
+ neptune:{title:'Neptune',fa:'نپتون',desc:'Neptune is the most distant major planet from the Sun. It is a deep-blue ice giant with extremely fast winds.',facts:['Planet 8','Very strong winds'],links:[['Solar System','solar']]},
+ cheetah:{title:'Cheetah',fa:'یوزپلنگ',desc:'The cheetah is the fastest land animal. Its flexible spine and long legs help it accelerate rapidly over short distances.',facts:['Animal · Mammal','Habitat · Open grasslands'],links:[['Leopard','leopard'],['Gazelle','gazelle']]},
+ leopard:{title:'Leopard',fa:'پلنگ',desc:'Leopards are powerful, adaptable big cats. Their rosette-patterned coats help them blend into many habitats.',facts:['Animal · Mammal','Family · Felidae'],links:[['Cheetah','cheetah']]},
+ elephant:{title:'Elephant',fa:'فیل',desc:'Elephants are the largest living land animals. Their trunks are used for breathing, smelling, drinking and grasping objects.',facts:['Animal · Mammal','Social · Herds'],links:[['Gazelle','gazelle']]},
+ gazelle:{title:'Gazelle',fa:'غزال',desc:'Gazelles are graceful, fast-running antelopes. Their speed and agility help them escape predators in open habitats.',facts:['Animal · Mammal','Family · Bovidae'],links:[['Cheetah','cheetah']]},
+ laboratory:{title:'Laboratory',fa:'آزمایشگاه',desc:'A laboratory is a controlled place where scientists observe, measure, test ideas and conduct experiments safely.',facts:['Science · Research','Tools · Instruments'],links:[['Microscope','microscope'],['Telescope','telescope'],['Experiment','experiment']]},
+ microscope:{title:'Microscope',fa:'میکروسکوپ',desc:'A microscope uses lenses to magnify tiny objects that cannot be seen clearly with the unaided eye, such as cells and microorganisms.',facts:['Tool · Optics','Use · Tiny specimens'],links:[['Cell','cell'],['Laboratory','laboratory']]},
+ telescope:{title:'Telescope',fa:'تلسکوپ',desc:'A telescope collects light from distant objects, allowing us to observe the Moon, planets, stars and galaxies.',facts:['Tool · Astronomy','Use · Distant objects'],links:[['Solar System','solar'],['Observatory','observatory']]},
+ experiment:{title:'Experiment',fa:'آزمایش',desc:'An experiment is a planned test used to investigate a question. Scientists change or measure variables and record evidence.',facts:['Method · Scientific inquiry','Key idea · Evidence'],links:[['Laboratory','laboratory'],['Scientist','scientist']]},
+ knowledge:{title:'Books and Knowledge',fa:'کتاب و دانش',desc:'Books preserve observations, explanations and discoveries so knowledge can be shared and tested by others.',facts:['Learning · Reading','Science · Evidence'],links:[['Scientist','scientist']]}
+};
+function openWorldExplorer(key){
+ const data=worldExplorerData[key]||{title:key,fa:key,desc:'Explore this object and connect it with the vocabulary and ideas in this lesson.',facts:['Vocabulary · Lesson '+activeWorldLesson],links:[]};
+ const box=document.getElementById('worldInfo');if(!box){openWordBloom(key);return}
+ box.innerHTML='<button class="wi-close" onclick="closeWorldExplorer()" aria-label="Close">×</button><div class="wi-kicker">INTERACTIVE FIELD GUIDE</div><h4>'+data.title+'</h4><b>'+data.fa+'</b><p>'+data.desc+'</p><div class="wi-fact">'+data.facts.map(x=>'<span>'+x+'</span>').join('')+'</div><div class="wi-actions">'+data.links.map(x=>'<button onclick="openWorldExplorer(\''+x[1]+'\')">'+x[0]+'</button>').join('')+'<button class="primary" onclick="openWordBloom(\''+key+'\')">واژه و تلفظ</button></div><div class="wi-note">Tap an object in the 3D world or choose a related topic to explore further.</div>';
+ box.classList.add('open');
+}
+function closeWorldExplorer(){document.getElementById('worldInfo')?.classList.remove('open')}
+
 
 function renderLessonWorld(n){
  activeWorldLesson=n;activeWorldStep=0;
  const title=lessonWorldTitles[n-1],items=lessonWorldItems[n-1];
  setTimeout(()=>{if(n===1)initForest3D();else initLesson3D(n)},140);
  const hint=n===1?'حیوانات را در جنگل تماشا کن؛ روی هر حیوان یا نامش بزن تا واژه را یاد بگیری.':n===2?'درون بدن انسان را کشف کن؛ روی اندام‌ها و اجزای سه‌بعدی بزن.':n===3?'آزمایشگاه را کاوش کن؛ ابزارها را لمس کن تا نام و معنی‌شان را یاد بگیری.':'کره زمین را بچرخان و سرزمین‌ها و بناها را کشف کن.';
- return '<div class="lesson-world" id="lessonWorld" data-world="'+n+'"><div class="world-title"><small>'+title[0]+'</small><h3>'+title[1]+'</h3><p>'+title[2]+'</p></div><div class="forest3d-stage" id="forest3dStage" aria-label="Interactive animated 3D lesson scene"></div><div class="world-animals" id="worldAnimals">'+items.map(x=>'<button class="world-animal" onclick="openWorldItem(\''+x.key+'\')"><b>'+x.en+'</b><small>'+x.fa+'</small></button>').join('')+'</div><div class="world-controls"><button class="primary" id="forestPauseBtn" onclick="toggleForestMotion()">Ⅱ توقف حرکت</button><button id="forestFullBtn" onclick="toggleForestFullscreen()">⛶ تمام‌صفحه</button></div><div class="world-hint" id="worldHint">'+hint+'</div></div>';
+ return '<div class="lesson-world" id="lessonWorld" data-world="'+n+'"><div class="world-title"><small>'+title[0]+'</small><h3>'+title[1]+'</h3><p>'+title[2]+'</p></div><div class="forest3d-stage" id="forest3dStage" aria-label="Interactive animated 3D lesson scene"></div><div class="world-info" id="worldInfo" aria-live="polite"></div><div class="world-animals" id="worldAnimals">'+items.map(x=>'<button class="world-animal" onclick="openWorldItem(\''+x.key+'\')"><b>'+x.en+'</b><small>'+x.fa+'</small></button>').join('')+'</div><div class="world-controls"><button class="primary" id="forestPauseBtn" onclick="toggleForestMotion()">Ⅱ توقف حرکت</button><button id="forestFullBtn" onclick="toggleForestFullscreen()">⛶ تمام‌صفحه</button></div><div class="world-hint" id="worldHint">'+hint+'</div></div>';
 }
 
 /* A small real-time 3D forest made from animated Three.js meshes (not stickers). */
@@ -660,7 +712,26 @@ function initLesson3D(n){
   const brain=group('brain',2.2,0);for(let i=0;i<9;i++){const a=i*Math.PI*2/9;mesh(brain,new T.SphereGeometry(.28,10,8),pink,Math.cos(a)*.28,1.65+Math.sin(a)*.22,0,.9,1,.8)}mesh(brain,new T.TorusGeometry(.28,.045,8,20),white,0,1.65,.02,1,1,1);
   const oxygen=group('oxygen',0,-4);for(let i=0;i<8;i++){const b=mesh(oxygen,new T.SphereGeometry(.12+(i%3)*.04,10,8),mat(0xbceaf1,.25),Math.sin(i*1.4)*1.1,.6+i*.28,Math.cos(i*1.8)*.5);b.userData.floatPhase=i}
   for(let i=0;i<13;i++){const cell=mesh(scene,new T.SphereGeometry(.14,10,8),mat(i%2?0xd45c68:0x9c3949),-4+Math.random()*8,1+Math.random()*2,-3-Math.random()*3,1,.6,1);cell.userData.floatPhase=i;objects.push(cell)}
+  
+// Anatomical vessels visible across the torso: red arteries, blue veins, fine capillaries.
+  const vesselMat=(color)=>new T.MeshStandardMaterial({color,roughness:.32,metalness:.05,emissive:color,emissiveIntensity:.12});
+  function vessel(key,points,color,radius){const g=new T.Group();g.userData.wordKey=key;const curve=new T.CatmullRomCurve3(points.map(p=>new T.Vector3(p[0],p[1],p[2])));const tube=new T.Mesh(new T.TubeGeometry(curve,48,radius,8,false),vesselMat(color));tube.castShadow=true;g.add(tube);scene.add(g);objects.push(g)}
+  vessel('artery',[[0,2.6,.47],[0,2.2,.5],[.12,1.95,.49],[.45,1.72,.48],[.52,1.3,.43]],0xc83245,.055);
+  vessel('artery',[[0,2.15,.51],[-.2,1.9,.5],[-.48,1.72,.48],[-.55,1.28,.43]],0xc83245,.045);
+  vessel('vein',[[.12,2.65,.5],[.18,2.25,.51],[.05,1.95,.52],[-.18,1.7,.49],[-.25,1.3,.45]],0x286fc2,.052);
+  vessel('vein',[[-.05,2.15,.52],[.22,1.95,.5],[.48,1.68,.47],[.55,1.25,.42]],0x286fc2,.043);
+  for(let i=0;i<7;i++){const x=-.48+i*.16;vessel('capillary',[[x,1.62,.49],[x+.06,1.48,.49],[x-.04,1.38,.48],[x+.04,1.28,.46]],i%2?0xc84b61:0x397bc0,.012)}
   body.userData.breath=true;heart.userData.heartbeat=true;brain.userData.sway=true;
+// A miniature orbital Solar System in the upper background, with individually clickable planets.
+  const solarRoot=new T.Group();solarRoot.position.set(0,4.45,-5.2);scene.add(solarRoot);
+  const starGeo=new T.BufferGeometry(),starPos=[];for(let i=0;i<260;i++)starPos.push((Math.random()-.5)*24,(Math.random()-.5)*12,(Math.random()-.5)*5);
+  starGeo.setAttribute('position',new T.Float32BufferAttribute(starPos,3));scene.add(new T.Points(starGeo,new T.PointsMaterial({color:0xffffff,size:.035,transparent:true,opacity:.8})));
+  const sunMesh=new T.Mesh(new T.SphereGeometry(.42,24,18),new T.MeshBasicMaterial({color:0xffd36a}));solarRoot.add(sunMesh);
+  const planetSpecs=[['mercury',0x9c9891,.62,.075],['venus',0xd9a66d,.88,.12],['earth',0x398bc4,1.16,.13],['mars',0xc75d43,1.45,.10],['jupiter',0xd5ad83,1.9,.24],['saturn',0xd8c18e,2.43,.21],['uranus',0x83cbd0,2.92,.16],['neptune',0x416ed1,3.38,.16]];
+  planetSpecs.forEach((p,i)=>{const orbit=new T.Mesh(new T.TorusGeometry(p[2],.004,4,96),new T.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.28}));orbit.rotation.x=Math.PI/2;solarRoot.add(orbit);const pg=new T.Group();pg.userData.wordKey=p[0];pg.position.set(p[2],0,0);const pm=new T.Mesh(new T.SphereGeometry(p[3],18,14),new T.MeshStandardMaterial({color:p[1],roughness:.7}));pg.add(pm);if(p[0]==='saturn'){const ring=new T.Mesh(new T.TorusGeometry(.31,.035,8,48),new T.MeshStandardMaterial({color:0xd9c59b,roughness:.8}));ring.rotation.x=Math.PI/2.7;pg.add(ring)}solarRoot.add(pg);objects.push(pg)});
+  const sunGroup=new T.Group();sunGroup.userData.wordKey='solar';sunGroup.position.copy(sunMesh.position);sunGroup.scale.setScalar(1.35);solarRoot.add(sunGroup);objects.push(sunGroup);
+  solarRoot.userData.orbit=true;objects.push(solarRoot);
+  
  }else if(n===3){
   // Laboratory bench with a detailed microscope, flasks, books and telescope.
   const bench=group('laboratory',0,-1.3);mesh(bench,new T.BoxGeometry(6,.24,2),mat(0x805d48),0,1,0);mesh(bench,new T.BoxGeometry(.22,1.1,.22),mat(0x624633),-2.5,.42,0);mesh(bench,new T.BoxGeometry(.22,1.1,.22),mat(0x624633),2.5,.42,0);
@@ -684,7 +755,7 @@ function initLesson3D(n){
  renderer.domElement.addEventListener('pointermove',e=>{if(e.buttons){let dx=e.clientX-downX;if(Math.abs(dx)>4)drag=true;angle+=dx*.002;camera.position.x=Math.sin(angle)*1.4;camera.lookAt(0,1,0);downX=e.clientX}});
  renderer.domElement.addEventListener('pointerup',e=>{if(drag)return;const r=renderer.domElement.getBoundingClientRect();pointer.x=(e.clientX-r.left)/r.width*2-1;pointer.y=-(e.clientY-r.top)/r.height*2+1;ray.setFromCamera(pointer,camera);const h=ray.intersectObjects(objects,true);if(h.length){let o=h[0].object;while(o.parent&&!o.userData.wordKey)o=o.parent;if(o.userData.wordKey)openWorldItem(o.userData.wordKey)}});
  let paused=false;const clock=new T.Clock();let raf=0;function resize(){const w=Math.max(1,host.clientWidth),h=Math.max(1,host.clientHeight);camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h,false)}resize();const ro=new ResizeObserver(resize);ro.observe(host);
- function animate(){raf=requestAnimationFrame(animate);const t=clock.getElapsedTime();if(!paused)objects.forEach((o,i)=>{if(o.userData.heartbeat){const q=1+Math.sin(t*3.5)*.07;o.scale.setScalar(q)}if(o.userData.breath)o.scale.y=1+Math.sin(t*1.3)*.018;if(o.userData.sway)o.rotation.y=Math.sin(t*.6)*.12;if(o.userData.spin)o.rotation.y=t*.2;if(o.userData.floatPhase!==undefined)o.position.y+=Math.sin(t*1.2+o.userData.floatPhase)*.0015;if(n===3&&o.userData.wordKey==='experiment')o.rotation.y=Math.sin(t*.8)*.06});renderer.render(scene,camera)}
+ function animate(){raf=requestAnimationFrame(animate);const t=clock.getElapsedTime();if(!paused)objects.forEach((o,i)=>{if(o.userData.heartbeat){const q=1+Math.sin(t*3.5)*.07;o.scale.setScalar(q)}if(o.userData.breath)o.scale.y=1+Math.sin(t*1.3)*.018;if(o.userData.sway)o.rotation.y=Math.sin(t*.6)*.12;if(o.userData.spin)o.rotation.y=t*.2;if(o.userData.orbit)o.rotation.y=t*.12;if(o.userData.floatPhase!==undefined)o.position.y+=Math.sin(t*1.2+o.userData.floatPhase)*.0015;if(n===3&&o.userData.wordKey==='experiment')o.rotation.y=Math.sin(t*.8)*.06});renderer.render(scene,camera)}
  animate();forest3DState={renderer,scene,camera,animals:[],raf:0,get raf(){return raf},setPaused(v){paused=v},isPaused(){return paused},resize,ro};
  
 }
@@ -694,8 +765,8 @@ async function toggleForestFullscreen(){const el=document.getElementById('lesson
 document.addEventListener('fullscreenchange',()=>{const el=document.getElementById('lessonWorld');if(el&&!document.fullscreenElement){el.classList.remove('is-fullscreen');document.body.style.overflow='';const b=document.getElementById('forestFullBtn');if(b)b.textContent='⛶ تمام‌صفحه';if(forest3DState)forest3DState.resize()}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){const el=document.getElementById('lessonWorld');if(el)el.classList.remove('is-fullscreen');document.body.style.overflow='';const b=document.getElementById('forestFullBtn');if(b)b.textContent='⛶ تمام‌صفحه';if(forest3DState)forest3DState.resize()}});
 
-function worldExplore(){const el=document.getElementById('lessonWorld');if(!el)return;el.classList.add('explore');activeWorldStep=1;document.getElementById('worldExploreBtn').textContent='🐾 دیدن جانوران';document.getElementById('worldBackBtn').style.display='inline-block';document.getElementById('worldHint').textContent='حالا روی هر حیوان بزن؛ کارت معنی و تلفظ انگلیسی‌اش باز می‌شود.'}
-function worldOverview(){const el=document.getElementById('lessonWorld');if(!el)return;el.classList.remove('explore');activeWorldStep=0;document.getElementById('worldExploreBtn').textContent=activeWorldLesson===1?'🌿 ورود به جنگل':'✨ کشف این دنیا';document.getElementById('worldBackBtn').style.display='none';document.getElementById('worldHint').textContent='نمای کلی دنیا؛ برای کشف جزئیات روی دکمه ورود بزن.'}
+function worldExplore(){const el=document.getElementById('lessonWorld');if(!el)return;el.classList.add('explore');activeWorldStep=1;const h=document.getElementById('worldHint');if(h)h.textContent='روی هر جسم سه‌بعدی بزن تا راهنمای تعاملی، نام انگلیسی و جزئیات علمی آن را ببینی.'}
+function worldOverview(){const el=document.getElementById('lessonWorld');if(!el)return;el.classList.remove('explore');activeWorldStep=0;closeWorldExplorer();const h=document.getElementById('worldHint');if(h)h.textContent='روی هر جسم سه‌بعدی بزن؛ می‌توانی بچرخانی، نزدیک شوی و جزئیاتش را کشف کنی.'}
 function worldNext(){if(activeWorldStep===0)worldExplore();else worldOverview()}
 function openLesson(n){let d=lessonStudy[n-1],l=lessons[n-1];document.getElementById('lessonFilter').value=String(n);document.getElementById('lessonDetail').classList.remove('hidden');document.getElementById('lessonDetail').innerHTML=`<span class="pill">LESSON ${n}</span><h2 style="margin:12px 0 3px">${l[1]}</h2><p class="latin">${l[0]}</p>${renderLessonWorld(n)}<div class="lesson-block"><h3>📖 راهنمای مطالعه و Reading</h3><div class="reading-box">${d.reading}</div><p class="muted">برای دیدن معنی و تلفظ واژه‌های کلیدی، روی آن‌ها بزن:</p><div class="tagrow">${d.keywords.map(k=>{let key=encodeURIComponent(k);return `<button type="button" class="mini" onclick="openWordBloom(decodeURIComponent('${key}'))">${k}</button>`}).join('')}</div></div><div class="lesson-block"><h3>📐 گرامر این درس</h3><p>${d.grammar}</p><div class="grammar-formula">${d.formula}</div><button class="btn soft" onclick="showPage('grammar')">رفتن به درسنامه گرامر</button></div><div class="actions" style="justify-content:flex-start"><button class="btn soft" onclick="showPage('vocab');document.getElementById('lessonFilter').value='${n}';renderWords()">واژگان این درس</button><button class="btn soft" onclick="showPage('vocab');document.getElementById('lessonFilter').value='${n}';document.getElementById('flashFilter').value='${n}';renderWords();resetFlash()">فلش‌کارت‌های درس</button><button class="btn" onclick="showPage('quiz');document.getElementById('quizLesson').value='${n}';startQuiz()">آزمون درس</button></div>`;document.getElementById('lessonDetail').scrollIntoView({behavior:'smooth',block:'start'})}
 
