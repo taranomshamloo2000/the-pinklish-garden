@@ -281,8 +281,57 @@
 /* Heart rhythm and tactile focus feedback */
 .unified-object[data-key="heart"]>svg{transform-origin:50% 58%;animation:heartRhythm 1.05s ease-in-out infinite}
 @keyframes heartRhythm{0%,100%{transform:scale(1)}12%{transform:scale(1.045)}24%{transform:scale(1)}38%{transform:scale(1.025)}52%{transform:scale(1)}}
-.bank-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}.bank-option{width:100%;min-height:46px;text-align:right;white-space:normal;line-height:1.7;cursor:pointer;border:1px solid var(--line);border-radius:13px;background:#fff9f6;color:var(--ink);padding:10px 12px}.bank-option:disabled{opacity:1;cursor:default}.bank-option.correct,.option.correct{background:#d9f5df!important;border-color:#35a853!important;color:#145b2a!important}.bank-option.wrong,.option.wrong{background:#ffe2e2!important;border-color:#df6666!important;color:#8d2020!important}.bank-answer{width:100%;min-height:85px;resize:vertical;margin-top:10px}.bank-option:focus-visible,.bank-answer:focus-visible{outline:3px solid #d98da2;outline-offset:2px}@media(max-width:600px){.bank-options{grid-template-columns:1fr}}.timed-exam{border:2px solid #e7a8c9!important;background:linear-gradient(135deg,rgba(255,238,247,.98),rgba(255,255,255,.98))!important;box-shadow:0 12px 32px rgba(190,91,145,.13)!important;margin:18px 0 22px!important}.timed-exam h2{color:#a33e78;font-size:clamp(21px,3vw,28px);margin:0 0 8px}.timed-exam .toolbar{align-items:center;gap:12px;flex-wrap:wrap}.timed-exam label{display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-weight:700;color:#81405f}.timed-exam .timed-area{border-top:1px solid #edc6da;margin-top:14px;padding-top:12px}.timed-exam #timedClock{font-size:25px;color:#a33e78;font-variant-numeric:tabular-nums}.timed-exam #timedQuestion{margin:12px 0}.timed-exam #timedNext{margin-top:12px}</style>
+.bank-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}.bank-option{width:100%;min-height:46px;text-align:right;white-space:normal;line-height:1.7;cursor:pointer;border:1px solid var(--line);border-radius:13px;background:#fff9f6;color:var(--ink);padding:10px 12px}.bank-option:disabled{opacity:1;cursor:default}.bank-option.correct,.option.correct{background:#d9f5df!important;border-color:#35a853!important;color:#145b2a!important}.bank-option.wrong,.option.wrong{background:#ffe2e2!important;border-color:#df6666!important;color:#8d2020!important}.bank-answer{width:100%;min-height:85px;resize:vertical;margin-top:10px}.bank-option:focus-visible,.bank-answer:focus-visible{outline:3px solid #d98da2;outline-offset:2px}@media(max-width:600px){.bank-options{grid-template-columns:1fr}}.timed-exam{border:2px solid #e7a8c9!important;background:linear-gradient(135deg,rgba(255,238,247,.98),rgba(255,255,255,.98))!important;box-shadow:0 12px 32px rgba(190,91,145,.13)!important;margin:18px 0 22px!important}.timed-exam h2{color:#a33e78;font-size:clamp(21px,3vw,28px);margin:0 0 8px}.timed-exam .toolbar{align-items:center;gap:12px;flex-wrap:wrap}.timed-exam label{display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-weight:700;color:#81405f}.timed-exam .timed-area{border-top:1px solid #edc6da;margin-top:14px;padding-top:12px}.timed-exam #timedClock{font-size:25px;color:#a33e78;font-variant-numeric:tabular-nums}.timed-exam #timedQuestion{margin:12px 0}.timed-exam #timedNext{margin-top:12px}
+/* Garden color themes */
+:root{--hero-a:#271a21;--hero-b:#4b293a;--hero-c:#986078;--tile-glow:#f9e9ed}
+:root[data-theme="lavender"]{--ink:#29213b;--muted:#776b8b;--rose:#a995d8;--rose2:#d8c9f2;--cream:#fbf8ff;--paper:#f0eafb;--wine:#51406f;--line:#e2d9f0;--gold:#c5a6db;--shadow:0 18px 55px #39264b18;--hero-a:#211a35;--hero-b:#51406f;--hero-c:#9a83bd;--tile-glow:#eee7fa}
+:root[data-theme="mint"]{--ink:#1d342e;--muted:#668078;--rose:#72b9a3;--rose2:#bce4d6;--cream:#f7fffb;--paper:#e9f6ef;--wine:#285d50;--line:#d4e9df;--gold:#c5aa75;--shadow:0 18px 55px #1d493818;--hero-a:#142c28;--hero-b:#285d50;--hero-c:#72a995;--tile-glow:#e1f3eb}
+:root[data-theme="ocean"]{--ink:#192d42;--muted:#657e96;--rose:#6ca9cf;--rose2:#b9d9ee;--cream:#f6fbff;--paper:#e8f2fa;--wine:#28577a;--line:#d4e4f0;--gold:#c5a66f;--shadow:0 18px 55px #183c5a18;--hero-a:#14283d;--hero-b:#28577a;--hero-c:#6b9ebc;--tile-glow:#e1eff8}
+:root[data-theme="sunset"]{--ink:#3c2925;--muted:#8b7064;--rose:#e49a78;--rose2:#f5c7a9;--cream:#fffaf5;--paper:#f9eee3;--wine:#874c3b;--line:#eedbd0;--gold:#d2a45e;--shadow:0 18px 55px #5b352318;--hero-a:#38201f;--hero-b:#874c3b;--hero-c:#c98262;--tile-glow:#f9e9dd}
+:root[data-theme="midnight"]{--ink:#e9e2f2;--muted:#b3a8c4;--rose:#bd9bdc;--rose2:#57466e;--cream:#211c2b;--paper:#2b2438;--wine:#d0b1ee;--line:#493d5b;--gold:#d8bd8a;--shadow:0 18px 55px #08061066;--hero-a:#100d1b;--hero-b:#29213b;--hero-c:#695482;--tile-glow:#332940}
+:root[data-theme="midnight"] body{background:var(--cream);color:var(--ink)}
+:root[data-theme="midnight"] .panel,:root[data-theme="midnight"] .tile,:root[data-theme="midnight"] .word,:root[data-theme="midnight"] .stat,:root[data-theme="midnight"] .field,:root[data-theme="midnight"] .timed-exam{background:#2b2438;color:var(--ink);border-color:var(--line)}
+:root[data-theme="midnight"] .tile p,:root[data-theme="midnight"] .sub,:root[data-theme="midnight"] .section-head p,:root[data-theme="midnight"] .word small{color:var(--muted)}
+:root[data-theme="midnight"] .field{background:#211c2b;color:var(--ink)}
+:root[data-theme="midnight"] .flashcard.flipped{background:linear-gradient(145deg,#493b60,#30283e);color:#f5edff}
+:root[data-theme="midnight"] .flashcard.flipped .hint{color:#c9bdd9}
+.hero{background:radial-gradient(ellipse at 78% 20%,var(--rose) 0,transparent 35%),linear-gradient(115deg,var(--hero-a) 0%,var(--hero-b) 56%,var(--hero-c) 100%)}
+.tile:after{background:var(--tile-glow)}
+/* Compact theme switcher */
+.theme-switcher{position:fixed;top:14px;left:14px;z-index:1000;direction:rtl;font-family:Estedad,Tahoma,sans-serif}
+.theme-trigger{width:46px;height:46px;border:1px solid var(--line);border-radius:16px;background:var(--cream);color:var(--wine);box-shadow:0 7px 24px #38202b22;display:grid;place-items:center;font-size:23px;transition:.2s}
+.theme-trigger:hover{transform:translateY(-2px)}
+.theme-pop{position:absolute;top:54px;left:0;width:min(285px,calc(100vw - 28px));padding:15px;background:var(--cream);color:var(--ink);border:1px solid var(--line);border-radius:20px;box-shadow:0 18px 50px #24121f30;display:none}
+.theme-pop.open{display:block;animation:themeIn .18s ease-out}
+@keyframes themeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.theme-pop-title{font-size:14px;font-weight:800;margin:0 0 3px}
+.theme-pop-sub{font-size:11px;color:var(--muted);margin:0 0 12px}
+.theme-options{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.theme-choice{border:1px solid var(--line);border-radius:13px;padding:9px 8px;background:transparent;color:var(--ink);display:flex;align-items:center;gap:8px;text-align:right;font-size:12px;transition:.18s}
+.theme-choice:hover{transform:translateY(-2px);border-color:var(--rose)}
+.theme-choice[aria-pressed="true"]{outline:2px solid var(--rose);background:var(--paper)}
+.theme-dots{display:flex;gap:3px;flex-shrink:0}
+.theme-dots i{display:block;width:11px;height:22px;border-radius:5px}
+.theme-choice span:last-child{font-weight:700}
+@media(max-width:560px){.theme-switcher{top:10px;left:10px}.theme-trigger{width:42px;height:42px;border-radius:14px}.theme-pop{top:49px}}
+
+</style>
 <body>
+
+<div class="theme-switcher" id="themeSwitcher">
+ <button class="theme-trigger" type="button" aria-label="تغییر رنگ سایت" aria-expanded="false" onclick="toggleThemeMenu()">☰</button>
+ <div class="theme-pop" id="themePop" aria-label="ترکیب‌های رنگی سایت">
+  <p class="theme-pop-title">رنگ باغت رو انتخاب کن 🌈</p><p class="theme-pop-sub">هر وقت خواستی حال‌وهوای سایت رو عوض کن.</p>
+  <div class="theme-options">
+   <button class="theme-choice" type="button" data-theme-choice="pink" aria-pressed="true" onclick="applyGardenTheme('pink')"><span class="theme-dots"><i style="background:#fff9f6"></i><i style="background:#d98da2"></i><i style="background:#542b3d"></i></span><span>صورتی شکوفه‌ای</span></button>
+   <button class="theme-choice" type="button" data-theme-choice="lavender" aria-pressed="false" onclick="applyGardenTheme('lavender')"><span class="theme-dots"><i style="background:#fbf8ff"></i><i style="background:#a995d8"></i><i style="background:#51406f"></i></span><span>یاسی رؤیایی</span></button>
+   <button class="theme-choice" type="button" data-theme-choice="mint" aria-pressed="false" onclick="applyGardenTheme('mint')"><span class="theme-dots"><i style="background:#f7fffb"></i><i style="background:#72b9a3"></i><i style="background:#285d50"></i></span><span>نعنایی آرام</span></button>
+   <button class="theme-choice" type="button" data-theme-choice="ocean" aria-pressed="false" onclick="applyGardenTheme('ocean')"><span class="theme-dots"><i style="background:#f6fbff"></i><i style="background:#6ca9cf"></i><i style="background:#28577a"></i></span><span>آبی اقیانوسی</span></button>
+   <button class="theme-choice" type="button" data-theme-choice="sunset" aria-pressed="false" onclick="applyGardenTheme('sunset')"><span class="theme-dots"><i style="background:#fffaf5"></i><i style="background:#e49a78"></i><i style="background:#874c3b"></i></span><span>غروب هلویی</span></button>
+   <button class="theme-choice" type="button" data-theme-choice="midnight" aria-pressed="false" onclick="applyGardenTheme('midnight')"><span class="theme-dots"><i style="background:#211c2b"></i><i style="background:#bd9bdc"></i><i style="background:#695482"></i></span><span>شب بنفش</span></button>
+  </div>
+ </div>
+</div>
 <main class="wrap">
 <section id="home" class="page">
 <div class="hero"><div class="hero-copy"><div class="eyebrow">A little garden for curious minds</div><h1>THE PINKLISH<br>GARDEN</h1><p>اینجا هر واژه یک شکوفه است؛ یاد بگیر، تمرین کن و قدم‌به‌قدم باغ دانش انگلیسی خودت را بساز.</p><button class="btn light" onclick="showPage('lessons')">شروع یادگیری <span>←</span></button></div><div class="hero-art">🌸</div></div>
@@ -1195,4 +1244,9 @@ function pgHint(){const w=pgSet[pgIndex];document.getElementById('pgFeedback').c
 function pgNext(){if(!pgSolved)return;if(pgIndex<pgSet.length-1){pgIndex++;pgRender()}else{document.getElementById('pgFeedback').textContent='🎉 همه‌ی تصاویر این درس رو کامل کردی! تو یک ستاره‌ای!';document.getElementById('pgNext').hidden=true;document.getElementById('pgProgressBar').style.width='100%'}}
 function showVocabMenu(){document.getElementById('vocabMenu').classList.remove('hidden');['bank','flash','spell'].forEach(k=>document.getElementById('vocabView-'+k).classList.add('hidden'));window.scrollTo({top:0,behavior:'smooth'})}
 function showVocabTool(tool){document.getElementById('vocabMenu').classList.add('hidden');['bank','flash','spell'].forEach(k=>document.getElementById('vocabView-'+k).classList.toggle('hidden',k!==tool));if(tool==='bank')renderWords();if(tool==='flash')resetFlash();if(tool==='spell')pgReset();window.scrollTo({top:0,behavior:'smooth'})}
+
+function toggleThemeMenu(){const p=document.getElementById('themePop'),b=document.querySelector('.theme-trigger');if(!p)return;const open=p.classList.toggle('open');b?.setAttribute('aria-expanded',String(open))}
+function applyGardenTheme(theme){const allowed=['pink','lavender','mint','ocean','sunset','midnight'];if(!allowed.includes(theme))return;document.documentElement.dataset.theme=theme;try{localStorage.setItem('pinklishGardenTheme',theme)}catch(e){}document.querySelectorAll('[data-theme-choice]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.themeChoice===theme)));const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=theme==='midnight'?'#211c2b':theme==='lavender'?'#fbf8ff':theme==='mint'?'#f7fffb':theme==='ocean'?'#f6fbff':theme==='sunset'?'#fffaf5':'#fff9f6'}
+(function(){let saved='pink';try{saved=localStorage.getItem('pinklishGardenTheme')||'pink'}catch(e){}applyGardenTheme(saved);document.addEventListener('click',e=>{const root=document.getElementById('themeSwitcher');if(root&&!root.contains(e.target)){document.getElementById('themePop')?.classList.remove('open');document.querySelector('.theme-trigger')?.setAttribute('aria-expanded','false')}});document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('themePop')?.classList.remove('open');document.querySelector('.theme-trigger')?.setAttribute('aria-expanded','false')}})})();
+
 </script></body></html>
