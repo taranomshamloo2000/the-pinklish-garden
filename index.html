@@ -70,7 +70,11 @@
 @keyframes orbitSpin{to{transform:rotate(360deg)}}
 @keyframes grammarBob{0%,100%{transform:translateY(0) translateZ(22px) rotate(-3deg)}50%{transform:translateY(-7px) translateZ(22px) rotate(3deg)}}
 @keyframes cubeDrift{0%,100%{transform:translateY(0) rotateY(-18deg) rotateX(12deg)}50%{transform:translateY(-9px) rotateY(18deg) rotateX(5deg)}}
-@keyframes arrowPulse{0<section id="grammar" class="page hidden">
+@keyframes arrowPulse{0%,100%{opacity:.45;transform:translateX(0)}50%{opacity:1;transform:translateX(-4px)}}
+@keyframes grammarReveal{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:650px){.grammar-academy-grid{grid-template-columns:1fr}.grammar-orbit{left:3%;opacity:.5;width:85px;height:85px}.grammar-hero{padding:25px 19px}.g-options{grid-template-columns:1fr 1fr}}
+</style>
+<section id="grammar" class="page hidden">
 <button class="back" onclick="showPage('home')">← بازگشت به خانه</button>
 <h1 class="page-title">آکادمی گرامر</h1><p class="sub">از ساختن جمله تا تسلط؛ قدم‌به‌قدم، تصویری و تعاملی</p>
 <div class="grammar-hero"><div class="grammar-orbit"></div><div class="eyebrow">THE PINKLISH GARDEN · GRAMMAR STUDIO</div><h2>Grammar in Bloom</h2><p>هر قانون یک قطعه از پازل زبان است. کارت‌ها را باز کن، مثال‌ها را ببین، انیمیشن‌ها را دنبال کن و در پایان خودت را بسنج.</p></div>
