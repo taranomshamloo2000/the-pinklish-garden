@@ -663,12 +663,12 @@ function initForest3D(){
  if(!window.THREE){host.innerHTML='<p style="padding:40px;color:white;text-align:center">برای نمایش جنگل سه‌بعدی، اتصال اینترنت را بررسی کن و صفحه را دوباره باز کن.</p>';return}
  const T=window.THREE,scene=new T.Scene();scene.background=new T.Color(0x9bcbd0);scene.fog=new T.Fog(0x9bcbd0,13,29);
  const camera=new T.PerspectiveCamera(43,1,.1,80);camera.position.set(0,5.2,11.8);camera.lookAt(0,1,0);
- const renderer=new T.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5));renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;host.appendChild(renderer.domElement);
+ const renderer=new T.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;host.appendChild(renderer.domElement);
  scene.add(new T.HemisphereLight(0xe4f4e8,0x40523b,2.1));
  const sun=new T.DirectionalLight(0xffedc7,2.5);sun.position.set(-5,9,5);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);scene.add(sun);
  const ground=new T.Mesh(new T.PlaneGeometry(45,45),new T.MeshStandardMaterial({color:0x416c43,roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.y=-.04;ground.receiveShadow=true;scene.add(ground);
  const path=new T.Mesh(new T.PlaneGeometry(4,24),new T.MeshStandardMaterial({color:0xb6a17a,roughness:1}));path.rotation.x=-Math.PI/2;path.position.set(0,.005,-1);path.receiveShadow=true;scene.add(path);
- function tree(x,z,h=1){const g=new T.Group();g.position.set(x,0,z);const trunk=new T.Mesh(new T.CylinderGeometry(.13*h,.2*h,1.8*h,7),new T.MeshStandardMaterial({color:0x60452f,roughness:1}));trunk.position.y=.9*h;trunk.castShadow=true;g.add(trunk);for(let i=0;i<3;i++){const crown=new T.Mesh(new T.ConeGeometry((1.05-i*.18)*h,1.8*h,7),new T.MeshStandardMaterial({color:[0x28583b,0x356b43,0x477b49][i],roughness:1,flatShading:true}));crown.position.y=(1.9+i*.58)*h;crown.castShadow=true;g.add(crown)}scene.add(g)}
+ function tree(x,z,h=1){const g=new T.Group();g.position.set(x,0,z);const bark=new T.MeshStandardMaterial({color:0x59402d,roughness:.96});const leafMats=[0x234b35,0x2d6040,0x3d7549,0x547e4a].map(c=>new T.MeshStandardMaterial({color:c,roughness:.88}));const trunk=new T.Mesh(new T.CylinderGeometry(.16*h,.27*h,2.25*h,14,5),bark);trunk.position.y=1.12*h;trunk.castShadow=true;g.add(trunk);for(let b=0;b<5;b++){const branch=new T.Mesh(new T.CylinderGeometry(.045*h,.09*h,.9*h,9),bark);branch.position.set((b%2?1:-1)*.3*h,1.45*h+b*.18*h,0);branch.rotation.z=(b%2?-.65:.65);g.add(branch);for(let j=0;j<7;j++){const leaf=new T.Mesh(new T.IcosahedronGeometry((.22+Math.random()*.16)*h,2),leafMats[(b+j)%leafMats.length]);leaf.position.set((b%2?1:-1)*(.48+Math.random()*.3)*h,(1.8+j*.12+Math.random()*.4)*h,(Math.random()-.5)*.8*h);leaf.scale.set(1.15,.9,.85);leaf.castShadow=true;g.add(leaf)}}for(let i=0;i<24;i++){const a=Math.random()*Math.PI*2,y=(2+Math.random()*1.8)*h,r=(.35+Math.random()*.7)*h;const leaf=new T.Mesh(new T.IcosahedronGeometry(.18*h+Math.random()*.12*h,1),leafMats[i%4]);leaf.position.set(Math.cos(a)*r,y,Math.sin(a)*r);leaf.castShadow=true;g.add(leaf)}scene.add(g);return g}
  [[-6,-4,1.3],[-5,1,1.1],[-4,-7,1.5],[5,-5,1.4],[6,0,1.25],[4,-8,1.5],[-7,6,1.2],[7,5,1.3],[-2,-9,1.4],[2,-10,1.4]].forEach(a=>tree(...a));
  const grassMat=new T.MeshStandardMaterial({color:0x6d9853,roughness:1});
  for(let i=0;i<90;i++){const x=(Math.random()-.5)*18,z=(Math.random()-.5)*18;if(Math.abs(x)<2.5&&z>-5&&z<5)continue;const tuft=new T.Mesh(new T.ConeGeometry(.055,.3,4),grassMat);tuft.position.set(x,.13,z);tuft.rotation.z=(Math.random()-.5)*.5;scene.add(tuft)}
@@ -750,7 +750,69 @@ function initLesson3D(n){
   const temple=group('culture',3.1,-.5);mesh(temple,new T.BoxGeometry(1.5,.22,.8),mat(0xe3d4b4),0,.12,0);for(let i=0;i<4;i++)mesh(temple,new T.CylinderGeometry(.09,.13,1.35,10),mat(0xf0dfbf),-.55+i*.37,.8,0);mesh(temple,new T.ConeGeometry(.9,.4,4),mat(0x9e8b73),0,1.6,0);
   const flags=group('abroad',0,-4);for(let i=0;i<3;i++){mesh(flags,new T.CylinderGeometry(.025,.025,1.4,6),mat(0xf0e9dd),-.5+i*.5,.8,0);mesh(flags,new T.BoxGeometry(.42,.25,.02),mat([0xc65353,0x5b8eaa,0x68a66c][i]),-.3+i*.5,1.25,0)}
  }
- const ray=new T.Raycaster(),pointer=new T.Vector2();let downX=0,drag=false,angle=0;
+ // Fine architectural and scientific craftsmanship details.
+ if(n===2){
+  const bone=mat(0xe7d8c6,.62),muscle=mat(0xa85a5d,.72),gold=mat(0xc6a36b,.32,.72);
+  // Anatomical shoulder, clavicle and rib-cage relief on the front of the torso.
+  for(const side of [-1,1]){
+   const clav=mesh(body,new T.CapsuleGeometry(.055,.52,5,10),bone,side*.34,2.24,.39,1,1,1);clav.rotation.z=side*.24;
+   for(let r=0;r<5;r++){const rib=mesh(body,new T.TorusGeometry(.24+r*.035,.025,7,28,Math.PI),bone,side*.04,1.95-r*.13,.36);rib.rotation.z=Math.PI;rib.scale.set(1.25,.58,1)}
+   const shoulder=mesh(body,new T.SphereGeometry(.27,24,18),skin,side*.68,2.25,0,1,1,.92);
+   const elbow=mesh(body,new T.SphereGeometry(.15,18,14),skin,side*1.02,1.25,.02);
+   const wrist=mesh(body,new T.SphereGeometry(.13,18,14),skin,side*1.08,.9,.02);
+   for(let f=0;f<4;f++){const finger=mesh(body,new T.CapsuleGeometry(.035,.19,4,8),skin,side*(1.08+(f-1.5)*.065),.7,.03);finger.rotation.z=side*.12}
+  }
+  const neckMesh=mesh(body,new T.CylinderGeometry(.19,.24,.42,24),skin,0,2.62,0);
+  // Vertebrae and fine branching vessel detail at the back-side silhouette.
+  for(let v=0;v<9;v++)mesh(body,new T.SphereGeometry(.075,12,10),bone,0,2.28-v*.18,-.34);
+  // Detailed anatomical heart: atria, ventricles, aorta and pulmonary vessels.
+  const aorta=mesh(heart,new T.TorusGeometry(.17,.055,10,28,Math.PI*1.45),0xc83b4a,0,2.08,0);aorta.rotation.z=Math.PI;
+  const vesselTube=(pts,color,r)=>{const curve=new T.CatmullRomCurve3(pts.map(p=>new T.Vector3(...p)));const tube=new T.Mesh(new T.TubeGeometry(curve,32,r,8,false),vesselMat(color));heart.add(tube)};
+  vesselTube([[0,1.9,0],[.05,2.2,0],[.22,2.32,0],[.36,2.2,0]],0xc83245,.045);
+  vesselTube([[-.08,1.9,0],[-.2,2.12,0],[-.35,2.18,0]],0x286fc2,.035);
+  // Brain folds: curved gyri give the cerebrum a richer anatomical surface.
+  for(let side of [-1,1])for(let j=0;j<5;j++){const pts=[];for(let q=0;q<9;q++){const u=q/8;pts.push(new T.Vector3(side*(.06+u*.38),1.52+j*.065+Math.sin(u*Math.PI*2+j)*.045,Math.cos(u*Math.PI)*.12))}const c=new T.CatmullRomCurve3(pts);brain.add(new T.Mesh(new T.TubeGeometry(c,18,.018,6,false),mat(0xd98591,.65)))}
+ }
+ if(n===3){
+  const chrome=mat(0x9daab3,.22,.82),darkMetal=mat(0x263c4b,.28,.72),brass=mat(0xb28a4c,.28,.78);
+  // Precision microscope: focus wheels, eyepiece rim, objective turret and stage clips.
+  for(const side of [-1,1]){const wheel=mesh(micro,new T.CylinderGeometry(.2,.2,.08,32),brass,side*.29,1.55,.12);wheel.rotation.x=Math.PI/2;const hub=mesh(micro,new T.CylinderGeometry(.07,.07,.1,24),darkMetal,side*.29,1.55,.18);hub.rotation.x=Math.PI/2}
+  for(let j=0;j<3;j++){const objective=mesh(micro,new T.CylinderGeometry(.045,.065,.34,16),chrome,-.35+j*.18,2.15,.05);objective.rotation.z=-.48;const tip=mesh(micro,new T.CylinderGeometry(.055,.055,.08,16),darkMetal,-.35+j*.18,2.29,.05);tip.rotation.z=-.48}
+  for(const side of [-1,1])mesh(micro,new T.BoxGeometry(.08,.04,.16),brass,side*.25,1.42,.18);
+  // Glass reflections and measurement markings on the laboratory vessel.
+  for(let k=0;k<5;k++){const mark=mesh(flask,new T.BoxGeometry(.12,.012,.012),mat(0xf2ffff,.18),.19,1.42+k*.1,.18);mark.rotation.z=.02}
+  // Telescope tripod, adjustment collar and finder scope.
+  const tripod=group('telescope',2.65,-2);for(let side=0;side<3;side++){const a=side*Math.PI*2/3;const leg=mesh(tripod,new T.CylinderGeometry(.035,.055,1.2,10),brass,Math.cos(a)*.42,.58,Math.sin(a)*.42);leg.rotation.z=Math.cos(a)*.28;leg.rotation.x=Math.sin(a)*.28}
+  const finder=mesh(scope,new T.CylinderGeometry(.045,.055,.65,12),darkMetal,.08,2.1,.12);finder.rotation.z=-.7;
+  // Fine glass shelves and illuminated specimen slides.
+  const shelf=group('laboratory',0,-3.1);mesh(shelf,new T.BoxGeometry(5,.08,.6),chrome,0,2.8,0);
+  for(let i=0;i<6;i++){const jar=mesh(shelf,new T.CylinderGeometry(.13,.13,.42,20),glass,-2.1+i*.82,3.05,0);mesh(shelf,new T.CylinderGeometry(.14,.14,.055,20),brass,-2.1+i*.82,3.29,0)}
+ }
+ if(n===4){
+  const marble=mat(0xe2d3b8,.76),limestone=mat(0xc5b18f,.9),bronze=mat(0x80623e,.34,.7),gold=mat(0xc7a66b,.28,.72);
+  // Globe surface: hand-painted map-like continents using a canvas texture.
+  const mapCanvas=document.createElement('canvas');mapCanvas.width=1024;mapCanvas.height=512;const cx=mapCanvas.getContext('2d');
+  cx.fillStyle='#236f9b';cx.fillRect(0,0,1024,512);cx.fillStyle='#79a978';
+  const landShapes=[[[120,90],[170,50],[230,72],[260,120],[235,175],[195,190],[165,250],[130,210],[105,145]],[[250,245],[300,220],[335,270],[320,350],[285,420],[260,350]],[[420,90],[485,55],[555,85],[610,120],[585,180],[520,190],[490,240],[445,190]],[[480,220],[550,210],[590,270],[560,365],[520,430],[490,350]],[[590,80],[690,45],[780,90],[820,160],[760,210],[700,190],[650,150]],[[760,300],[840,280],[900,330],[870,390],[800,380]]];
+  landShapes.forEach(poly=>{cx.beginPath();poly.forEach((p,i)=>i?cx.lineTo(p[0],p[1]):cx.moveTo(p[0],p[1]));cx.closePath();cx.fill()});
+  cx.globalAlpha=.22;for(let i=0;i<1800;i++){cx.fillStyle=i%2?'#d7d3a1':'#154e70';cx.fillRect(Math.random()*1024,Math.random()*512,Math.random()*4+1,Math.random()*3+1)}cx.globalAlpha=1;
+  const mapTex=new T.CanvasTexture(mapCanvas);mapTex.colorSpace=T.SRGBColorSpace;const mapMat=new T.MeshStandardMaterial({map:mapTex,roughness:.82,metalness:0});
+  sphere.material=mapMat;
+  // Historical tower: carved stone base, stacked cornices, arched windows and roof ribs.
+  for(let level=0;level<3;level++){const cornice=mesh(tower,new T.CylinderGeometry(.56-level*.035,.56-level*.035,.12,24),limestone,0,.18+level*.55,0);cornice.castShadow=true}
+  for(let side=-1;side<=1;side+=2){const arch=mesh(tower,new T.TorusGeometry(.13,.035,8,24,Math.PI),bronze,side*.2,1.45,.47);arch.rotation.z=Math.PI;mesh(tower,new T.BoxGeometry(.08,.35,.08),bronze,side*.2,1.28,.48)}
+  // Classical temple: fluted columns, ornate capitals, pediment, stairs and a relief frieze.
+  for(let i=0;i<4;i++){const x=-.55+i*.37;for(let f=0;f<8;f++){const flute=mesh(temple,new T.CylinderGeometry(.008,.008,1.12,6),gold,x+Math.cos(f*Math.PI/4)*.095,.8,Math.sin(f*Math.PI/4)*.095);flute.castShadow=false}mesh(temple,new T.CylinderGeometry(.16,.16,.12,16),gold,x,1.5,0)}
+  mesh(temple,new T.CylinderGeometry(.12,.12,.13,16),gold,0,1.58,0);
+  mesh(temple,new T.BoxGeometry(1.8,.12,.95),limestone,0,1.78,0);
+  const pediment=mesh(temple,new T.ConeGeometry(1.05,.52,3),marble,0,2.08,0);pediment.rotation.y=Math.PI/2;
+  for(let step=0;step<4;step++)mesh(temple,new T.BoxGeometry(2.1-step*.18,.12,1.05-step*.12),limestone,0,-.02-step*.12,.35+step*.12);
+  // Antique bronze armillary rings around the globe add a museum-like finish.
+  for(let i=0;i<3;i++){const ring=mesh(globe,new T.TorusGeometry(2.02+i*.06,.012,6,96),bronze,0,1.7,0);ring.rotation.set(i*.7, i*1.1, i*.35)}
+  // Floating engraved-looking stars and small orbiting moon.
+  const moon=group('planet',2.4,1.4);mesh(moon,new T.SphereGeometry(.24,24,18),mat(0xcac8bd,.9),0,2.6,0);
+ }
+  const ray=new T.Raycaster(),pointer=new T.Vector2();let downX=0,drag=false,angle=0;
  renderer.domElement.addEventListener('pointerdown',e=>{downX=e.clientX;drag=false});
  renderer.domElement.addEventListener('pointermove',e=>{if(e.buttons){let dx=e.clientX-downX;if(Math.abs(dx)>4)drag=true;angle+=dx*.002;camera.position.x=Math.sin(angle)*1.4;camera.lookAt(0,1,0);downX=e.clientX}});
  renderer.domElement.addEventListener('pointerup',e=>{if(drag)return;const r=renderer.domElement.getBoundingClientRect();pointer.x=(e.clientX-r.left)/r.width*2-1;pointer.y=-(e.clientY-r.top)/r.height*2+1;ray.setFromCamera(pointer,camera);const h=ray.intersectObjects(objects,true);if(h.length){let o=h[0].object;while(o.parent&&!o.userData.wordKey)o=o.parent;if(o.userData.wordKey)openWorldItem(o.userData.wordKey)}});
