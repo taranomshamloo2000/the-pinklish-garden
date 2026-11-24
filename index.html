@@ -196,4 +196,40 @@ const lessonStudy=[
 function openLesson(n){let d=lessonStudy[n-1],l=lessons[n-1];document.getElementById('lessonFilter').value=String(n);document.getElementById('lessonDetail').classList.remove('hidden');document.getElementById('lessonDetail').innerHTML=`<span class="pill">LESSON ${n}</span><h2 style="margin:12px 0 3px">${l[1]}</h2><p class="latin">${l[0]}</p><div class="scene"><div class="scene-orb">${d.scene}</div><span class="scene-label">THE PINKLISH GARDEN · 3D STUDY</span></div><div class="lesson-block"><h3>📖 راهنمای مطالعه و Reading</h3><div class="reading-box">${d.reading}</div><p class="muted">برای دیدن معنی و تلفظ واژه‌های کلیدی، روی آن‌ها بزن:</p><div class="tagrow">${d.keywords.map(k=>`<button class="mini" onclick="openWordBloom(${JSON.stringify(k)})">${k}</button>`).join('')}</div></div><div class="lesson-block"><h3>📐 گرامر این درس</h3><p>${d.grammar}</p><div class="grammar-formula">${d.formula}</div><button class="btn soft" onclick="showPage('grammar')">رفتن به درسنامه گرامر</button></div><div class="actions" style="justify-content:flex-start"><button class="btn soft" onclick="showPage('vocab');document.getElementById('lessonFilter').value='${n}';renderWords()">واژگان این درس</button><button class="btn soft" onclick="showPage('flash');document.getElementById('flashFilter').value='${n}';resetFlash()">فلش‌کارت‌های درس</button><button class="btn" onclick="showPage('quiz');document.getElementById('quizLesson').value='${n}';startQuiz()">آزمون درس</button></div>`;document.getElementById('lessonDetail').scrollIntoView({behavior:'smooth',block:'start'})}
 
 renderLessons();renderAudio();renderFurther();renderGarden();renderProgress();if(document.getElementById('writingText'))document.getElementById('writingText').value=localStorage.getItem('pg_writing')||'';
+
+/* THE PINKLISH GARDEN — soft click sound effects */
+(()=>{
+  let audioCtx;
+  let lastSoundAt=0;
+  function playGardenClick(){
+    const now=Date.now();
+    if(now-lastSoundAt<45) return;
+    lastSoundAt=now;
+    try{
+      const Ctx=window.AudioContext||window.webkitAudioContext;
+      if(!Ctx) return;
+      audioCtx=audioCtx||new Ctx();
+      if(audioCtx.state==="suspended") audioCtx.resume();
+      const t=audioCtx.currentTime;
+      const osc=audioCtx.createOscillator();
+      const gain=audioCtx.createGain();
+      const filter=audioCtx.createBiquadFilter();
+      osc.type="sine";
+      osc.frequency.setValueAtTime(720+Math.random()*130,t);
+      osc.frequency.exponentialRampToValueAtTime(430+Math.random()*70,t+0.075);
+      filter.type="lowpass";
+      filter.frequency.setValueAtTime(2200,t);
+      gain.gain.setValueAtTime(0.0001,t);
+      gain.gain.exponentialRampToValueAtTime(0.075,t+0.008);
+      gain.gain.exponentialRampToValueAtTime(0.0001,t+0.11);
+      osc.connect(filter);filter.connect(gain);gain.connect(audioCtx.destination);
+      osc.start(t);osc.stop(t+0.12);
+    }catch(e){}
+  }
+  document.addEventListener("click",e=>{
+    const target=e.target instanceof Element?e.target:null;
+    if(!target) return;
+    if(target.closest('button,a,input,select,textarea,[role="button"],[onclick],.tile,.word,.flashcard,.navlinks,.tab')) playGardenClick();
+  },true);
+})();
 </script></body></html>
