@@ -788,20 +788,25 @@ function paintOnlineModels(host,assets){
 let worldAudioContext=null;
 function playWorldSound(key){
  try{
+  // Speak the English label on every tap; this is a real audible fallback on mobile browsers.
+  if('speechSynthesis' in window){
+   const labels={heart:'heart',brain:'brain',blood:'blood',cell:'cell',organ:'organ',microbe:'microbe',leopard:'leopard',elephant:'elephant',gazelle:'gazelle',tiger:'tiger',dolphin:'dolphin',goat:'goat',whale:'whale',bear:'bear',bird:'bird',giraffe:'giraffe',wolf:'wolf',cheetah:'cheetah',cat:'cat',lion:'lion',zebra:'zebra',panda:'panda',duck:'duck',goose:'goose',camel:'camel',sun:'sun',moon:'moon',planet:'planet',mars:'Mars',neptune:'Neptune',saturn:'Saturn',uranus:'Uranus',mercury:'Mercury',venus:'Venus',jupiter:'Jupiter',orbit:'orbit',telescope:'telescope',microscope:'microscope',lamp:'lamp',ball:'ball',ring:'ring',drop:'water drop',gold:'gold',silver:'silver',metal:'metal',plastic:'plastic',liquid:'liquid',pepper:'pepper',sandwich:'sandwich',seafood:'seafood','fast-food':'fast food',paint:'paint',observatory:'observatory',scientist:'scientist',razi:'Razi',avicenna:'Avicenna',book:'book',pen:'pen',paper:'paper',laboratory:'laboratory',hospital:'hospital',medicine:'medicine',drug:'medicine',mirror:'mirror',iran:'Iran',peru:'Peru',chile:'Chile',italy:'Italy',india:'India',egypt:'Egypt',beijing:'Beijing',pyramid:'pyramid','great-wall':'Great Wall','holy-shrine':'holy shrine','wind-tower':'wind tower',desert:'desert',jungle:'jungle',booklet:'booklet',ticket:'ticket',flight:'flight',bag:'bag',visa:'visa',piano:'piano',vegetable:'vegetable',chip:'potato chip','junk-food':'junk food',forest:'forest',tree:'tree',plant:'plant',box:'box',laptop:'laptop',road:'road',sky:'sky',foot:'foot'};
+   window.speechSynthesis.cancel();
+   const u=new SpeechSynthesisUtterance(labels[key]||key.replace(/[-_]/g,' '));
+   u.lang='en-US';u.rate=.88;u.pitch=1;
+   window.speechSynthesis.speak(u);
+  }
   const C=window.AudioContext||window.webkitAudioContext;
-  if(!C){console.warn('Web Audio is not supported');return}
+  if(!C)return;
   worldAudioContext=worldAudioContext||new C();
   const c=worldAudioContext;
   const play=()=>{
    const t=c.currentTime;
    const tone=(f,type,d,v,end,delay=0)=>{
-    const o=c.createOscillator(),g=c.createGain();
-    o.type=type;o.frequency.setValueAtTime(f,t+delay);
+    const o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(f,t+delay);
     if(end)o.frequency.exponentialRampToValueAtTime(end,t+delay+d);
-    g.gain.setValueAtTime(.0001,t+delay);
-    g.gain.exponentialRampToValueAtTime(v,t+delay+.025);
-    g.gain.exponentialRampToValueAtTime(.0001,t+delay+d);
-    o.connect(g);g.connect(c.destination);o.start(t+delay);o.stop(t+delay+d+.04);
+    g.gain.setValueAtTime(.0001,t+delay);g.gain.exponentialRampToValueAtTime(v,t+delay+.025);
+    g.gain.exponentialRampToValueAtTime(.0001,t+delay+d);o.connect(g);g.connect(c.destination);o.start(t+delay);o.stop(t+delay+d+.04);
    };
    if(key==='heart'){tone(82,'sine',.22,.48,42);tone(55,'triangle',.14,.24,30,.035);tone(82,'sine',.22,.48,42,.38);tone(55,'triangle',.14,.24,30,.415);return}
    const animals={lion:[125,'sawtooth',.52,75],tiger:[145,'sawtooth',.36,65],leopard:[175,'sawtooth',.28,90],cheetah:[210,'sawtooth',.22,130],elephant:[95,'sine',.48,220],gazelle:[780,'sine',.24,620],goat:[390,'triangle',.23,250],whale:[180,'sine',.85,90],dolphin:[1150,'sine',.16,1550],bear:[115,'sawtooth',.4,80],bird:[1500,'sine',.12,2100],wolf:[260,'sawtooth',.62,420],cat:[620,'triangle',.24,440],zebra:[520,'triangle',.2,370],panda:[230,'triangle',.32,180],duck:[420,'triangle',.25,290],goose:[360,'triangle',.32,250],ant:[880,'sine',.055,990],camel:[210,'triangle',.34,160]};
@@ -811,8 +816,7 @@ function playWorldSound(key){
    if(['blood','drop','sea','liquid'].includes(key)){tone(430,'sine',.32,.28,190);return}
    tone(640,'sine',.22,.28,390);
   };
-  if(c.state==='suspended')c.resume().then(play).catch(e=>console.warn('Audio resume failed',e));
-  else play();
+  if(c.state==='suspended')c.resume().then(play).catch(e=>console.warn('Audio resume failed',e));else play();
  }catch(e){console.warn('World sound failed',e)}
 }
 function focusWorldObject(key){
