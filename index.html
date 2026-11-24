@@ -101,52 +101,17 @@
 .vocab-menu{margin:22px 0}.vocab-menu-intro{text-align:center;margin:18px 0 24px}.vocab-menu-intro h2{color:#70465c;font-size:26px;margin:0 0 8px}.vocab-menu-intro p{color:#947b87;margin:0}.vocab-menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.vocab-menu-card{min-width:0;min-height:190px;padding:22px 16px;border:1px solid #ead7df;border-radius:24px;background:linear-gradient(145deg,#fff 0%,#fff4f7 100%);box-shadow:0 8px 24px #70465c12;display:flex;flex-direction:column;align-items:flex-start;text-align:right;gap:10px;color:#35232d;cursor:pointer;transition:transform .2s,box-shadow .2s}.vocab-menu-card:active{transform:scale(.98)}.vocab-menu-card>span{font-size:36px}.vocab-menu-card strong{font-size:17px}.vocab-menu-card small{font-size:13px;line-height:1.9;color:#907b86}.vocab-menu-card b{font-size:13px;color:#a34e78;margin-top:auto}.vocab-tool-view{margin-top:16px}.vocab-tool-view>.back{margin-bottom:16px}.vocab-tool-view.hidden{display:none!important}@media(max-width:430px){.vocab-menu-grid{grid-template-columns:1fr}.vocab-menu-card{min-height:145px}}
 
 /* Immersive 3D lesson worlds */
-.lesson-world{--world1:#173c35;--world2:#6fa17a;position:relative;margin:20px 0 26px;border-radius:26px;overflow:hidden;min-height:390px;color:#fff;background:linear-gradient(180deg,var(--world-sky,#a9d9dc) 0%,var(--world-mid,#6a9d77) 54%,var(--world-ground,#214b37) 100%);isolation:isolate;box-shadow:0 22px 50px #233b3228;perspective:1000px}
-.lesson-world[data-world="2"]{--world-sky:#9ac9df;--world-mid:#e2b4bd;--world-ground:#784b68}
-.lesson-world[data-world="3"]{--world-sky:#b7d9df;--world-mid:#b8a1bc;--world-ground:#54445f}
-.lesson-world[data-world="4"]{--world-sky:#f5cba0;--world-mid:#d88f8c;--world-ground:#6b5368}
-.world-sky{position:absolute;inset:0;overflow:hidden;pointer-events:none}
-.world-sun{position:absolute;width:95px;height:95px;border-radius:50%;top:9%;right:13%;background:#fff4c7;box-shadow:0 0 55px 22px #fff7c477;animation:worldSun 6s ease-in-out infinite}
-.world-cloud{position:absolute;width:130px;height:38px;border-radius:50px;background:#ffffff9c;filter:blur(1px);top:18%;left:-150px;animation:worldCloud 24s linear infinite}
-.world-cloud:before,.world-cloud:after{content:"";position:absolute;background:inherit;border-radius:50%}.world-cloud:before{width:55px;height:55px;left:22px;top:-24px}.world-cloud:after{width:68px;height:64px;right:17px;top:-32px}
-.world-cloud.two{top:31%;animation-duration:32s;animation-delay:-13s;transform:scale(.7);opacity:.7}
-.world-mountain{position:absolute;bottom:20%;width:0;height:0;border-left:150px solid transparent;border-right:150px solid transparent;border-bottom:190px solid #547f70;filter:drop-shadow(0 12px 12px #193b3344)}
-.world-mountain.one{left:7%;opacity:.75}.world-mountain.two{right:3%;transform:scale(1.2);border-bottom-color:#729b7b;opacity:.8}
-.world-ground{position:absolute;bottom:-7%;left:-5%;width:110%;height:38%;border-radius:50% 50% 0 0;background:linear-gradient(180deg,#3f7950,#173e32);box-shadow:inset 0 15px 25px #ffffff20}
-.world-tree{position:absolute;bottom:18%;font-size:clamp(58px,9vw,100px);filter:drop-shadow(0 18px 10px #18332977);transform-origin:bottom center;animation:treeSway 5s ease-in-out infinite;cursor:pointer;transition:transform .35s}
-.world-tree:hover{transform:translateY(-12px) rotateY(18deg) scale(1.12)}
-.world-tree.t1{left:3%;font-size:clamp(82px,13vw,140px)}.world-tree.t2{left:20%;animation-delay:-2s}.world-tree.t3{right:4%;font-size:clamp(90px,14vw,145px);animation-delay:-1s}.world-tree.t4{right:24%;font-size:clamp(62px,9vw,100px);animation-delay:-3s}
-.world-title{position:relative;z-index:3;text-align:center;padding:26px 18px 0;text-shadow:0 3px 12px #17352b77}
-.world-title small{display:block;letter-spacing:.2em;font:600 10px Georgia,serif;color:#fffde0}.world-title h3{font:600 clamp(25px,5vw,40px) 'Playfair Display',Georgia,serif;margin:8px 0 4px;direction:ltr}.world-title p{margin:0;font-size:12px;color:#fff9}
-.world-floor{position:absolute;z-index:2;bottom:12%;left:50%;width:min(70%,540px);height:100px;transform:translateX(-50%) rotateX(68deg);border:2px solid #ffffff55;border-radius:50%;box-shadow:0 0 30px #ffffff25,inset 0 0 30px #ffffff22;animation:worldRing 9s linear infinite}
-.world-object{position:absolute;z-index:4;left:50%;top:54%;transform:translate(-50%,-50%);font-size:clamp(70px,12vw,115px);filter:drop-shadow(0 22px 14px #102b2877);animation:worldFloat 4s ease-in-out infinite;cursor:pointer}
-.world-animals{position:relative;z-index:5;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:760px;margin:34px auto 0;padding:0 18px 28px}
-.world-animal{border:1px solid #ffffff8c;background:linear-gradient(145deg,#ffffffdf,#f8f4f1d9);color:#382a31;border-radius:19px;padding:13px 8px;text-align:center;box-shadow:0 13px 22px #142d293b;transform:translateZ(25px);transition:transform .25s,box-shadow .25s;backdrop-filter:blur(7px);cursor:pointer}
-.world-animal:hover{transform:translateY(-8px) rotateY(-5deg) scale(1.035);box-shadow:0 20px 30px #142d2955}
-.world-animal .animal-art{display:block;font-size:clamp(38px,7vw,62px);filter:drop-shadow(0 9px 6px #47313c33);animation:animalBob 3.2s ease-in-out infinite}
-.world-animal:nth-child(2n) .animal-art{animation-delay:-1.1s}.world-animal:nth-child(3n) .animal-art{animation-delay:-2s}
-.world-animal b{display:block;font:600 17px 'Playfair Display',Georgia,serif;direction:ltr;color:#63384d;margin-top:5px}.world-animal small{font-size:11px;color:#79616c}
-.world-controls{position:relative;z-index:8;display:flex;justify-content:center;gap:9px;flex-wrap:wrap;padding:0 14px 20px}
-.world-controls button{border:1px solid #ffffff9c;background:#fff3;color:#fff;border-radius:30px;padding:10px 17px;backdrop-filter:blur(8px);font-size:13px;font-weight:700;transition:.2s}
-.world-controls button.primary{background:#fff;color:#4e3442;border-color:#fff}.world-controls button:hover{transform:translateY(-3px);background:#fff;color:#4e3442}
-.world-hint{position:relative;z-index:8;text-align:center;font-size:12px;color:#fffde9;padding:0 12px 17px}
-.lesson-world.explore .world-tree{transform:scale(.82) translateY(8px);opacity:.65}
-.lesson-world.explore .world-object{transform:translate(-50%,-50%) scale(.72);opacity:.5}
-.lesson-world.explore .world-title{padding-top:16px}
-.lesson-world.explore .world-animals{animation:worldReveal .65s cubic-bezier(.2,.8,.2,1) both}
-.lesson-world:not(.explore) .world-animals{display:none}
-.world-constellation{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:110px 20px 80px;z-index:4}
-.world-constellation .world-token{width:clamp(80px,15vw,120px);height:clamp(80px,15vw,120px);display:grid;place-items:center;border-radius:25px;background:linear-gradient(145deg,#ffffffdc,#f8e8efc9);color:#59384c;box-shadow:12px 15px 25px #40283d4d,inset 2px 2px 9px #fff;transform:rotateY(-13deg) rotateX(8deg);animation:worldToken 4s ease-in-out infinite;cursor:pointer}
-.world-token span{font-size:42px}.world-token b{font:600 13px Georgia,serif;direction:ltr}
-.world-constellation .world-token:nth-child(2n){animation-delay:-1.2s}.world-constellation .world-token:nth-child(3n){animation-delay:-2.3s}
-@keyframes worldCloud{to{left:115%}}@keyframes worldSun{50%{transform:translateY(10px) scale(1.05);box-shadow:0 0 75px 30px #fff7c477}}
-@keyframes treeSway{0%,100%{rotate:-2deg}50%{rotate:2deg}}@keyframes worldRing{to{transform:translateX(-50%) rotateX(68deg) rotateZ(360deg)}}
-@keyframes worldFloat{0%,100%{translate:0 0;rotate:-5deg}50%{translate:0 -16px;rotate:5deg}}
-@keyframes animalBob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-7px) rotate(3deg)}}
-@keyframes worldReveal{from{opacity:0;transform:translateY(35px) scale(.92)}to{opacity:1;transform:translateY(0) scale(1)}}
-@keyframes worldToken{0%,100%{transform:translateY(0) rotateY(-13deg) rotateX(8deg)}50%{transform:translateY(-10px) rotateY(13deg) rotateX(-3deg)}}
-@media(max-width:560px){.lesson-world{min-height:380px;border-radius:20px}.world-animals{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:22px}.world-animal{padding:10px 6px}.world-animal b{font-size:15px}.world-title{padding-top:22px}.world-tree.t2,.world-tree.t4{opacity:.65}.world-floor{width:88%}}
-@media(prefers-reduced-motion:reduce){.lesson-world *{animation:none!important;transition:none!important}}
+.lesson-world{--world-sky:#a9d9dc;--world-mid:#6a9d77;--world-ground:#214b37;position:relative;margin:20px 0 26px;border-radius:26px;overflow:hidden;min-height:390px;color:#fff;background:linear-gradient(180deg,var(--world-sky) 0%,var(--world-mid) 54%,var(--world-ground) 100%);isolation:isolate;box-shadow:0 22px 50px #233b3228;perspective:1000px}
+.lesson-world[data-world="2"]{--world-sky:#9ac9df;--world-mid:#e2b4bd;--world-ground:#784b68}.lesson-world[data-world="3"]{--world-sky:#b7d9df;--world-mid:#b8a1bc;--world-ground:#54445f}.lesson-world[data-world="4"]{--world-sky:#f5cba0;--world-mid:#d88f8c;--world-ground:#6b5368}
+.world-sky{position:absolute;inset:0;overflow:hidden;pointer-events:none}.world-sun{position:absolute;width:95px;height:95px;border-radius:50%;top:9%;right:13%;background:#fff4c7;box-shadow:0 0 55px 22px #fff7c477;animation:worldSun 6s ease-in-out infinite}.world-cloud{position:absolute;width:130px;height:38px;border-radius:50px;background:#ffffff9c;filter:blur(1px);top:18%;left:-150px;animation:worldCloud 24s linear infinite}.world-cloud:before,.world-cloud:after{content:"";position:absolute;background:inherit;border-radius:50%}.world-cloud:before{width:55px;height:55px;left:22px;top:-24px}.world-cloud:after{width:68px;height:64px;right:17px;top:-32px}.world-cloud.two{top:31%;animation-duration:32s;animation-delay:-13s;transform:scale(.7);opacity:.7}
+.world-mountain{position:absolute;bottom:20%;width:0;height:0;border-left:150px solid transparent;border-right:150px solid transparent;border-bottom:190px solid #547f70;filter:drop-shadow(0 12px 12px #193b3344)}.world-mountain.one{left:7%;opacity:.75}.world-mountain.two{right:3%;transform:scale(1.2);border-bottom-color:#729b7b;opacity:.8}.world-ground{position:absolute;bottom:-7%;left:-5%;width:110%;height:38%;border-radius:50% 50% 0 0;background:linear-gradient(180deg,#3f7950,#173e32);box-shadow:inset 0 15px 25px #ffffff20}
+.world-tree{position:absolute;bottom:18%;font-size:clamp(58px,9vw,100px);filter:drop-shadow(0 18px 10px #18332977);transform-origin:bottom center;animation:treeSway 5s ease-in-out infinite;cursor:pointer;transition:transform .35s}.world-tree:hover{transform:translateY(-12px) rotateY(18deg) scale(1.12)}.world-tree.t1{left:3%;font-size:clamp(82px,13vw,140px)}.world-tree.t2{left:20%;animation-delay:-2s}.world-tree.t3{right:4%;font-size:clamp(90px,14vw,145px);animation-delay:-1s}.world-tree.t4{right:24%;font-size:clamp(62px,9vw,100px);animation-delay:-3s}
+.world-title{position:relative;z-index:3;text-align:center;padding:26px 18px 0;text-shadow:0 3px 12px #17352b77}.world-title small{display:block;letter-spacing:.2em;font:600 10px Georgia,serif;color:#fffde0}.world-title h3{font:600 clamp(25px,5vw,40px) 'Playfair Display',Georgia,serif;margin:8px 0 4px;direction:ltr}.world-title p{margin:0;font-size:12px;color:#fff9}.world-floor{position:absolute;z-index:2;bottom:12%;left:50%;width:min(70%,540px);height:100px;transform:translateX(-50%) rotateX(68deg);border:2px solid #ffffff55;border-radius:50%;box-shadow:0 0 30px #ffffff25,inset 0 0 30px #ffffff22;animation:worldRing 9s linear infinite}.world-object{position:absolute;z-index:4;left:50%;top:54%;transform:translate(-50%,-50%);font-size:clamp(70px,12vw,115px);filter:drop-shadow(0 22px 14px #102b2877);animation:worldFloat 4s ease-in-out infinite;cursor:pointer}
+.world-animals{position:relative;z-index:5;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:760px;margin:34px auto 0;padding:0 18px 28px}.world-animal{border:1px solid #ffffff8c;background:linear-gradient(145deg,#ffffffdf,#f8f4f1d9);color:#382a31;border-radius:19px;padding:13px 8px;text-align:center;box-shadow:0 13px 22px #142d293b;transform:translateZ(25px);transition:transform .25s,box-shadow .25s;backdrop-filter:blur(7px);cursor:pointer}.world-animal:hover{transform:translateY(-8px) rotateY(-5deg) scale(1.035);box-shadow:0 20px 30px #142d2955}.world-animal .animal-art{display:block;font-size:clamp(38px,7vw,62px);filter:drop-shadow(0 9px 6px #47313c33);animation:animalBob 3.2s ease-in-out infinite}.world-animal:nth-child(2n) .animal-art{animation-delay:-1.1s}.world-animal:nth-child(3n) .animal-art{animation-delay:-2s}.world-animal b{display:block;font:600 17px 'Playfair Display',Georgia,serif;direction:ltr;color:#63384d;margin-top:5px}.world-animal small{font-size:11px;color:#79616c}
+.world-controls{position:relative;z-index:8;display:flex;justify-content:center;gap:9px;flex-wrap:wrap;padding:0 14px 20px}.world-controls button{border:1px solid #ffffff9c;background:#fff3;color:#fff;border-radius:30px;padding:10px 17px;backdrop-filter:blur(8px);font-size:13px;font-weight:700;transition:.2s}.world-controls button.primary{background:#fff;color:#4e3442;border-color:#fff}.world-controls button:hover{transform:translateY(-3px);background:#fff;color:#4e3442}.world-hint{position:relative;z-index:8;text-align:center;font-size:12px;color:#fffde9;padding:0 12px 17px}.lesson-world.explore .world-tree{transform:scale(.82) translateY(8px);opacity:.65}.lesson-world.explore .world-object{transform:translate(-50%,-50%) scale(.72);opacity:.5}.lesson-world.explore .world-title{padding-top:16px}.lesson-world.explore .world-animals{animation:worldReveal .65s cubic-bezier(.2,.8,.2,1) both}.lesson-world:not(.explore) .world-animals{display:none}
+.world-constellation{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:110px 20px 80px;z-index:4}.world-constellation .world-token{width:clamp(80px,15vw,120px);height:clamp(80px,15vw,120px);display:grid;place-items:center;border-radius:25px;background:linear-gradient(145deg,#ffffffdc,#f8e8efc9);color:#59384c;box-shadow:12px 15px 25px #40283d4d,inset 2px 2px 9px #fff;transform:rotateY(-13deg) rotateX(8deg);animation:worldToken 4s ease-in-out infinite;cursor:pointer}.world-token span{font-size:42px}.world-token b{font:600 13px Georgia,serif;direction:ltr}.world-constellation .world-token:nth-child(2n){animation-delay:-1.2s}.world-constellation .world-token:nth-child(3n){animation-delay:-2.3s}
+@keyframes worldCloud{to{left:115%}}@keyframes worldSun{50%{transform:translateY(10px) scale(1.05);box-shadow:0 0 75px 30px #fff7c477}}@keyframes treeSway{0%,100%{rotate:-2deg}50%{rotate:2deg}}@keyframes worldRing{to{transform:translateX(-50%) rotateX(68deg) rotateZ(360deg)}}@keyframes worldFloat{0%,100%{translate:0 0;rotate:-5deg}50%{translate:0 -16px;rotate:5deg}}@keyframes animalBob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-7px) rotate(3deg)}}@keyframes worldReveal{from{opacity:0;transform:translateY(35px) scale(.92)}to{opacity:1;transform:translateY(0) scale(1)}}@keyframes worldToken{0%,100%{transform:translateY(0) rotateY(-13deg) rotateX(8deg)}50%{transform:translateY(-10px) rotateY(13deg) rotateX(-3deg)}}
+@media(max-width:560px){.lesson-world{min-height:380px;border-radius:20px}.world-animals{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:22px}.world-animal{padding:10px 6px}.world-animal b{font-size:15px}.world-title{padding-top:22px}.world-tree.t2,.world-tree.t4{opacity:.65}.world-floor{width:88%}}@media(prefers-reduced-motion:reduce){.lesson-world *{animation:none!important;transition:none!important}}
 
 </style>
 <body>
@@ -347,73 +312,188 @@ function answerGrammar(i){const q=grammarQuestions[grammarQ%grammarQuestions.len
 function nextGrammarQuestion(){grammarQ=(grammarQ+1)%grammarQuestions.length;renderGrammarQuiz()}
 
 function renderLessons(){document.getElementById('lessonCards').innerHTML=lessons.map((l,i)=>`<article class="lesson-card"><span class="pill">LESSON ${i+1}</span><h3 class="latin">${l[0]}</h3><h3>${l[1]}</h3><p>${l[2]}</p><div class="tagrow"><span class="tag">${words.filter(w=>w[3]===i+1).length} واژه</span><span class="tag">گرامر</span><span class="tag">آزمون</span></div><button class="btn soft" style="margin-top:15px" onclick="openLesson(${i+1})">ورود به درس ←</button></article>`).join('')}
+function openLesson(n){document.getElementById('lessonFilter').value=String(n);document.getElementById('lessonDetail').classList.remove('hidden');document.getElementById('lessonDetail').innerHTML=`<h2>درس ${n}: ${lessons[n-1][1]}</h2><p class="latin">${lessons[n-1][0]}</p><p>${lessons[n-1][2]}</p><div class="actions" style="justify-content:flex-start"><button class="btn soft" onclick="showPage('vocab');document.getElementById('lessonFilter').value='${n}';document.getElementById('flashFilter').value='${n}';renderWords();resetFlash()">واژگان این درس</button><button class="btn soft" onclick="showPage('grammar')">گرامر</button><button class="btn soft" onclick="showPage('quiz');document.getElementById('quizLesson').value='${n}';startQuiz()">آزمون درس</button><button class="btn soft" onclick="showPage('further')">شنیداری تکمیلی</button></div>`;document.getElementById('lessonDetail').scrollIntoView({behavior:'smooth',block:'start'})}
 
-const lessonWorldItems=[
-[
-{en:'Cheetah',fa:'یوزپلنگ',emoji:'🐆',key:'cheetah'},
-{en:'Leopard',fa:'پلنگ',emoji:'🐆',key:'leopard'},
-{en:'Elephant',fa:'فیل',emoji:'🐘',key:'elephant'},
-{en:'Gazelle',fa:'غزال',emoji:'🦌',key:'gazelle'},
-{en:'Tiger',fa:'ببر',emoji:'🐅',key:'tiger'},
-{en:'Lion',fa:'شیر',emoji:'🦁',key:'lion'},
-{en:'Bear',fa:'خرس',emoji:'🐻',key:'bear'},
-{en:'Bird',fa:'پرنده',emoji:'🦜',key:'bird'},
-{en:'Giraffe',fa:'زرافه',emoji:'🦒',key:'giraffe'}
-],
-[
-{en:'Heart',fa:'قلب',emoji:'❤️',key:'heart'},
-{en:'Blood',fa:'خون',emoji:'🩸',key:'blood'},
-{en:'Brain',fa:'مغز',emoji:'🧠',key:'brain'},
-{en:'Oxygen',fa:'اکسیژن',emoji:'💨',key:'oxygen'},
-{en:'Cell',fa:'سلول',emoji:'🧫',key:'cell'},
-{en:'Microbe',fa:'میکروب',emoji:'🦠',key:'microbe'}
-],
-[
-{en:'Scientist',fa:'دانشمند',emoji:'🧑‍🔬',key:'scientist'},
-{en:'Laboratory',fa:'آزمایشگاه',emoji:'🧪',key:'laboratory'},
-{en:'Medicine',fa:'دارو',emoji:'💊',key:'medicine'},
-{en:'Book',fa:'کتاب',emoji:'📚',key:'book'},
-{en:'Microscope',fa:'میکروسکوپ',emoji:'🔬',key:'microscope'},
-{en:'Telescope',fa:'تلسکوپ',emoji:'🔭',key:'telescope'}
-],
-[
-{en:'Iran',fa:'ایران',emoji:'🇮🇷',key:'iran'},
-{en:'Peru',fa:'پرو',emoji:'🇵🇪',key:'peru'},
-{en:'Chile',fa:'شیلی',emoji:'🇨🇱',key:'chile'},
-{en:'Italy',fa:'ایتالیا',emoji:'🇮🇹',key:'italy'},
-{en:'India',fa:'هند',emoji:'🇮🇳',key:'india'},
-{en:'Egypt',fa:'مصر',emoji:'🇪🇬',key:'egypt'}
-]
+function renderWords(){let q=(document.getElementById('wordSearch')?.value||'').toLowerCase().trim(),f=document.getElementById('lessonFilter')?.value||'all';let arr=words.filter(w=>(f==='all'||w[3]===+f)&&(!q||w[0].toLowerCase().includes(q)||w[2].toLowerCase().includes(q)||w[1].toLowerCase().includes(q)));document.getElementById('wordList').innerHTML=arr.length?arr.map(w=>{let key=encodeURIComponent(w[0]);return `<div class="word"><div><strong>${w[0]}</strong><small>${w[1]} · درس ${w[3]}</small><div class="meaning">${w[2]}</div></div><div class="word-tools"><button type="button" class="mini" onclick="openWordBloom(decodeURIComponent('${key}'))">جزئیات</button><button type="button" class="ghost" onclick="toggleLearn(decodeURIComponent('${key}'))" title="ذخیره در باغ">${learned.has(w[0])?'✓':'＋'}</button></div></div>`}).join(''):'<div class="empty">واژه‌ای پیدا نشد.</div>'}
+function toggleLearn(w){learned.has(w)?learned.delete(w):learned.add(w);saveSets();renderWords();renderProgress()}
+function saveSets(){localStorage.setItem('pg_learned',JSON.stringify([...learned]));localStorage.setItem('pg_review',JSON.stringify([...review]))}
+function resetFlash(){let f=document.getElementById('flashFilter')?.value||'all';flashSet=words.filter(w=>f==='all'||w[3]===+f);flashIndex=0;showFlash()}
+function showFlash(){if(!flashSet.length)return;flipped=false;let w=flashSet[flashIndex];document.getElementById('flashcard').classList.remove('flipped');document.getElementById('flashWord').textContent=w[0];document.getElementById('flashHint').textContent='برای دیدن معنی، روی کارت بزن';document.getElementById('flashCount').textContent=`کارت ${flashIndex+1} از ${flashSet.length} · ${w[1]}`}
+function flipCard(){if(!flashSet.length)return;flipped=!flipped;let w=flashSet[flashIndex];document.getElementById('flashcard').classList.toggle('flipped',flipped);document.getElementById('flashWord').textContent=flipped?w[2]:w[0];document.getElementById('flashHint').textContent=flipped?`${w[1]} · درس ${w[3]}`:'برای دیدن معنی، روی کارت بزن'}
+function nextCard(){flashIndex=(flashIndex+1)%flashSet.length;showFlash()}function prevCard(){flashIndex=(flashIndex-1+flashSet.length)%flashSet.length;showFlash()}
+function shuffleFlash(){flashSet.sort(()=>Math.random()-.5);flashIndex=0;showFlash()}
+function markWord(known){let w=flashSet[flashIndex];if(known){learned.add(w[0]);review.delete(w[0])}else{review.add(w[0])}saveSets();renderGarden();nextCard()}
+const questions=[['What does “protect” mean?',['محافظت کردن','نابود کردن','فراموش کردن','سفر کردن'],0,1],['“Endangered” means …',['اهلی','در معرض انقراض','بزرگ','بی‌خطر'],1,1],['Which one is a planet?',['Telescope','Oxygen','Neptune','Energy'],2,2],['“Knowledge” means …',['دانش','سفر','بیماری','فرهنگ'],0,3],['Choose the correct adverb.',['careful','carefully','care','careless'],1,4],['A telescope is used to observe …',['tiny cells','distant objects in space','food','sound'],1,2],['“Destination” means …',['مقصد','سفارت','تعطیلات','فرهنگ'],0,4],['The opposite of “dangerous” is …',['wild','safe','low','deep'],1,1],['Trees release …',['oxygen','plastic','oil','smoke'],0,1],['A forest is a home for …',['only cars','many animals','machines','books'],1,1],['Jupiter is the … planet.',['smallest','largest','nearest','darkest'],1,2],['The heart pumps … around the body.',['air','water','blood','food'],2,2],['Red blood cells carry …',['oxygen','sand','paint','oil'],0,2],['“Experiment” means …',['آزمایش','مسافرت','قانون','بیماری'],0,3],['A person who studies stars and planets is an …',['astronomer','artist','farmer','driver'],0,3],['“Abroad” means …',['در خانه','در خارج از کشور','در مدرسه','در بیمارستان'],1,4],['You … keep your passport safe.',['should','yesterday','beautiful','quickly'],0,4],['“Carefully” is an …',['adjective','adverb','noun','pronoun'],1,4],['Which is a reflexive pronoun?',['myself','mine','me','my'],0,3],['Choose the correct form: She speaks …',['polite','politely','politeness','politer'],1,4],['Which sentence is about the future?',['I went home.','I will travel tomorrow.','I am reading now.','I read yesterday.'],1,1],['Which is a comparative adjective?',['tall','taller','tallest','tallly'],1,2],['“Destination” means …',['مقصد','مهمان','بلیت','فرودگاه'],0,4],['Which action saves water?',['Leave the tap open','Take longer showers','Turn off the tap','Wash one item many times'],2,1],['Scientists learn by …',['asking questions and experimenting','avoiding books','never observing','only travelling'],0,3],['A safe traveler should …',['leave bags alone','keep phone charged','carry lots of cash','ignore local culture'],1,4],['“Knowledge” means …',['دانش','جنگل','پرواز','قلب'],0,3]];
+function startQuiz(){let f=document.getElementById('quizLesson')?.value||'all';quizSet=questions.filter(q=>f==='all'||q[3]===+f);if(!quizSet.length)quizSet=questions;quizSet.sort(()=>Math.random()-.5);quizIndex=0;score=0;renderQuestion()}
+function renderQuestion(){answered=false;let q=quizSet[quizIndex];document.getElementById('quizMeta').textContent=`سؤال ${quizIndex+1} از ${quizSet.length} · پاسخ درست: ${score}`;document.getElementById('question').textContent=q[0];document.getElementById('options').innerHTML=q[1].map((o,i)=>`<button class="option" onclick="answerQuiz(${i})">${['الف','ب','ج','د'][i]}) ${o}</button>`).join('');document.getElementById('quizFeedback').innerHTML='';document.getElementById('nextQuestion').disabled=true;document.getElementById('nextQuestion').textContent=quizIndex===quizSet.length-1?'دیدن نتیجه':'سؤال بعدی'}
+function answerQuiz(i){if(answered)return;answered=true;let q=quizSet[quizIndex],buttons=[...document.querySelectorAll('.option')];buttons[q[2]].classList.add('correct');if(i!==q[2])buttons[i].classList.add('wrong');else score++;document.getElementById('quizFeedback').innerHTML=`<div class="feedback">${i===q[2]?'آفرین! پاسخ درست بود. 🌸':'این بار درست نبود؛ پاسخ صحیح: '+q[1][q[2]]}</div>`;document.getElementById('nextQuestion').disabled=false}
+function nextQuiz(){if(!answered)return;if(quizIndex<quizSet.length-1){quizIndex++;renderQuestion()}else{document.getElementById('quizMeta').textContent='آزمون به پایان رسید';document.getElementById('question').textContent=`نتیجه تو: ${score} از ${quizSet.length}`;document.getElementById('options').innerHTML='';document.getElementById('quizFeedback').innerHTML='<div class="feedback">برای تمرین بیشتر می‌توانی یک آزمون تازه شروع کنی.</div>';document.getElementById('nextQuestion').disabled=true;document.getElementById('nextQuestion').textContent='پایان آزمون'}}
+
+function renderFurther(){const box=document.getElementById('furtherCards');if(!box)return;box.innerHTML=furtherTexts.map((t,i)=>`<article class="lesson-card"><span class="pill">درس ${t.lesson} · ${t.part}</span><h3 class="latin">${t.title}</h3><details style="margin-top:12px"><summary style="cursor:pointer;color:var(--wine);font-weight:700">متن انگلیسی و ترجمه فارسی</summary><h4>English transcript</h4><p class="latin" style="white-space:pre-line;color:var(--ink);font-size:15px;line-height:2">${t.en}</p><h4>ترجمه فارسی</h4><p style="white-space:pre-line;line-height:2">${t.fa}</p></details></article>`).join('')}
+
+const officialAudioSources=[
+{title:'Saving Nature',fa:'درس اول · حفظ طبیعت',url:'https://www.roshd.ir/zaban/Content/کتاب-گویا-زبان-انگلیسی-1-پایه-دهم-درس-اول',parts:'Conversation · New Words & Expressions · Reading · Listening & Speaking · Pronunciation · What You Learned'},
+{title:'Wonders of Creation',fa:'درس دوم · شگفتی‌های آفرینش',url:'https://www.roshd.ir/zaban/Content/کتاب-گویا-زبان-انگلیسی-1-پایه-دهم-درس-دوم',parts:'Conversation · New Words & Expressions · Reading · Listening & Speaking · Pronunciation · What You Learned'},
+{title:'The Value of Knowledge',fa:'درس سوم · ارزش دانش',url:'https://www.roshd.ir/zaban/Content/کتاب-گویا-زبان-انگلیسی-1-پایه-دهم-درس-سوم',parts:'Conversation · New Words & Expressions · Reading · Listening & Speaking · Pronunciation · What You Learned'},
+{title:'Traveling the World',fa:'درس چهارم · سفر به دور دنیا',url:'https://www.roshd.ir/zaban/Content/کتاب-گویا-زبان-انگلیسی-1-پایه-دهم-درس-چهارم',parts:'Conversation · New Words & Expressions · Reading · Listening & Speaking · Pronunciation · What You Learned'}
 ];
-const lessonWorldTitles=[
-['THE GREEN KINGDOM','The Secret Forest','به جنگل حفاظت از طبیعت خوش آمدی'],
-['THE HUMAN WONDER','Inside the Living World','به دنیای شگفت‌انگیز بدن و آفرینش خوش آمدی'],
-['THE WORLD OF DISCOVERY','The Inventors’ Lab','به آزمایشگاه دانش و کشف خوش آمدی'],
-['A JOURNEY AROUND EARTH','Explore the World','آماده‌ی سفر به فرهنگ‌ها و سرزمین‌ها هستی؟']
-];
+function renderAudio(){document.getElementById('audioCards').innerHTML=officialAudioSources.map((a,i)=>`<article class="lesson-card"><span class="pill">VISION 1 · LESSON ${i+1}</span><h3 class="latin">${a.title}</h3><h4>${a.fa}</h4><p>فایل‌های صوتی رسمی این درس، شامل:</p><p class="latin" style="line-height:2;color:var(--muted);font-size:13px">${a.parts}</p><a class="btn" href="${a.url}" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:10px">🎧 گوش دادن و دریافت فایل‌ها</a><p style="font-size:11px;color:var(--muted);margin-top:12px">منبع: پایگاه رسمی رسانه‌های آموزشی رشد · سازمان پژوهش و برنامه‌ریزی آموزشی</p></article>`).join('')}
+function saveWriting(){localStorage.setItem('pg_writing',document.getElementById('writingText').value);document.getElementById('writingMsg').textContent='نوشته‌ات ذخیره شد.'}
+function addTask(){let v=document.getElementById('taskInput').value.trim();if(!v)return;let a=JSON.parse(localStorage.getItem('pg_tasks')||'[]');a.push({t:v,d:false});localStorage.setItem('pg_tasks',JSON.stringify(a));document.getElementById('taskInput').value='';renderTasks()}
+function renderTasks(){let a=JSON.parse(localStorage.getItem('pg_tasks')||'[]');document.getElementById('tasks').innerHTML=a.length?a.map((x,i)=>`<div class="word"><label><input type="checkbox" ${x.d?'checked':''} onchange="taskDone(${i},this.checked)"> ${x.t}</label><span class="pill">${x.d?'انجام شد':'در انتظار'}</span></div>`).join(''):'<div class="empty">هنوز کاری اضافه نکرده‌ای.</div>'}
+function taskDone(i,v){let a=JSON.parse(localStorage.getItem('pg_tasks')||'[]');a[i].d=v;localStorage.setItem('pg_tasks',JSON.stringify(a));renderTasks();renderProgress()}
+function renderGarden(){let n=learned.size;document.getElementById('flowers').textContent=n?Array.from({length:Math.min(n,60)},(_,i)=>['🌷','🪷','🌸','🌺','🌼'][i%5]).join(' '):'🌱';document.getElementById('flowerCount').textContent=`تا امروز ${n} واژه را یاد گرفته‌ای؛ باغت در حال شکوفا شدن است.`}
+function renderProgress(){let a=JSON.parse(localStorage.getItem('pg_tasks')||'[]'),done=a.filter(x=>x.d).length;document.getElementById('learnedStat').textContent=learned.size;document.getElementById('reviewStat').textContent=review.size;document.getElementById('taskStat').textContent=done;let pct=Math.round(learned.size/words.length*100);document.getElementById('vocabProgress').style.width=pct+'%';document.getElementById('progressText').textContent=`${learned.size} واژه از ${words.length} واژه موجود در نسخه فعلی`}
+
+const bloomEmoji={'avicenna':'🧑🏻‍🏫','leopard':'🐆','visitor':'🧳','die out':'🦤','elephant':'🐘','human':'🧑','endangered':'🐼','gazelle':'🦌','information':'📚','protect':'🛡️','destroy':'💥','wildlife':'🦒','nature':'🌿','zookeeper':'🧑🏻‍🌾','telescope':'🔭','microscope':'🔬','orbit':'🪐','planet':'🪐','neptune':'🔵','oxygen':'🫧','carbon dioxide':'⚗️','energy':'⚡','creation':'🌌','donate':'🎁','knowledge':'📖','value':'💎','scientist':'🧑🏻‍🔬','mathematics':'📐','medicine':'💊','experiment':'🧪','discover':'🔎','achievement':'🏆','effort':'💪','translate':'🌐','patient':'🧑‍⚕️','treatment':'🩺','travel agent':'🧭','vacation':'🏖️','abroad':'✈️','destination':'📍','culture':'🎭','embassy':'🏛️','historical':'🏺','comfortable':'🛋️','traditional':'🪕','safely':'🦺','pilgrim':'🕌'};
+let activeBloomWord=null;
+function persianPronunciation(word){const p={'leopard':'لِپِرد','elephant':'اِلِفِنت','gazelle':'گَزِل','tiger':'تایگِر','dolphin':'دالْفین','whale':'وِیل','bear':'بِر','bird':'بِرد','giraffe':'جِراف','wolf':'وولف','cheetah':'چی‌تا','panda':'پَندا','forest':'فارِست','nature':'نِیچِر','protect':'پِرُتِکت','destroy':'دیسترُی','endangered':'اِن‌دِینجِرد','telescope':'تِلِسکوپ','microscope':'مایکرُسکوپ','planet':'پْلَنِت','orbit':'اوربیت','neptune':'نِپتون','oxygen':'آکسِجِن','knowledge':'نالِج','scientist':'سایِنتیست','medicine':'مِدِسِن','vacation':'وِیکِیشن','abroad':'اَبراد','destination':'دِستینِیشن','avicenna':'اَویسِنا','carbon dioxide':'کاربِن دای‌آکساید'};return p[word.toLowerCase()]||word.split('').join('');}
+const pictureTitles={'avicenna':'Avicenna','die out':'Extinction','endangered':'Endangered species','wildlife':'Wildlife','zookeeper':'Zookeeper','carbon dioxide':'Carbon dioxide','travel agent':'Travel agent','abroad':'Study abroad','pilgrim':'Pilgrim'};
+const pictureSearchTerms={
+'avicenna':'Avicenna historical site statue',
+'visitor':'museum visitors',
+'die out':'wildlife extinction endangered species',
+'endangered':'endangered animal wildlife',
+'information':'information books learning',
+'protect':'wildlife conservation nature protection',
+'destroy':'environmental destruction deforestation',
+'wildlife':'wild animals in nature',
+'nature':'beautiful nature landscape',
+'zookeeper':'zookeeper feeding animals zoo',
+'telescope':'astronomical telescope observatory',
+'microscope':'microscope laboratory',
+'orbit':'planet orbit solar system illustration',
+'planet':'planet earth space',
+'neptune':'Neptune planet space',
+'oxygen':'oxygen molecule science',
+'carbon dioxide':'carbon dioxide molecule science',
+'energy':'renewable energy solar panels',
+'creation':'universe creation space nebula',
+'donate':'charity donation helping people',
+'knowledge':'library books knowledge',
+'value':'valuable antique object',
+'scientist':'scientist laboratory research',
+'mathematics':'mathematics geometry numbers',
+'medicine':'medical medicine laboratory',
+'experiment':'science experiment laboratory',
+'discover':'scientific discovery research',
+'achievement':'achievement success award',
+'effort':'hard work effort study',
+'translate':'translation languages dictionary',
+'patient':'patient hospital care',
+'treatment':'medical treatment hospital',
+'travel agent':'travel agency office',
+'vacation':'vacation beach travel',
+'abroad':'international travel city',
+'destination':'travel destination landscape',
+'culture':'traditional culture festival',
+'embassy':'embassy building',
+'historical':'historical architecture monument',
+'comfortable':'comfortable cozy room',
+'traditional':'traditional clothing culture',
+'safely':'road safety traffic',
+'pilgrim':'pilgrimage religious site'
+};
+function setBloomImage(img,emoji,word,url,alt){if(!activeBloomWord||activeBloomWord[0].toLowerCase()!==word.toLowerCase())return;img.onload=()=>{if(img.naturalWidth>=img.naturalHeight*1.12){img.hidden=false;emoji.hidden=true}else{img.hidden=true;emoji.hidden=false}};img.onerror=()=>{img.hidden=true;emoji.hidden=false};img.src=url;img.alt=alt||word+' photograph'}
+function loadModalPicture(word){
+ const img=document.getElementById('modalPicture'),emoji=document.getElementById('modalEmoji');
+ img.hidden=true;img.removeAttribute('src');img.onload=null;img.onerror=null;emoji.hidden=false;
+ const key=word.toLowerCase(),query=pictureSearchTerms[key]||word;
+ const searchParams=new URLSearchParams({action:'query',list:'search',srsearch:query,srnamespace:'6',srlimit:'30',format:'json',origin:'*'});
+ fetch('https://commons.wikimedia.org/w/api.php?'+searchParams.toString()).then(r=>{if(!r.ok)throw new Error('Commons search failed');return r.json()}).then(searchData=>{
+  if(!activeBloomWord||activeBloomWord[0].toLowerCase()!==key)return;
+  const hits=(searchData.query?.search||[]).filter(x=>x.title&&/^File:/i.test(x.title));
+  if(!hits.length)throw new Error('No Commons files found');
+  const titles=hits.map(x=>x.title).slice(0,25).join('|');
+  const infoParams=new URLSearchParams({action:'query',titles,prop:'imageinfo',iiprop:'url|size',iiurlwidth:'1000',format:'json',origin:'*'});
+  return fetch('https://commons.wikimedia.org/w/api.php?'+infoParams.toString()).then(r=>{if(!r.ok)throw new Error('Image details failed');return r.json()});
+ }).then(infoData=>{
+  if(!infoData||!activeBloomWord||activeBloomWord[0].toLowerCase()!==key)return;
+  const candidates=Object.values(infoData.query?.pages||{}).map(p=>({page:p,info:p.imageinfo?.[0]})).filter(x=>x.info?.thumburl&&x.info.width>=x.info.height*1.12&&x.info.width>=480&&x.info.height>=260);
+  candidates.sort((a,b)=>{
+   const score=x=>Math.abs((x.info.width/x.info.height)-1.65)+((x.info.width<800)?0.35:0);
+   return score(a)-score(b);
+  });
+  if(candidates.length){
+   const best=candidates[0];
+   img.onload=()=>{if(img.naturalWidth>=img.naturalHeight*1.12){img.hidden=false;emoji.hidden=true}else{img.hidden=true;emoji.hidden=false}};
+   img.onerror=()=>{img.hidden=true;emoji.hidden=false};
+   img.alt=best.page.title.replace(/^File:/,'');
+   img.src=best.info.thumburl;
+   return;
+  }
+  loadWikipediaLandscapeFallback(word,img,emoji);
+ }).catch(()=>loadWikipediaLandscapeFallback(word,img,emoji));
+}
+function openWordBloom(word){let w=words.find(x=>x[0].toLowerCase()===String(word).toLowerCase());if(!w)return;activeBloomWord=w;document.getElementById('modalWord').textContent=w[0];document.getElementById('modalPhonetic').textContent=w[1];document.getElementById('modalPersianPronunciation').textContent=persianPronunciation(w[0]);document.getElementById('modalMeaning').textContent=w[2];document.getElementById('modalEmoji').textContent=bloomEmoji[w[0].toLowerCase()]||'🌸';loadModalPicture(w[0]);const examples=wordExamplesFor(w[0]);document.getElementById('modalExample').textContent='1. '+examples[0];document.getElementById('modalExample2').textContent='2. '+examples[1];document.getElementById('wordModal').classList.add('open')}
+function closeWordModal(){document.getElementById('wordModal').classList.remove('open')}
+function speakModalWord(){if(!activeBloomWord)return;if(!('speechSynthesis'in window)){alert('پخش تلفظ در این مرورگر پشتیبانی نمی‌شود.');return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(activeBloomWord[0]);u.lang='en-US';u.rate=.82;speechSynthesis.speak(u)}
+function saveModalWord(){if(!activeBloomWord)return;learned.add(activeBloomWord[0]);saveSets();renderGarden();renderProgress();closeWordModal()}
+const wordExamples={
+'avicenna':['Avicenna was a famous Iranian doctor.','Many students learn about Avicenna in history class.'],
+'leopard':['A leopard can run very fast.','We saw a leopard in the wildlife park.'],
+'visitor':['Every visitor must buy a ticket.','The museum welcomes many visitors every day.'],
+'die out':['Some animals may die out if we do not protect them.','We must save forests so that rare animals do not die out.'],
+'elephant':['An elephant has a long trunk.','Elephants usually live in groups.'],
+'human':['Every human needs clean water.','Humans should take care of the Earth.'],
+'endangered':['The Persian leopard is an endangered animal.','Endangered animals need our protection.'],
+'gazelle':['A gazelle can run quickly.','The gazelle lives in open areas.'],
+'information':['I need more information about this planet.','This book gives useful information about wildlife.'],
+'protect':['We should protect nature.','People must protect endangered animals.'],
+'destroy':['Pollution can destroy the environment.','Wildfires may destroy many trees.'],
+'wildlife':['We must protect wildlife.','The forest is home to a lot of wildlife.'],
+'nature':['Nature is our home.','We should keep nature clean.'],
+'zookeeper':['The zookeeper feeds the animals every morning.','A zookeeper takes care of the animals at the zoo.'],
+'telescope':['We can see stars through a telescope.','My father bought a telescope for observing the moon.'],
+'microscope':['A microscope makes tiny things look bigger.','The scientist used a microscope to study the cells.'],
+'orbit':['The Earth moves in an orbit around the Sun.','The satellite is now in orbit.'],
+'planet':['Mars is a planet in our solar system.','Our planet needs clean air and water.'],
+'neptune':['Neptune is a very distant planet.','Neptune looks blue because of gases in its atmosphere.'],
+'oxygen':['People need oxygen to breathe.','Plants help produce oxygen.'],
+'carbon dioxide':['Humans breathe out carbon dioxide.','Plants use carbon dioxide to make food.'],
+'energy':['The Sun gives us light and energy.','I eat breakfast to get energy for the day.'],
+'creation':['The creation of the universe is a fascinating subject.','We should respect all forms of creation.'],
+'donate':['People donate books to the school library.','You can donate clothes to families in need.'],
+'knowledge':['Knowledge is valuable.','Reading books helps us gain knowledge.'],
+'value':['Honesty is an important value.','This old painting has great value.'],
+'scientist':['The scientist works in a laboratory.','A scientist asks questions and looks for answers.'],
+'mathematics':['Mathematics helps us solve problems.','My favorite subject is mathematics.'],
+'medicine':['This medicine can help you feel better.','She wants to study medicine at university.'],
+'experiment':['The students did an experiment in science class.','The experiment showed how plants grow.'],
+'discover':['Scientists discover new things every year.','I hope to discover something interesting today.'],
+'achievement':['Winning the competition was a great achievement.','Her achievement made her family proud.'],
+'effort':['Success needs time and effort.','Your effort will help you improve your English.'],
+'translate':['Can you translate this sentence into Persian?','I use a dictionary to translate new words.'],
+'patient':['The doctor talked to the patient.','The patient is waiting for the doctor.'],
+'treatment':['The patient needs medical treatment.','This treatment helped him get better.'],
+'travel agent':['The travel agent helped us book our tickets.','Ask the travel agent about hotels in Japan.'],
+'vacation':['We are going on vacation next week.','I usually visit my grandparents during vacation.'],
+'abroad':['My uncle lives abroad.','She wants to study abroad next year.'],
+'destination':['Paris is a popular travel destination.','What is your final destination?'],
+'culture':['Every country has its own culture.','Learning a language helps us understand another culture.'],
+'embassy':['We went to the embassy to get a visa.','The embassy is near the city center.'],
+'historical':['We visited a historical building yesterday.','This city has many historical places.'],
+'comfortable':['These shoes are very comfortable.','I feel comfortable in my new room.'],
+'traditional':['We ate traditional food at the festival.','They wear traditional clothes on special days.'],
+'safely':['Please drive safely.','The children arrived home safely.'],
+'pilgrim':['The pilgrim visited the holy place.','Many pilgrims travel there every year.']
+};
+function wordExamplesFor(w){return wordExamples[String(w).toLowerCase()]||[`I am learning the word “${w}”.`,`Can you use “${w}” in a sentence?`];}
+function wordExample(w){return wordExamplesFor(w)[0];}
+function renderWords(){let q=(document.getElementById('wordSearch')?.value||'').toLowerCase().trim(),f=document.getElementById('lessonFilter')?.value||'all';let arr=words.filter(w=>(f==='all'||w[3]===+f)&&(!q||w[0].toLowerCase().includes(q)||w[2].toLowerCase().includes(q)||w[1].toLowerCase().includes(q)));document.getElementById('wordList').innerHTML=arr.length?arr.map(w=>{let key=encodeURIComponent(w[0]);return `<div class="word"><div><strong>${w[0]}</strong><small>${w[1]} · درس ${w[3]}</small><div class="meaning">${w[2]}</div></div><div class="word-tools"><button type="button" class="mini" onclick="openWordBloom(decodeURIComponent('${key}'))">جزئیات</button><button type="button" class="ghost" onclick="toggleLearn(decodeURIComponent('${key}'))" title="ذخیره در باغ">${learned.has(w[0])?'✓':'＋'}</button></div></div>`}).join(''):'<div class="empty">واژه‌ای پیدا نشد.</div>'}
+const lessonStudy=[
+{reading:'در این درس با موضوع حیوانات در معرض انقراض، زیستگاه‌ها و راه‌های حفاظت از طبیعت آشنا می‌شوی. در بخش Reading کتاب، متن «Endangered Animals» را بخوان و به علت‌های کاهش جمعیت جانوران و راه‌های محافظت از آن‌ها توجه کن.',keywords:['cheetah','endangered','protect','nature','forest','wildlife'],grammar:'آینده با will، ساختار be going to، اسم‌های مفرد و جمع و نشانه‌های اسم',formula:'will + base verb  |  am/is/are going to + verb',scene:'🐆'},
+{reading:'موضوع این درس شگفتی‌های آفرینش است. متن Reading با عنوان «A Wonderful Liquid» درباره خون، پلاسما، گلبول‌های قرمز و سفید و نقش آن‌ها در بدن توضیح می‌دهد. به کارکرد قلب و سلول‌های خونی دقت کن.',keywords:['water','liquid','heart','blood','brain','oxygen','cell','microbe'],grammar:'صفت‌ها، جایگاه صفت، صفت‌های تفضیلی و عالی و ساختار برابری',formula:'as + adjective + as  |  adjective-er + than  |  the + adjective-est',scene:'🫀'},
+{reading:'این درس درباره ارزش دانش و دانشمندان ایرانی است. متن Reading با عنوان «No Pain No Gain» بر تلاش، مطالعه و دستاوردهای علمی تأکید می‌کند. هنگام مطالعه به افعال مربوط به فعالیت‌های در حال انجام در گذشته توجه کن.',keywords:['knowledge','scientist','laboratory','medicine','experiment','achieve','valuable'],grammar:'گذشته استمراری، فعل‌های کنشی و حالتی، و ضمایر انعکاسی در بخش See Also',formula:'was / were + verb-ing  |  myself, yourself, himself, herself...',scene:'📚'},
+{reading:'در این درس درباره انتخاب مقصد گردشگری، سفر و فرهنگ کشورها می‌خوانی. متن Reading با عنوان «Iran: A True Paradise» جاذبه‌های ایران و ویژگی‌های آن را معرفی می‌کند. به توصیه‌ها، الزام‌ها و قیدهای چگونگی انجام کار توجه کن.',keywords:['Iran','paradise','traveler','ancient','culture','destination','carefully','politely'],grammar:'افعال وجهی، قیدها و ساخت قیدهای -ly؛ حروف اضافه در بخش See Also',formula:'can / should / must / may + base verb  |  adjective + ly',scene:'🗺️'}];
+
+const lessonWorldItems=[[{en:'Cheetah',fa:'یوزپلنگ',emoji:'🐆',key:'cheetah'},{en:'Leopard',fa:'پلنگ',emoji:'🐆',key:'leopard'},{en:'Elephant',fa:'فیل',emoji:'🐘',key:'elephant'},{en:'Gazelle',fa:'غزال',emoji:'🦌',key:'gazelle'},{en:'Tiger',fa:'ببر',emoji:'🐅',key:'tiger'},{en:'Lion',fa:'شیر',emoji:'🦁',key:'lion'},{en:'Bear',fa:'خرس',emoji:'🐻',key:'bear'},{en:'Bird',fa:'پرنده',emoji:'🦜',key:'bird'},{en:'Giraffe',fa:'زرافه',emoji:'🦒',key:'giraffe'}],[{en:'Heart',fa:'قلب',emoji:'❤️',key:'heart'},{en:'Blood',fa:'خون',emoji:'🩸',key:'blood'},{en:'Brain',fa:'مغز',emoji:'🧠',key:'brain'},{en:'Oxygen',fa:'اکسیژن',emoji:'💨',key:'oxygen'},{en:'Cell',fa:'سلول',emoji:'🧫',key:'cell'},{en:'Microbe',fa:'میکروب',emoji:'🦠',key:'microbe'}],[{en:'Scientist',fa:'دانشمند',emoji:'🧑‍🔬',key:'scientist'},{en:'Laboratory',fa:'آزمایشگاه',emoji:'🧪',key:'laboratory'},{en:'Medicine',fa:'دارو',emoji:'💊',key:'medicine'},{en:'Book',fa:'کتاب',emoji:'📚',key:'book'},{en:'Microscope',fa:'میکروسکوپ',emoji:'🔬',key:'microscope'},{en:'Telescope',fa:'تلسکوپ',emoji:'🔭',key:'telescope'}],[{en:'Iran',fa:'ایران',emoji:'🇮🇷',key:'iran'},{en:'Peru',fa:'پرو',emoji:'🇵🇪',key:'peru'},{en:'Chile',fa:'شیلی',emoji:'🇨🇱',key:'chile'},{en:'Italy',fa:'ایتالیا',emoji:'🇮🇹',key:'italy'},{en:'India',fa:'هند',emoji:'🇮🇳',key:'india'},{en:'Egypt',fa:'مصر',emoji:'🇪🇬',key:'egypt'}]];
+const lessonWorldTitles=[['THE GREEN KINGDOM','The Secret Forest','به جنگل حفاظت از طبیعت خوش آمدی'],['THE HUMAN WONDER','Inside the Living World','به دنیای شگفت‌انگیز بدن و آفرینش خوش آمدی'],['THE WORLD OF DISCOVERY','The Inventors’ Lab','به آزمایشگاه دانش و کشف خوش آمدی'],['A JOURNEY AROUND EARTH','Explore the World','آماده‌ی سفر به فرهنگ‌ها و سرزمین‌ها هستی؟']];
 let activeWorldLesson=1,activeWorldStep=0;
-function openWorldItem(key){if(typeof openWordBloom==='function')openWordBloom(key)}
-function renderLessonWorld(n){
- activeWorldLesson=n;activeWorldStep=0;
- const title=lessonWorldTitles[n-1],items=lessonWorldItems[n-1];
- const forest=n===1;
- const scenery=forest?'<div class="world-sky"><div class="world-sun"></div><div class="world-cloud"></div><div class="world-cloud two"></div><div class="world-mountain one"></div><div class="world-mountain two"></div></div><div class="world-ground"></div><div class="world-tree t1" onclick="worldExplore()">🌲</div><div class="world-tree t2" onclick="worldExplore()">🌳</div><div class="world-tree t3" onclick="worldExplore()">🌲</div><div class="world-tree t4" onclick="worldExplore()">🌳</div><div class="world-floor"></div><div class="world-object" onclick="worldExplore()">🦋</div>':'<div class="world-sky"><div class="world-sun"></div><div class="world-cloud"></div><div class="world-cloud two"></div></div><div class="world-ground"></div><div class="world-floor"></div><div class="world-constellation">'+items.slice(0,4).map(x=>'<button class="world-token" onclick="openWorldItem(\''+x.key+'\')"><span>'+x.emoji+'</span><b>'+x.en+'</b></button>').join('')+'</div>';
- return '<div class="lesson-world" id="lessonWorld" data-world="'+n+'">'+scenery+'<div class="world-title"><small>'+title[0]+'</small><h3>'+title[1]+'</h3><p>'+title[2]+'</p></div><div class="world-animals" id="worldAnimals">'+items.map(x=>'<button class="world-animal" onclick="openWorldItem(\''+x.key+'\')"><span class="animal-art">'+x.emoji+'</span><b>'+x.en+'</b><small>'+x.fa+'</small></button>').join('')+'</div><div class="world-controls"><button class="primary" id="worldExploreBtn" onclick="worldExplore()">'+(forest?'🌿 ورود به جنگل':'✨ کشف این دنیا')+'</button><button id="worldBackBtn" onclick="worldOverview()" style="display:none">↶ نمای کلی</button><button onclick="worldNext()">⟶ بخش بعدی</button></div><div class="world-hint" id="worldHint">'+(forest?'روی «ورود به جنگل» بزن و حیوانات را کشف کن؛ برای یادگیری هر حیوان، کارت آن را لمس کن.':'روی هر نماد شناور بزن تا واژه‌اش را یاد بگیری؛ با دکمه‌ها در دنیا حرکت کن.')+'</div></div>';
-}
-function worldExplore(){
- const el=document.getElementById('lessonWorld');if(!el)return;
- el.classList.add('explore');activeWorldStep=1;
- document.getElementById('worldExploreBtn').textContent='🐾 دیدن جانوران';
- document.getElementById('worldBackBtn').style.display='inline-block';
- document.getElementById('worldHint').textContent='حالا روی هر حیوان بزن؛ کارت معنی و تلفظ انگلیسی‌اش باز می‌شود.';
-}
-function worldOverview(){
- const el=document.getElementById('lessonWorld');if(!el)return;
- el.classList.remove('explore');activeWorldStep=0;
- document.getElementById('worldExploreBtn').textContent=activeWorldLesson===1?'🌿 ورود به جنگل':'✨ کشف این دنیا';
- document.getElementById('worldBackBtn').style.display='none';
- document.getElementById('worldHint').textContent='نمای کلی دنیا؛ برای کشف جزئیات روی دکمه ورود بزن.';
-}
+function openWorldItem(key){openWordBloom(key)}
+function renderLessonWorld(n){activeWorldLesson=n;activeWorldStep=0;const title=lessonWorldTitles[n-1],items=lessonWorldItems[n-1],forest=n===1;const scenery=forest?'<div class="world-sky"><div class="world-sun"></div><div class="world-cloud"></div><div class="world-cloud two"></div><div class="world-mountain one"></div><div class="world-mountain two"></div></div><div class="world-ground"></div><div class="world-tree t1" onclick="worldExplore()">🌲</div><div class="world-tree t2" onclick="worldExplore()">🌳</div><div class="world-tree t3" onclick="worldExplore()">🌲</div><div class="world-tree t4" onclick="worldExplore()">🌳</div><div class="world-floor"></div><div class="world-object" onclick="worldExplore()">🦋</div>':'<div class="world-sky"><div class="world-sun"></div><div class="world-cloud"></div><div class="world-cloud two"></div></div><div class="world-ground"></div><div class="world-floor"></div><div class="world-constellation">'+items.slice(0,4).map(x=>'<button class="world-token" onclick="openWorldItem(\''+x.key+'\')"><span>'+x.emoji+'</span><b>'+x.en+'</b></button>').join('')+'</div>';return '<div class="lesson-world" id="lessonWorld" data-world="'+n+'">'+scenery+'<div class="world-title"><small>'+title[0]+'</small><h3>'+title[1]+'</h3><p>'+title[2]+'</p></div><div class="world-animals" id="worldAnimals">'+items.map(x=>'<button class="world-animal" onclick="openWorldItem(\''+x.key+'\')"><span class="animal-art">'+x.emoji+'</span><b>'+x.en+'</b><small>'+x.fa+'</small></button>').join('')+'</div><div class="world-controls"><button class="primary" id="worldExploreBtn" onclick="worldExplore()">'+(forest?'🌿 ورود به جنگل':'✨ کشف این دنیا')+'</button><button id="worldBackBtn" onclick="worldOverview()" style="display:none">↶ نمای کلی</button><button onclick="worldNext()">⟶ بخش بعدی</button></div><div class="world-hint" id="worldHint">'+(forest?'روی «ورود به جنگل» بزن و حیوانات را کشف کن؛ برای یادگیری هر حیوان، کارت آن را لمس کن.':'روی هر نماد شناور بزن تا واژه‌اش را یاد بگیری؛ با دکمه‌ها در دنیا حرکت کن.')+'</div></div>'}
+function worldExplore(){const el=document.getElementById('lessonWorld');if(!el)return;el.classList.add('explore');activeWorldStep=1;document.getElementById('worldExploreBtn').textContent='🐾 دیدن جانوران';document.getElementById('worldBackBtn').style.display='inline-block';document.getElementById('worldHint').textContent='حالا روی هر حیوان بزن؛ کارت معنی و تلفظ انگلیسی‌اش باز می‌شود.'}
+function worldOverview(){const el=document.getElementById('lessonWorld');if(!el)return;el.classList.remove('explore');activeWorldStep=0;document.getElementById('worldExploreBtn').textContent=activeWorldLesson===1?'🌿 ورود به جنگل':'✨ کشف این دنیا';document.getElementById('worldBackBtn').style.display='none';document.getElementById('worldHint').textContent='نمای کلی دنیا؛ برای کشف جزئیات روی دکمه ورود بزن.'}
 function worldNext(){if(activeWorldStep===0)worldExplore();else worldOverview()}
 function openLesson(n){let d=lessonStudy[n-1],l=lessons[n-1];document.getElementById('lessonFilter').value=String(n);document.getElementById('lessonDetail').classList.remove('hidden');document.getElementById('lessonDetail').innerHTML=`<span class="pill">LESSON ${n}</span><h2 style="margin:12px 0 3px">${l[1]}</h2><p class="latin">${l[0]}</p>${renderLessonWorld(n)}<div class="lesson-block"><h3>📖 راهنمای مطالعه و Reading</h3><div class="reading-box">${d.reading}</div><p class="muted">برای دیدن معنی و تلفظ واژه‌های کلیدی، روی آن‌ها بزن:</p><div class="tagrow">${d.keywords.map(k=>{let key=encodeURIComponent(k);return `<button type="button" class="mini" onclick="openWordBloom(decodeURIComponent('${key}'))">${k}</button>`}).join('')}</div></div><div class="lesson-block"><h3>📐 گرامر این درس</h3><p>${d.grammar}</p><div class="grammar-formula">${d.formula}</div><button class="btn soft" onclick="showPage('grammar')">رفتن به درسنامه گرامر</button></div><div class="actions" style="justify-content:flex-start"><button class="btn soft" onclick="showPage('vocab');document.getElementById('lessonFilter').value='${n}';renderWords()">واژگان این درس</button><button class="btn soft" onclick="showPage('vocab');document.getElementById('lessonFilter').value='${n}';document.getElementById('flashFilter').value='${n}';renderWords();resetFlash()">فلش‌کارت‌های درس</button><button class="btn" onclick="showPage('quiz');document.getElementById('quizLesson').value='${n}';startQuiz()">آزمون درس</button></div>`;document.getElementById('lessonDetail').scrollIntoView({behavior:'smooth',block:'start'})}
 
