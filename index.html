@@ -167,7 +167,7 @@
 <section id="about" class="page hidden"><h1 class="page-title">درباره باغ</h1><p class="sub">یک فضای آموزشی برای شکوفا شدن مهارت‌های زبان انگلیسی.</p></section>
 </main>
 <div class="modal3d" id="wordModal" onclick="if(event.target===this)closeWordModal()"><div class="modal-card"><button class="modal-close" onclick="closeWordModal()">×</button><span class="pill">WORD BLOOM · باغ واژگان</span><div class="modal-visual"><span id="modalEmoji">🌷</span></div><h2 id="modalWord">protect</h2><div class="phonetic" id="modalPhonetic">/prəˈtekt/</div>
-<div style="margin:7px 0 14px;color:#a04f78;font-weight:700">🔤 تلفظ به فارسی: <span id="modalPersianPronunciation">پِرُتِکت</span></div><div class="meaning" id="modalMeaning">محافظت کردن</div><p class="example" id="modalExample">We should protect nature.</p><div class="actions"><button class="btn soft" onclick="speakModalWord()">🔊 شنیدن تلفظ</button><button class="btn" onclick="saveModalWord()">ذخیره در باغ 🌷</button></div></div></div>
+<div style="margin:7px 0 14px;color:#a04f78;font-weight:700">🔤 تلفظ به فارسی: <span id="modalPersianPronunciation">پِرُتِکت</span></div><div class="meaning" id="modalMeaning">محافظت کردن</div><p class="example" id="modalExample">We should protect nature.</p><p class="example" id="modalExample2" style="margin-top:8px"></p><div class="actions"><button class="btn soft" onclick="speakModalWord()">🔊 شنیدن تلفظ</button><button class="btn" onclick="saveModalWord()">ذخیره در باغ 🌷</button></div></div></div>
 </main>
 <footer class="footer"><div class="latin">THE PINKLISH GARDEN</div><p>Where English blooms.</p><p>طراحی و ساخته‌شده با عشق به یادگیری توسط <b>ترنم شاملو</b></p><p><a href="mailto:taranomshamloo2000@gmail.com">taranomshamloo2000@gmail.com</a></p><p style="font-size:11px;opacity:.65">© THE PINKLISH GARDEN</p></footer>
 <script>
@@ -334,11 +334,61 @@ function renderProgress(){let a=JSON.parse(localStorage.getItem('pg_tasks')||'[]
 const bloomEmoji={cheetah:'🐆',leopard:'🐆',trees:'🌳',tree:'🌳',road:'🛣️',protect:'🛡️',nature:'🌿',forest:'🌲',water:'💧',liquid:'💧',heart:'❤️',brain:'🧠',blood:'🩸',creation:'🌌',knowledge:'📖',laboratory:'🧪',scientist:'🔬',iran:'🗺️',paradise:'🪷',ski:'⛷️',ancient:'🏛️',planet:'🪐',oxygen:'🫧',lungs:'🫁',star:'⭐'};
 let activeBloomWord=null;
 function persianPronunciation(word){const p={'leopard':'لِپِرد','elephant':'اِلِفِنت','gazelle':'گَزِل','tiger':'تایگِر','dolphin':'دالْفین','whale':'وِیل','bear':'بِر','bird':'بِرد','giraffe':'جِراف','wolf':'وولف','cheetah':'چی‌تا','panda':'پَندا','forest':'فارِست','nature':'نِیچِر','protect':'پِرُتِکت','destroy':'دیسترُی','endangered':'اِن‌دِینجِرد','telescope':'تِلِسکوپ','microscope':'مایکرُسکوپ','planet':'پْلَنِت','orbit':'اوربیت','neptune':'نِپتون','oxygen':'آکسِجِن','knowledge':'نالِج','scientist':'سایِنتیست','medicine':'مِدِسِن','vacation':'وِیکِیشن','abroad':'اَبراد','destination':'دِستینِیشن','avicenna':'اَویسِنا','carbon dioxide':'کاربِن دای‌آکساید'};return p[word.toLowerCase()]||word.split('').join('');}
-function openWordBloom(word){let w=words.find(x=>x[0].toLowerCase()===String(word).toLowerCase());if(!w)return;activeBloomWord=w;document.getElementById('modalWord').textContent=w[0];document.getElementById('modalPhonetic').textContent=w[1];document.getElementById('modalPersianPronunciation').textContent=persianPronunciation(w[0]);document.getElementById('modalMeaning').textContent=w[2];document.getElementById('modalEmoji').textContent=bloomEmoji[w[0].toLowerCase()]||'🌸';document.getElementById('modalExample').textContent=wordExample(w[0]);document.getElementById('wordModal').classList.add('open')}
+function openWordBloom(word){let w=words.find(x=>x[0].toLowerCase()===String(word).toLowerCase());if(!w)return;activeBloomWord=w;document.getElementById('modalWord').textContent=w[0];document.getElementById('modalPhonetic').textContent=w[1];document.getElementById('modalPersianPronunciation').textContent=persianPronunciation(w[0]);document.getElementById('modalMeaning').textContent=w[2];document.getElementById('modalEmoji').textContent=bloomEmoji[w[0].toLowerCase()]||'🌸';const examples=wordExamplesFor(w[0]);document.getElementById('modalExample').textContent='1. '+examples[0];document.getElementById('modalExample2').textContent='2. '+examples[1];document.getElementById('wordModal').classList.add('open')}
 function closeWordModal(){document.getElementById('wordModal').classList.remove('open')}
 function speakModalWord(){if(!activeBloomWord)return;if(!('speechSynthesis'in window)){alert('پخش تلفظ در این مرورگر پشتیبانی نمی‌شود.');return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(activeBloomWord[0]);u.lang='en-US';u.rate=.82;speechSynthesis.speak(u)}
 function saveModalWord(){if(!activeBloomWord)return;learned.add(activeBloomWord[0]);saveSets();renderGarden();renderProgress();closeWordModal()}
-function wordExample(w){let e={protect:'We should protect nature.',nature:'Nature is our home.',cheetah:'The Iranian cheetah is endangered.',water:'Water is a wonderful liquid.',heart:'The heart pumps blood around the body.',brain:'The brain helps us think.',knowledge:'Knowledge is valuable.',travel:'I want to travel around the world.',carefully:'She drives carefully.',destination:'What is your destination?'};return e[w.toLowerCase()]||`I am learning the word “${w}”.`}
+const wordExamples={
+'avicenna':['Avicenna was a famous Iranian doctor.','Many students learn about Avicenna in history class.'],
+'leopard':['A leopard can run very fast.','We saw a leopard in the wildlife park.'],
+'visitor':['Every visitor must buy a ticket.','The museum welcomes many visitors every day.'],
+'die out':['Some animals may die out if we do not protect them.','We must save forests so that rare animals do not die out.'],
+'elephant':['An elephant has a long trunk.','Elephants usually live in groups.'],
+'human':['Every human needs clean water.','Humans should take care of the Earth.'],
+'endangered':['The Persian leopard is an endangered animal.','Endangered animals need our protection.'],
+'gazelle':['A gazelle can run quickly.','The gazelle lives in open areas.'],
+'information':['I need more information about this planet.','This book gives useful information about wildlife.'],
+'protect':['We should protect nature.','People must protect endangered animals.'],
+'destroy':['Pollution can destroy the environment.','Wildfires may destroy many trees.'],
+'wildlife':['We must protect wildlife.','The forest is home to a lot of wildlife.'],
+'nature':['Nature is our home.','We should keep nature clean.'],
+'zookeeper':['The zookeeper feeds the animals every morning.','A zookeeper takes care of the animals at the zoo.'],
+'telescope':['We can see stars through a telescope.','My father bought a telescope for observing the moon.'],
+'microscope':['A microscope makes tiny things look bigger.','The scientist used a microscope to study the cells.'],
+'orbit':['The Earth moves in an orbit around the Sun.','The satellite is now in orbit.'],
+'planet':['Mars is a planet in our solar system.','Our planet needs clean air and water.'],
+'neptune':['Neptune is a very distant planet.','Neptune looks blue because of gases in its atmosphere.'],
+'oxygen':['People need oxygen to breathe.','Plants help produce oxygen.'],
+'carbon dioxide':['Humans breathe out carbon dioxide.','Plants use carbon dioxide to make food.'],
+'energy':['The Sun gives us light and energy.','I eat breakfast to get energy for the day.'],
+'creation':['The creation of the universe is a fascinating subject.','We should respect all forms of creation.'],
+'donate':['People donate books to the school library.','You can donate clothes to families in need.'],
+'knowledge':['Knowledge is valuable.','Reading books helps us gain knowledge.'],
+'value':['Honesty is an important value.','This old painting has great value.'],
+'scientist':['The scientist works in a laboratory.','A scientist asks questions and looks for answers.'],
+'mathematics':['Mathematics helps us solve problems.','My favorite subject is mathematics.'],
+'medicine':['This medicine can help you feel better.','She wants to study medicine at university.'],
+'experiment':['The students did an experiment in science class.','The experiment showed how plants grow.'],
+'discover':['Scientists discover new things every year.','I hope to discover something interesting today.'],
+'achievement':['Winning the competition was a great achievement.','Her achievement made her family proud.'],
+'effort':['Success needs time and effort.','Your effort will help you improve your English.'],
+'translate':['Can you translate this sentence into Persian?','I use a dictionary to translate new words.'],
+'patient':['The doctor talked to the patient.','The patient is waiting for the doctor.'],
+'treatment':['The patient needs medical treatment.','This treatment helped him get better.'],
+'travel agent':['The travel agent helped us book our tickets.','Ask the travel agent about hotels in Japan.'],
+'vacation':['We are going on vacation next week.','I usually visit my grandparents during vacation.'],
+'abroad':['My uncle lives abroad.','She wants to study abroad next year.'],
+'destination':['Paris is a popular travel destination.','What is your final destination?'],
+'culture':['Every country has its own culture.','Learning a language helps us understand another culture.'],
+'embassy':['We went to the embassy to get a visa.','The embassy is near the city center.'],
+'historical':['We visited a historical building yesterday.','This city has many historical places.'],
+'comfortable':['These shoes are very comfortable.','I feel comfortable in my new room.'],
+'traditional':['We ate traditional food at the festival.','They wear traditional clothes on special days.'],
+'safely':['Please drive safely.','The children arrived home safely.'],
+'pilgrim':['The pilgrim visited the holy place.','Many pilgrims travel there every year.']
+};
+function wordExamplesFor(w){return wordExamples[String(w).toLowerCase()]||[`I am learning the word “${w}”.`,`Can you use “${w}” in a sentence?`];}
+function wordExample(w){return wordExamplesFor(w)[0];}
 function renderWords(){let q=(document.getElementById('wordSearch')?.value||'').toLowerCase().trim(),f=document.getElementById('lessonFilter')?.value||'all';let arr=words.filter(w=>(f==='all'||w[3]===+f)&&(!q||w[0].toLowerCase().includes(q)||w[2].toLowerCase().includes(q)||w[1].toLowerCase().includes(q)));document.getElementById('wordList').innerHTML=arr.length?arr.map(w=>{let key=encodeURIComponent(w[0]);return `<div class="word"><div><strong>${w[0]}</strong><small>${w[1]} · درس ${w[3]}</small><div class="meaning">${w[2]}</div></div><div class="word-tools"><button type="button" class="mini" onclick="openWordBloom(decodeURIComponent('${key}'))">جزئیات</button><button type="button" class="ghost" onclick="toggleLearn(decodeURIComponent('${key}'))" title="ذخیره در باغ">${learned.has(w[0])?'✓':'＋'}</button></div></div>`}).join(''):'<div class="empty">واژه‌ای پیدا نشد.</div>'}
 const lessonStudy=[
 {reading:'در این درس با موضوع حیوانات در معرض انقراض، زیستگاه‌ها و راه‌های حفاظت از طبیعت آشنا می‌شوی. در بخش Reading کتاب، متن «Endangered Animals» را بخوان و به علت‌های کاهش جمعیت جانوران و راه‌های محافظت از آن‌ها توجه کن.',keywords:['cheetah','endangered','protect','nature','forest','wildlife'],grammar:'آینده با will، ساختار be going to، اسم‌های مفرد و جمع و نشانه‌های اسم',formula:'will + base verb  |  am/is/are going to + verb',scene:'🐆'},
