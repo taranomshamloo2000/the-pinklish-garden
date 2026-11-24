@@ -475,6 +475,44 @@
 :root[data-theme="lavender"] .correct{background:#e6f5ee!important;color:#155b3a!important}
 :root[data-theme="lavender"] .wrong{background:#fff0f0!important;color:#8a3030!important}
 
+
+/* Sapphire contrast repair: keep lower study panels dark and their text readable */
+:root[data-theme="lavender"] .panel,
+:root[data-theme="lavender"] .tile,
+:root[data-theme="lavender"] .word,
+:root[data-theme="lavender"] .stat,
+:root[data-theme="lavender"] .lesson-card,
+:root[data-theme="lavender"] .grammar3d,
+:root[data-theme="lavender"] .grammar-practice,
+:root[data-theme="lavender"] .picture-game,
+:root[data-theme="lavender"] .vocab-menu-card,
+:root[data-theme="lavender"] .timed-exam,
+:root[data-theme="lavender"] .bank-score-panel {
+  background:linear-gradient(145deg,#103763,#09294f)!important;
+  color:#eaf6ff!important;
+  border-color:#3b83b9!important;
+}
+:root[data-theme="lavender"] .panel :is(h1,h2,h3,p,strong,span,label,small,li,div),
+:root[data-theme="lavender"] .tile :is(h1,h2,h3,p,strong,span,label,small),
+:root[data-theme="lavender"] .word :is(strong,small,span),
+:root[data-theme="lavender"] .stat :is(b,small),
+:root[data-theme="lavender"] .lesson-card :is(h1,h2,h3,p,strong,span,small),
+:root[data-theme="lavender"] .grammar3d :is(h1,h2,h3,p,strong,span,small),
+:root[data-theme="lavender"] .grammar-practice :is(h1,h2,h3,p,strong,span,small,label),
+:root[data-theme="lavender"] .picture-game :is(h1,h2,h3,p,strong,span,small,label),
+:root[data-theme="lavender"] .vocab-menu-card :is(strong,small,b),
+:root[data-theme="lavender"] .timed-exam :is(h1,h2,h3,p,strong,span,label,small,div),
+:root[data-theme="lavender"] .bank-score-panel :is(h1,h2,h3,p,strong,span,small) {
+  color:#eaf6ff!important;
+}
+:root[data-theme="lavender"] .panel .muted,
+:root[data-theme="lavender"] .tile p,
+:root[data-theme="lavender"] .lesson-card p,
+:root[data-theme="lavender"] .grammar3d .g-summary,
+:root[data-theme="lavender"] .vocab-menu-card small {color:#bfe1fa!important}
+:root[data-theme="lavender"] .timed-exam #timedClock,
+:root[data-theme="lavender"] .timed-exam h2 {color:#8bdcff!important}
+
 </style>
 <body>
 
