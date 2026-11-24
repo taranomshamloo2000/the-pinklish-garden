@@ -671,8 +671,8 @@ function initLesson3D(n){
   for(let i=0;i<7;i++){const bubble=mesh(flask,new T.SphereGeometry(.045,8,6),mat(0xe8ffff,.15),Math.sin(i*2)*.13,1.45+i*.07,0);bubble.userData.floatPhase=i}
  }else{
   // A rotating blue planet, raised green continents and miniature monuments.
-  const globe=group('planet',0,-1.4);const ocean=mat(0x267eaa,.28,.2),land=mat(0x6da56b,.8),cloud=mat(0xe7f4f4,.25);
-  const sphere=mesh(globe,new T.SphereGeometry(1.85,36,28),ocean,0,1.7,0);sphere.userData.spin=true;
+  const globe=group('planet',0,-1.4);globe.userData.spin=true;const ocean=mat(0x267eaa,.28,.2),land=mat(0x6da56b,.8),cloud=mat(0xe7f4f4,.25);
+  const sphere=mesh(globe,new T.SphereGeometry(1.85,36,28),ocean,0,1.7,0);
   for(let i=0;i<11;i++){const a=i*2.4,lat=Math.sin(i*1.7)*.95;const patch=mesh(globe,new T.SphereGeometry(.45+(i%3)*.12,12,8),land,Math.cos(a)*1.42,1.7+lat,Math.sin(a)*1.42,.9,.65,.25);patch.lookAt(0,1.7,0)}
   for(let i=0;i<4;i++){const c=mesh(globe,new T.TorusGeometry(1.95+i*.07,.018,6,64),cloud,0,1.7,0);c.rotation.x=Math.PI/2+(i*.18);c.rotation.y=i*.6}
   const tower=group('historical',-3.2,-.5);mesh(tower,new T.CylinderGeometry(.45,.58,1.7,12),mat(0xd8c3a1),0,.85,0);mesh(tower,new T.ConeGeometry(.52,.7,12),mat(0x9d6254),0,2.05,0);for(let i=0;i<3;i++)mesh(tower,new T.BoxGeometry(.12,.5,.16),mat(0x5d5550),-.2+i*.2,1.2,.48);
