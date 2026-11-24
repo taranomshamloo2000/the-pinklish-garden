@@ -21,30 +21,64 @@
 .modal3d{position:fixed;inset:0;background:#1d101dcc;backdrop-filter:blur(12px);z-index:100;display:none;place-items:center;padding:18px}.modal3d.open{display:grid}.modal-card{width:min(520px,100%);background:#fff9f6;border:1px solid #f5dce4;border-radius:26px;padding:22px;box-shadow:0 25px 90px #13091088;text-align:center;position:relative}.modal-close{position:absolute;top:12px;left:12px;border:0;background:#f4e3e8;color:#542b3d;border-radius:50%;width:36px;height:36px;font-size:20px}.modal-visual{height:190px;border-radius:20px;background:radial-gradient(circle at 50% 35%,#fff,#f2d0dc 48%,#633d55);display:grid;place-items:center;overflow:hidden;margin:14px 0}.modal-visual span{font-size:100px;filter:drop-shadow(0 18px 15px #3a1b3355);animation:floatBloom 3s ease-in-out infinite}.modal-card h2{font:600 32px 'Playfair Display',serif;direction:ltr;margin:8px 0}.modal-card .phonetic{color:var(--muted);direction:ltr}.modal-card .meaning{font-size:19px;color:var(--wine);font-weight:700;margin:8px}.modal-card .example{background:#f8edf0;padding:12px;border-radius:13px;line-height:1.8;direction:ltr;font-family:Georgia,serif}.grammar-formula{background:#f8e9ed;color:#542b3d;border-radius:12px;padding:12px;direction:ltr;text-align:center;font:600 19px Georgia;margin:10px 0}
 @media(max-width:560px){.modal-card{padding:18px}.modal-visual{height:155px}.modal-visual span{font-size:80px}}
 
-</style>
-</head>
-<body>
-<header class="topbar"><nav class="nav">
-<a class="brand" href="#" onclick="showPage('home');return false"><span class="brandmark">✿</span><span><span class="latin">THE PINKLISH GARDEN</span><small>WHERE ENGLISH BLOOMS</small></span></a>
-<div class="navlinks" id="navlinks"><button class="active" data-page="home" onclick="showPage('home')">خانه</button><button data-page="lessons" onclick="showPage('lessons')">درس‌ها</button><button data-page="vocab" onclick="showPage('vocab')">واژگان</button><button data-page="grammar" onclick="showPage('grammar')">گرامر</button><button data-page="flash" onclick="showPage('flash')">فلش‌کارت</button><button data-page="quiz" onclick="showPage('quiz')">آزمون</button></div>
-</nav></header>
-<main class="wrap">
-<section id="home" class="page">
-<div class="hero"><div class="hero-copy"><div class="eyebrow">A little garden for curious minds</div><h1>THE PINKLISH<br>GARDEN</h1><p>اینجا هر واژه یک شکوفه است؛ یاد بگیر، تمرین کن و قدم‌به‌قدم باغ دانش انگلیسی خودت را بساز.</p><button class="btn light" onclick="showPage('lessons')">شروع یادگیری <span>←</span></button></div><div class="hero-art">🌸</div></div>
-<div class="section-head"><div><h2>به کدام بخش می‌رویم؟</h2><p>همه‌چیز همین‌جاست؛ فقط یک کلیک تا شروع یادگیری فاصله داری.</p></div><span class="pill">۱۲ بخش آموزشی</span></div>
-<div class="grid">
-<button class="tile" onclick="showPage('lessons')"><span class="emoji">📚</span><h3>درسنامه‌ها</h3><p>آموزش و مرور درس‌های زبان دهم</p></button>
-<button class="tile" onclick="showPage('vocab')"><span class="emoji">🌷</span><h3>واژگان</h3><p>جست‌وجو، معنی، تلفظ و مثال واژه‌ها</p></button>
-<button class="tile" onclick="showPage('grammar')"><span class="emoji">🧠</span><h3>گرامر</h3><p>قواعد با توضیح فارسی و مثال</p></button>
-<button class="tile" onclick="showPage('listening')"><span class="emoji">🎧</span><h3>شنیداری کتاب</h3><p>فایل‌ها و تمرین‌های شنیداری</p></button>
-<button class="tile" onclick="showPage('further')"><span class="emoji">🎼</span><h3>شنیداری تکمیلی</h3><p>تمرین‌های بیشتر برای تقویت گوش</p></button>
-<button class="tile" onclick="showPage('reading')"><span class="emoji">📖</span><h3>درک مطلب</h3><p>متن، ترجمه و پرسش‌های خواندن</p></button>
-<button class="tile" onclick="showPage('writing')"><span class="emoji">✍️</span><h3>نوشتن</h3><p>جمله‌سازی و تمرین نوشتاری</p></button>
-<button class="tile" onclick="showPage('flash')"><span class="emoji">🍡</span><h3>فلش‌کارت</h3><p>مرور سریع و هوشمند واژگان</p></button>
-<button class="tile" onclick="showPage('quiz')"><span class="emoji">🎯</span><h3>مرکز آزمون</h3><p>سؤال‌های چهارگزینه‌ای و سنجش</p></button>
-<button class="tile" onclick="showPage('planner')"><span class="emoji">🗓️</span><h3>برنامه‌ریز</h3><p>هدف‌های مطالعه و کارهای روزانه</p></button>
-<button class="tile" onclick="showPage('garden')"><span class="emoji">🪷</span><h3>باغ واژگان</h3><p>با یادگیری هر کلمه، باغت را پرگل کن</p></button>
-<button class="tile" onclick="showPage('progress')"><span class="emoji">🍨</span><h3>پیشرفت من</h3><p>آمار یادگیری و نتیجه آزمون‌ها</p></button>
+
+/* Pinklish Grammar Academy */
+.grammar-hero{position:relative;overflow:hidden;border-radius:28px;padding:30px 24px;margin:18px 0 22px;background:linear-gradient(125deg,#392333,#74445e 58%,#c9829b);color:#fff;box-shadow:0 18px 45px #542b3d26;isolation:isolate}
+.grammar-hero:before,.grammar-hero:after{content:"";position:absolute;border-radius:50%;filter:blur(1px);z-index:-1}
+.grammar-hero:before{width:190px;height:190px;right:-40px;top:-65px;background:radial-gradient(circle at 35% 35%,#fff8 0 4%,#f6c6d4a8 5% 18%,#edabc588 20% 45%,transparent 68%);animation:grammarFloat 6s ease-in-out infinite}
+.grammar-hero:after{width:140px;height:140px;left:8%;bottom:-75px;background:radial-gradient(circle,#f8d9e4aa,transparent 70%);animation:grammarFloat 7s ease-in-out infinite reverse}
+.grammar-hero h2{font:600 clamp(28px,5vw,43px) 'Playfair Display',Georgia,serif;direction:ltr;margin:0 0 8px}
+.grammar-hero p{max-width:700px;color:#faeaf0;line-height:2;margin:0}
+.grammar-orbit{position:absolute;left:7%;top:20px;width:115px;height:115px;border:1px solid #ffffff55;border-radius:50%;animation:orbitSpin 16s linear infinite}
+.grammar-orbit:before,.grammar-orbit:after{content:"✦";position:absolute;color:#ffe5ee;font-size:22px}
+.grammar-orbit:before{top:-12px;left:45px}.grammar-orbit:after{bottom:0;right:-8px;font-size:15px}
+.grammar-progress{height:9px;background:#f4e5e9;border-radius:20px;overflow:hidden;margin:12px 0 22px}
+.grammar-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#c97995,#f2b9cb);border-radius:20px;transition:width .45s ease}
+.grammar-tools{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin:14px 0}
+.grammar-tools button,.grammar-tools select{border:1px solid var(--line);border-radius:30px;padding:9px 14px;background:#fff;color:var(--wine)}
+.grammar-tools button.active{background:var(--wine);color:#fff}
+.grammar-academy-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.grammar3d{position:relative;min-height:250px;border:1px solid #ead9df;border-radius:23px;background:linear-gradient(145deg,#fff,#fff7f8);padding:20px;box-shadow:0 12px 28px #542b3d0b;transform-style:preserve-3d;transition:transform .35s,box-shadow .35s;overflow:hidden}
+.grammar3d:hover{transform:perspective(900px) rotateX(2deg) rotateY(-2deg) translateY(-5px);box-shadow:0 20px 38px #542b3d18}
+.grammar3d:after{content:"";position:absolute;width:130px;height:130px;border-radius:50%;left:-48px;bottom:-58px;background:radial-gradient(circle,#f4d4deaa,transparent 70%);pointer-events:none}
+.grammar3d-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.grammar3d-icon{width:57px;height:57px;display:grid;place-items:center;border-radius:18px;background:linear-gradient(145deg,#fff,#f3d6df);font-size:30px;box-shadow:7px 8px 15px #8c52631e,-5px -5px 12px #fff;transform:translateZ(22px);animation:grammarBob 4s ease-in-out infinite}
+.grammar3d h3{margin:13px 0 5px;font-size:19px}
+.grammar3d .g-sub{color:var(--muted);font-size:12px;margin:0 0 12px}
+.grammar-formula-big{direction:ltr;text-align:center;font:600 clamp(16px,2.6vw,22px) Georgia,serif;color:#6b354c;background:linear-gradient(100deg,#faedf1,#f5dfe6);border:1px solid #f0d5df;border-radius:15px;padding:14px 8px;margin:12px 0;box-shadow:inset 0 2px 6px #fff}
+.grammar3d .g-summary{font-size:13px;line-height:1.9;color:#59464e}
+.grammar-expand{border:0;border-radius:30px;padding:9px 14px;background:#f2e1e7;color:#603247;font-weight:700;margin-top:10px}
+.grammar-detail{display:none;border-top:1px dashed #e6cbd5;margin-top:14px;padding-top:13px;line-height:2;font-size:13px;animation:grammarReveal .35s ease}
+.grammar-detail.open{display:block}
+.grammar-detail ul{padding-right:19px;margin:7px 0}
+.g-example{direction:ltr;text-align:left;background:#fff;border-left:3px solid #d58ca4;padding:8px 11px;margin:7px 0;border-radius:9px;font-family:Georgia,serif;color:#513044}
+.g-visual{height:100px;display:flex;align-items:center;justify-content:center;gap:9px;perspective:500px;margin:8px 0 2px}
+.g-cube{width:58px;height:58px;display:grid;place-items:center;border-radius:15px;background:linear-gradient(145deg,#f8dce5,#c77f99);color:#572d42;font:700 15px Georgia,serif;box-shadow:8px 9px 18px #65364b35,inset 2px 2px 5px #fff9;transform:rotateY(-18deg) rotateX(12deg);animation:cubeDrift 4s ease-in-out infinite}
+.g-cube:nth-child(2){animation-delay:.4s;background:linear-gradient(145deg,#f5e5ed,#d9a5b8)}
+.g-cube:nth-child(3){animation-delay:.8s;background:linear-gradient(145deg,#e9c6d4,#b96e8a)}
+.g-arrow{font-size:22px;color:#b76d88;animation:arrowPulse 1.8s ease-in-out infinite}
+.grammar-practice{margin-top:24px;padding:22px;border-radius:24px;background:linear-gradient(145deg,#fff,#fff3f6);border:1px solid #efd9e1}
+.grammar-practice h3{margin:0 0 8px}
+.g-question{font-size:16px;font-weight:700;margin:14px 0}
+.g-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.g-option{border:1px solid #ead4dd;background:white;border-radius:13px;padding:11px;text-align:center;color:#573247;cursor:pointer;transition:.2s}
+.g-option:hover{transform:translateY(-2px);border-color:#ca829b;background:#fff8fa}
+.g-option.correct{background:#e6f5e9;border-color:#7db88b;color:#245a32}
+.g-option.wrong{background:#fff0f0;border-color:#df9292;color:#8a3030}
+.g-feedback{min-height:28px;margin-top:10px;font-size:13px;font-weight:700}
+@keyframes grammarFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+@keyframes orbitSpin{to{transform:rotate(360deg)}}
+@keyframes grammarBob{0%,100%{transform:translateY(0) translateZ(22px) rotate(-3deg)}50%{transform:translateY(-7px) translateZ(22px) rotate(3deg)}}
+@keyframes cubeDrift{0%,100%{transform:translateY(0) rotateY(-18deg) rotateX(12deg)}50%{transform:translateY(-9px) rotateY(18deg) rotateX(5deg)}}
+@keyframes arrowPulse{0<section id="grammar" class="page hidden">
+<button class="back" onclick="showPage('home')">← بازگشت به خانه</button>
+<h1 class="page-title">آکادمی گرامر</h1><p class="sub">از ساختن جمله تا تسلط؛ قدم‌به‌قدم، تصویری و تعاملی</p>
+<div class="grammar-hero"><div class="grammar-orbit"></div><div class="eyebrow">THE PINKLISH GARDEN · GRAMMAR STUDIO</div><h2>Grammar in Bloom</h2><p>هر قانون یک قطعه از پازل زبان است. کارت‌ها را باز کن، مثال‌ها را ببین، انیمیشن‌ها را دنبال کن و در پایان خودت را بسنج.</p></div>
+<div class="panel"><div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap"><strong>مسیر یادگیری تو</strong><span class="pill" id="grammarProgressText">۰ از ۹ مبحث</span></div><div class="grammar-progress"><span id="grammarProgressBar"></span></div><div class="grammar-tools" id="grammarFilters"><button class="active" onclick="filterGrammar('all',this)">همه مباحث</button><button onclick="filterGrammar('future',this)">آینده</button><button onclick="filterGrammar('compare',this)">مقایسه</button><button onclick="filterGrammar('past',this)">گذشته</button><button onclick="filterGrammar('other',this)">سایر قواعد</button></div></div>
+<div class="grammar-academy-grid" id="grammarCards"></div>
+<div class="grammar-practice"><span class="pill">PINK QUIZ · تمرین پایانی</span><h3>وقتشه دانسته‌هات رو امتحان کنی! 🌸</h3><p class="sub">یک گزینه را انتخاب کن؛ بازخورد پاسخ را همان‌جا می‌بینی.</p><div id="grammarQuiz"></div></div>
+<div class="notice" style="margin-top:17px">این آکادمی بر اساس مباحث گرامری چهار درس Vision 1 و نکته‌های تکمیلی مرتبط با آن‌ها تنظیم شده است. برای ترتیب و جزئیات نهایی تدریس، کتاب درسی معلم و نسخه چاپی کتاب مرجع اصلی‌اند.</div>
+</section>an class="emoji">🍨</span><h3>پیشرفت من</h3><p>آمار یادگیری و نتیجه آزمون‌ها</p></button>
 </div>
 <div class="section-head"><div><h2>یک شکوفه برای امروز</h2><p>هر روز حتی یک واژه تازه هم ارزشمند است.</p></div></div>
 <div class="panel" style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap"><div><span class="pill">واژه پیشنهادی</span><h2 class="latin" style="font-size:32px;margin:10px 0 2px">protect</h2><div>محافظت کردن</div><small class="muted">/prəˈtekt/ · We should protect nature.</small></div><button class="btn soft" onclick="showPage('flash')">مرور فلش‌کارت‌ها</button></div>
@@ -151,7 +185,51 @@ Lastly, when you travel, your behavior should be like the behavior of those who 
 const lessons=[['Saving Nature','حفاظت از طبیعت','واژگان طبیعت، حیوانات و آینده'],['Wonders of Creation','شگفتی‌های آفرینش','سیاره‌ها، بدن و شگفتی‌های جهان'],['The Value of Knowledge','ارزش دانش','دانش، دانشمندان و زمان‌های فعلی و گذشته'],['Traveling the World','سفر به دور دنیا','سفر، فرهنگ‌ها و قیدها']];
 let pageNow='home',flashSet=[],flashIndex=0,flipped=false,quizSet=[],quizIndex=0,score=0,answered=false;
 const learned=new Set(JSON.parse(localStorage.getItem('pg_learned')||'[]')),review=new Set(JSON.parse(localStorage.getItem('pg_review')||'[]'));
-function showPage(id){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));const el=document.getElementById(id);if(el)el.classList.remove('hidden');pageNow=id;document.querySelectorAll('.navlinks button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo({top:0,behavior:'smooth'});if(id==='vocab')renderWords();if(id==='flash')resetFlash();if(id==='lessons')renderLessons();if(id==='listening')renderAudio();if(id==='further')renderFurther();if(id==='planner')renderTasks();if(id==='garden')renderGarden();if(id==='progress')renderProgress();if(id==='quiz')startQuiz();}
+function showPage(id){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));const el=document.getElementById(id);if(el)el.classList.remove('hidden');pageNow=id;document.querySelectorAll('.navlinks button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo({top:0,behavior:'smooth'});if(id==='vocab')renderWords();if(id==='flash')resetFlash();if(id==='lessons')renderLessons();if(id==='listening')renderAudio();if(id==='further')renderFurther();if(id==='planner')renderTasks();if(id==='garden')renderGarden();if(id==='progress')renderProgress();if(id==='quiz')startQuiz();if(id==='grammar'){renderGrammarAcademy();renderGrammarQuiz();}}
+
+const grammarTopics=[
+{id:'will',cat:'future',unit:'درس ۱ · آینده',icon:'🌠',title:'آینده با will',sub:'تصمیم، پیش‌بینی و قول',formula:'Subject + will + base verb',summary:'برای تصمیمی که همان لحظه می‌گیریم، پیش‌بینی یا قول درباره آینده از will استفاده می‌کنیم.',visual:['I','will','go'],detail:'<b>ساختارها</b><ul><li>مثبت: فاعل + will + شکل ساده فعل</li><li>منفی: فاعل + will not (won’t) + فعل ساده</li><li>سؤالی: Will + فاعل + فعل ساده؟</li></ul><div class="g-example">She will help us. — او به ما کمک خواهد کرد.</div><div class="g-example">They won’t be late. — آن‌ها دیر نمی‌کنند.</div><div class="g-example">Will you come tomorrow? — فردا می‌آیی؟</div><b>نکته:</b> بعد از will فعل همیشه به شکل ساده می‌آید؛ برای he و she هم s نمی‌گیرد.'},
+{id:'going',cat:'future',unit:'درس ۱ · آینده',icon:'🧭',title:'ساختار be going to',sub:'برنامه و قصد از پیش تعیین‌شده',formula:'am / is / are + going to + verb',summary:'وقتی از قبل قصد یا برنامه‌ای داریم، یا از روی نشانه‌ها درباره آینده پیش‌بینی می‌کنیم، از be going to کمک می‌گیریم.',visual:['plan','going to','do'],detail:'<b>انتخاب am / is / are</b><ul><li>I → am</li><li>He / She / It → is</li><li>You / We / They → are</li></ul><div class="g-example">I am going to study tonight. — امشب قصد دارم درس بخوانم.</div><div class="g-example">Look at those clouds! It is going to rain. — آن ابرها را ببین! قرار است باران ببارد.</div><b>منفی:</b> She isn’t going to travel. <b>سؤالی:</b> Are they going to play?'},
+{id:'nouns',cat:'other',unit:'درس ۱ · اسم‌ها',icon:'🌷',title:'اسم مفرد و جمع',sub:'Plural nouns',formula:'one book → two books',summary:'اسم‌ها برای نشان دادن بیش از یکی معمولاً جمع بسته می‌شوند؛ اما چند الگوی املایی و جمع بی‌قاعده هم داریم.',visual:['book','books','boxes'],detail:'<ul><li>بیشتر اسم‌ها: افزودن s؛ book → books</li><li>پایان s, sh, ch, x, z: افزودن es؛ box → boxes</li><li>همخوان + y: تبدیل y به ies؛ city → cities</li><li>بعضی f / fe ها به ves تبدیل می‌شوند؛ leaf → leaves (همه نه!)</li><li>بی‌قاعده: man → men، woman → women، child → children، person → people، foot → feet</li></ul><div class="g-example">There are three children in the room.</div><b>یادت باشد:</b> بعد از عددهای بیشتر از یک، اسم شمارش‌پذیر معمولاً جمع می‌آید.'},
+{id:'comparative',cat:'compare',unit:'درس ۲ · مقایسه',icon:'⚖️',title:'صفت تفضیلی',sub:'مقایسه دو شخص یا چیز',formula:'adjective + -er + than',summary:'وقتی دو مورد را مقایسه می‌کنیم، برای صفت‌های کوتاه معمولاً er و برای صفت‌های بلندتر more به‌کار می‌رود.',visual:['small','smaller','smallest'],detail:'<ul><li>کوتاه: tall → taller؛ small → smaller</li><li>پایان e: nice → nicer</li><li>الگوی همخوان-مصوت-همخوان: big → bigger</li><li>پایان همخوان + y: happy → happier</li><li>صفت بلند: beautiful → more beautiful</li></ul><div class="g-example">Ali is taller than Reza.</div><div class="g-example">This book is more interesting than that one.</div><b>than</b> معمولاً بعد از صفت تفضیلی می‌آید.'},
+{id:'superlative',cat:'compare',unit:'درس ۲ · مقایسه',icon:'🏆',title:'صفت عالی',sub:'بالاترین درجه در یک گروه',formula:'the + -est / the most + adjective',summary:'برای نشان دادن بالاترین درجه یک ویژگی در میان سه مورد یا بیشتر از صفت عالی استفاده می‌کنیم.',visual:['tall','taller','the tallest'],detail:'<ul><li>کوتاه: tall → the tallest</li><li>پایان e: nice → the nicest</li><li>همخوان-مصوت-همخوان: big → the biggest</li><li>همخوان + y: happy → the happiest</li><li>صفت بلند: the most beautiful</li></ul><div class="g-example">Mount Damavand is the highest mountain in Iran.</div><b>بی‌قاعده‌های مهم:</b> good → better → the best؛ bad → worse → the worst.'},
+{id:'equality',cat:'compare',unit:'درس ۲ · مقایسه',icon:'🪞',title:'مقایسه برابری',sub:'وقتی دو چیز به یک اندازه‌اند',formula:'as + adjective + as',summary:'برای گفتن اینکه دو نفر یا چیز از نظر یک ویژگی برابرند، صفت را بین دو as قرار می‌دهیم.',visual:['as','bright','as'],detail:'<div class="g-example">Sara is as tall as Mina. — سارا به اندازه مینا قدبلند است.</div><div class="g-example">This test is not as difficult as that one. — این آزمون به سختی آن یکی نیست.</div><b>منفی:</b> not as + adjective + as؛ صفت در این ساختار به شکل ساده می‌ماند و er یا est نمی‌گیرد.'},
+{id:'past',cat:'past',unit:'درس ۳ · گذشته',icon:'⏳',title:'گذشته استمراری',sub:'کاری که در زمانی از گذشته در جریان بود',formula:'was / were + verb-ing',summary:'برای کاری که در زمان مشخصی در گذشته در حال انجام بوده، از گذشته استمراری استفاده می‌کنیم.',visual:['was','reading','at 8'],detail:'<b>فاعل و فعل کمکی</b><ul><li>I / He / She / It → was</li><li>You / We / They → were</li></ul><div class="g-example">I was studying at 8 last night.</div><div class="g-example">They were watching TV.</div><b>منفی:</b> wasn’t / weren’t + verb-ing<br><b>سؤالی:</b> Was / Were + فاعل + verb-ing؟<br><b>while</b> اغلب با کاری که در جریان بوده می‌آید: While I was reading, my phone rang.'},
+{id:'reflexive',cat:'other',unit:'درس ۳ · ضمیرها',icon:'🪞',title:'ضمیرهای انعکاسی',sub:'Reflexive pronouns',formula:'myself · yourself · himself · herself',summary:'وقتی فاعل و مفعول به یک شخص یا چیز اشاره کنند، از ضمیر انعکاسی استفاده می‌کنیم.',visual:['I','teach','myself'],detail:'<ul><li>I → myself</li><li>you → yourself / yourselves</li><li>he → himself</li><li>she → herself</li><li>it → itself</li><li>we → ourselves</li><li>they → themselves</li></ul><div class="g-example">I taught myself English. — خودم به خودم انگلیسی یاد دادم.</div><div class="g-example">She looked at herself in the mirror.</div><b>by + reflexive</b> یعنی «به‌تنهایی»: He did it by himself.'},
+{id:'adverbs',cat:'other',unit:'درس ۴ · قیدها',icon:'🦋',title:'قید حالت',sub:'Adverbs of manner',formula:'adjective → adverb (+ -ly)',summary:'قید حالت توضیح می‌دهد یک کار چگونه انجام می‌شود؛ معمولاً فعل را توصیف می‌کند.',visual:['careful','carefully','drive'],detail:'<ul><li>بیشتر صفت‌ها + ly: careful → carefully</li><li>پایان همخوان + y: easy → easily</li><li>پایان le: gentle → gently</li><li>بی‌قاعده: good → well، fast → fast، hard → hard</li></ul><div class="g-example">She speaks politely.</div><div class="g-example">He drives carefully.</div><b>جایگاه:</b> قید معمولاً بعد از فعل یا بعد از مفعول می‌آید: She speaks English fluently.'},
+{id:'modals',cat:'other',unit:'درس ۴ · افعال وجهی',icon:'💡',title:'افعال وجهی',sub:'can · should · must · may',formula:'modal + base verb',summary:'افعال وجهی معنی توانایی، توصیه، الزام یا احتمال می‌دهند. بعد از آن‌ها فعل ساده می‌آید.',visual:['can','should','must'],detail:'<ul><li>can: توانایی یا اجازه؛ I can swim.</li><li>should: توصیه؛ You should rest.</li><li>must: الزام قوی؛ We must protect nature.</li><li>may: احتمال یا اجازه؛ It may rain.</li></ul><div class="g-example">You should study more.</div><div class="g-example">We must be careful.</div><b>منفی:</b> cannot / can’t، shouldn’t، mustn’t، may not. <b>نکته:</b> بعد از modal از to یا s سوم‌شخص استفاده نمی‌کنیم.'},
+{id:'prepositions',cat:'other',unit:'درس ۴ · نکته تکمیلی',icon:'🧩',title:'حروف اضافه پرکاربرد',sub:'Prepositions in context',formula:'in · on · at · to · from',summary:'حرف اضافه رابطه زمان، مکان یا جهت را نشان می‌دهد؛ انتخاب آن به معنی و عبارت وابسته است.',visual:['in','on','at'],detail:'<ul><li>زمان: at 7 o’clock؛ on Monday؛ in July / in 2026</li><li>مکان: in a room؛ on the table؛ at school</li><li>جهت: go to school؛ come from Iran</li></ul><div class="g-example">We travel in summer.</div><div class="g-example">The book is on the desk.</div><b>نکته:</b> این‌ها الگوهای پرکاربردند؛ بسیاری از حروف اضافه همراه فعل‌ها و صفت‌های خاص باید به‌صورت عبارت یاد گرفته شوند.'}
+];
+let grammarFilter='all',grammarDone=new Set(JSON.parse(localStorage.getItem('pg_grammar_done')||'[]')),grammarQ=0,grammarScore=0;
+function renderGrammarAcademy(){
+ const host=document.getElementById('grammarCards');if(!host)return;
+ const arr=grammarTopics.filter(t=>grammarFilter==='all'||t.cat===grammarFilter);
+ host.innerHTML=arr.map(t=>'<article class="grammar3d" id="gcard-'+t.id+'"><div class="grammar3d-top"><span class="pill">'+t.unit+'</span><span class="grammar3d-icon">'+t.icon+'</span></div><h3>'+t.title+'</h3><p class="g-sub">'+t.sub+'</p><div class="g-visual">'+t.visual.map((v,i)=>'<span class="g-cube">'+v+'</span>'+(i<t.visual.length-1?'<span class="g-arrow">›</span>':'')).join('')+'</div><div class="grammar-formula-big">'+t.formula+'</div><p class="g-summary">'+t.summary+'</p><button class="grammar-expand" onclick="toggleGrammarCard(\''+t.id+'\')">باز کردن درس و مثال‌ها　＋</button><div class="grammar-detail" id="gdetail-'+t.id+'">'+t.detail+'<div class="actions" style="justify-content:flex-start"><button class="btn soft" onclick="markGrammarDone(\''+t.id+'\')">'+(grammarDone.has(t.id)?'✓ یاد گرفتم':'این مبحث را یاد گرفتم')+'</button></div></div></article>').join('');
+ const count=grammarDone.size,total=grammarTopics.length;
+ document.getElementById('grammarProgressText').textContent=count+' از '+total+' مبحث';
+ document.getElementById('grammarProgressBar').style.width=(count/total*100)+'%';
+}
+function filterGrammar(cat,btn){grammarFilter=cat;document.querySelectorAll('#grammarFilters button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderGrammarAcademy()}
+function toggleGrammarCard(id){const d=document.getElementById('gdetail-'+id);d.classList.toggle('open');const b=d.parentElement.querySelector('.grammar-expand');b.textContent=d.classList.contains('open')?'بستن درس　−':'باز کردن درس و مثال‌ها　＋'}
+function markGrammarDone(id){grammarDone.add(id);localStorage.setItem('pg_grammar_done',JSON.stringify([...grammarDone]));renderGrammarAcademy();const d=document.getElementById('gdetail-'+id);if(d)d.classList.add('open')}
+const grammarQuestions=[
+{q:'She ___ help us tomorrow.',o:['will','wills','is will','will to'],a:0,e:'بعد از will همیشه شکل ساده فعل می‌آید.'},
+{q:'Look at the clouds! It ___ rain.',o:['will to','is going to','are going to','going'],a:1,e:'برای پیش‌بینی بر اساس نشانه‌ها از be going to استفاده می‌کنیم.'},
+{q:'Two ___ are playing in the park.',o:['childs','childes','children','child'],a:2,e:'جمع بی‌قاعده child برابر children است.'},
+{q:'A lion is ___ than a cat.',o:['strong','stronger','strongest','more strong'],a:1,e:'برای مقایسه دو مورد از صفت تفضیلی + than استفاده می‌کنیم.'},
+{q:'This is ___ beautiful garden in town.',o:['more','the most','most than','as'],a:1,e:'ساختار صفت عالی برای صفت بلند the most + adjective است.'},
+{q:'I ___ reading at 9 last night.',o:['were','am','was','be'],a:2,e:'برای I در گذشته استمراری از was استفاده می‌کنیم.'},
+{q:'She made the cake by ___.',o:['herself','himself','myself','itself'],a:0,e:'ضمیر انعکاسی she برابر herself است.'},
+{q:'He drives ___.',o:['careful','carefully','carefulness','more careful'],a:1,e:'برای توصیف چگونگی رانندگی، قید carefully لازم است.'},
+{q:'You ___ drink more water. It is good advice.',o:['should','mustn’t','may not','cannot'],a:0,e:'برای توصیه از should استفاده می‌کنیم.'}
+];
+function renderGrammarQuiz(){
+ const q=grammarQuestions[grammarQ%grammarQuestions.length],host=document.getElementById('grammarQuiz');if(!host)return;
+ host.innerHTML='<div class="g-question">'+(grammarQ+1)+'. '+q.q+'</div><div class="g-options">'+q.o.map((o,i)=>'<button class="g-option" onclick="answerGrammar('+i+')">'+o+'</button>').join('')+'</div><div class="g-feedback" id="grammarFeedback"></div><div class="actions" style="justify-content:space-between"><span class="pill">امتیاز: '+grammarScore+'</span><button class="btn soft" onclick="nextGrammarQuestion()">سؤال بعدی ←</button></div>';
+}
+function answerGrammar(i){const q=grammarQuestions[grammarQ%grammarQuestions.length],opts=document.querySelectorAll('.g-option'),f=document.getElementById('grammarFeedback');opts.forEach((b,n)=>{b.disabled=true;if(n===q.a)b.classList.add('correct');else if(n===i)b.classList.add('wrong')});if(i===q.a){grammarScore++;f.textContent='آفرین! پاسخ درست است. '+q.e;f.style.color='#287345'}else{f.textContent='اشکالی ندارد؛ پاسخ درست: '+q.o[q.a]+'. '+q.e;f.style.color='#9a4659'}document.querySelector('.grammar-practice .pill').textContent='PINK QUIZ · سؤال '+(grammarQ+1)+' از '+grammarQuestions.length}
+function nextGrammarQuestion(){grammarQ=(grammarQ+1)%grammarQuestions.length;renderGrammarQuiz()}
+
 function renderLessons(){document.getElementById('lessonCards').innerHTML=lessons.map((l,i)=>`<article class="lesson-card"><span class="pill">LESSON ${i+1}</span><h3 class="latin">${l[0]}</h3><h3>${l[1]}</h3><p>${l[2]}</p><div class="tagrow"><span class="tag">${words.filter(w=>w[3]===i+1).length} واژه</span><span class="tag">گرامر</span><span class="tag">آزمون</span></div><button class="btn soft" style="margin-top:15px" onclick="openLesson(${i+1})">ورود به درس ←</button></article>`).join('')}
 function openLesson(n){document.getElementById('lessonFilter').value=String(n);document.getElementById('lessonDetail').classList.remove('hidden');document.getElementById('lessonDetail').innerHTML=`<h2>درس ${n}: ${lessons[n-1][1]}</h2><p class="latin">${lessons[n-1][0]}</p><p>${lessons[n-1][2]}</p><div class="actions" style="justify-content:flex-start"><button class="btn soft" onclick="showPage('vocab');document.getElementById('lessonFilter').value='${n}';renderWords()">واژگان این درس</button><button class="btn soft" onclick="showPage('grammar')">گرامر</button><button class="btn soft" onclick="showPage('quiz');document.getElementById('quizLesson').value='${n}';startQuiz()">آزمون درس</button><button class="btn soft" onclick="showPage('further')">شنیداری تکمیلی</button></div>`;document.getElementById('lessonDetail').scrollIntoView({behavior:'smooth',block:'start'})}
 
