@@ -113,6 +113,30 @@
 @keyframes worldCloud{to{left:115%}}@keyframes worldSun{50%{transform:translateY(10px) scale(1.05);box-shadow:0 0 75px 30px #fff7c477}}@keyframes treeSway{0%,100%{rotate:-2deg}50%{rotate:2deg}}@keyframes worldRing{to{transform:translateX(-50%) rotateX(68deg) rotateZ(360deg)}}@keyframes worldFloat{0%,100%{translate:0 0;rotate:-5deg}50%{translate:0 -16px;rotate:5deg}}@keyframes animalBob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-7px) rotate(3deg)}}@keyframes worldReveal{from{opacity:0;transform:translateY(35px) scale(.92)}to{opacity:1;transform:translateY(0) scale(1)}}@keyframes worldToken{0%,100%{transform:translateY(0) rotateY(-13deg) rotateX(8deg)}50%{transform:translateY(-10px) rotateY(13deg) rotateX(-3deg)}}
 @media(max-width:560px){.lesson-world{min-height:380px;border-radius:20px}.world-animals{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:22px}.world-animal{padding:10px 6px}.world-animal b{font-size:15px}.world-title{padding-top:22px}.world-tree.t2,.world-tree.t4{opacity:.65}.world-floor{width:88%}}@media(prefers-reduced-motion:reduce){.lesson-world *{animation:none!important;transition:none!important}}
 
+
+/* Real-time procedural 3D forest and fullscreen view */
+.lesson-world[data-world="1"]{min-height:410px;background:linear-gradient(180deg,#9dcbd0 0%,#6f9d78 53%,#244c37 100%)}
+.lesson-world[data-world="1"] .world-title{position:relative;z-index:5;pointer-events:none}
+.forest3d-stage{position:absolute;z-index:1;inset:72px 0 112px;overflow:hidden;touch-action:pan-y;cursor:grab}
+.forest3d-stage:active{cursor:grabbing}
+.forest3d-stage canvas{display:block;width:100%;height:100%;outline:0}
+.lesson-world[data-world="1"] .world-animals{display:flex!important;position:absolute;z-index:6;left:0;right:0;bottom:66px;max-width:none;margin:0;padding:0 12px;justify-content:center;gap:8px;flex-wrap:wrap;pointer-events:auto}
+.lesson-world[data-world="1"] .world-animal{min-width:80px;padding:7px 11px;background:#fffdf0e8;border:1px solid #fff;box-shadow:0 5px 16px #142d2944;border-radius:13px;backdrop-filter:blur(8px)}
+.lesson-world[data-world="1"] .world-animal .animal-art{display:none}
+.lesson-world[data-world="1"] .world-animal b{font-size:14px;margin:0}
+.lesson-world[data-world="1"] .world-animal small{font-size:10px}
+.lesson-world[data-world="1"] .world-controls{position:absolute;z-index:8;bottom:12px;left:0;right:0;padding:0 12px 8px}
+.lesson-world[data-world="1"] .world-hint{position:absolute;z-index:7;bottom:48px;left:0;right:0;padding:0 10px;font-size:11px;text-shadow:0 1px 6px #17352b}
+.lesson-world[data-world="1"] .world-floor,.lesson-world[data-world="1"] .world-tree,.lesson-world[data-world="1"] .world-object,.lesson-world[data-world="1"] .world-sky,.lesson-world[data-world="1"] .world-ground{display:none}
+.lesson-world[data-world="1"].is-fullscreen{position:fixed;inset:0;z-index:99999;width:100vw;height:100dvh;min-height:100dvh;margin:0;border-radius:0;overflow:hidden}
+.lesson-world[data-world="1"].is-fullscreen .forest3d-stage{inset:78px 0 135px}
+.lesson-world[data-world="1"].is-fullscreen .world-title{padding-top:25px}
+.lesson-world[data-world="1"].is-fullscreen .world-animals{bottom:78px;gap:12px}
+.lesson-world[data-world="1"].is-fullscreen .world-animal{padding:10px 16px}
+.lesson-world[data-world="1"].is-fullscreen .world-controls{bottom:17px}
+.lesson-world[data-world="1"].is-fullscreen .world-hint{bottom:55px}
+@media(max-width:560px){.lesson-world[data-world="1"]{min-height:410px}.lesson-world[data-world="1"] .forest3d-stage{inset:70px 0 125px}.lesson-world[data-world="1"] .world-animals{bottom:74px;gap:6px;padding:0 7px}.lesson-world[data-world="1"] .world-animal{min-width:0;padding:6px 9px}.lesson-world[data-world="1"] .world-animal b{font-size:12px}.lesson-world[data-world="1"] .world-hint{bottom:49px;font-size:10px}.lesson-world[data-world="1"].is-fullscreen .forest3d-stage{inset:75px 0 145px}.lesson-world[data-world="1"].is-fullscreen .world-animals{bottom:82px}.lesson-world[data-world="1"].is-fullscreen .world-controls{bottom:15px}}
+
 </style>
 <body>
 <main class="wrap">
@@ -184,6 +208,7 @@
 <div style="margin:7px 0 14px;color:#a04f78;font-weight:700">🔤 تلفظ به فارسی: <span id="modalPersianPronunciation">پِرُتِکت</span></div><div class="meaning" id="modalMeaning">محافظت کردن</div><p class="example" id="modalExample">We should protect nature.</p><p class="example" id="modalExample2" style="margin-top:8px"></p><div class="actions"><button class="btn soft" onclick="speakModalWord()">🔊 شنیدن تلفظ</button><button class="btn" onclick="saveModalWord()">ذخیره در باغ 🌷</button></div></div></div>
 </main>
 <footer class="footer"><div class="latin">THE PINKLISH GARDEN</div><p>Where English blooms.</p><p>طراحی و ساخته‌شده با عشق به یادگیری توسط <b>ترنم شاملو</b></p><p><a href="mailto:taranomshamloo2000@gmail.com">taranomshamloo2000@gmail.com</a></p><p style="font-size:11px;opacity:.65">© THE PINKLISH GARDEN</p></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
 <script>
 const words=[
 ['avicenna','/ˌævɪˈsenə/','ابن سینا',1],['leopard','/ˈlepərd/','پلنگ',1],['visitor','/ˈvɪzɪtər/','بازدیدکننده',1],['die out','/daɪ aʊt/','منقرض شدن',1],['elephant','/ˈelɪfənt/','فیل',1],['human','/ˈhjuːmən/','انسان',1],['endangered','/ɪnˈdeɪndʒərd/','در معرض انقراض',1],['gazelle','/ɡəˈzel/','غزال',1],['information','/ˌɪnfərˈmeɪʃən/','اطلاعات',1],['protect','/prəˈtekt/','محافظت کردن',1],['destroy','/dɪˈstrɔɪ/','نابود کردن',1],['wildlife','/ˈwaɪldlaɪf/','حیات وحش',1],['nature','/ˈneɪtʃər/','طبیعت',1],['zookeeper','/ˈzuːkiːpər/','نگهبان باغ‌وحش',1],['telescope','/ˈtelɪskoʊp/','تلسکوپ',2],['microscope','/ˈmaɪkrəˌskoʊp/','میکروسکوپ',2],['orbit','/ˈɔːrbɪt/','مدار',2],['planet','/ˈplænɪt/','سیاره',2],['Neptune','/ˈneptjuːn/','نپتون',2],['oxygen','/ˈɑːksɪdʒən/','اکسیژن',2],['carbon dioxide','/ˌkɑːrbən daɪˈɑːksaɪd/','دی‌اکسید کربن',2],['energy','/ˈenərdʒi/','انرژی',2],['creation','/kriˈeɪʃən/','آفرینش',2],['donate','/ˈdoʊneɪt/','اهدا کردن',2],['knowledge','/ˈnɑːlɪdʒ/','دانش',3],['value','/ˈvæljuː/','ارزش',3],['scientist','/ˈsaɪəntɪst/','دانشمند',3],['mathematics','/ˌmæθəˈmætɪks/','ریاضیات',3],['medicine','/ˈmedɪsɪn/','پزشکی',3],['experiment','/ɪkˈsperɪmənt/','آزمایش',3],['discover','/dɪˈskʌvər/','کشف کردن',3],['achievement','/əˈtʃiːvmənt/','دستاورد',3],['effort','/ˈefərt/','تلاش',3],['translate','/trænsˈleɪt/','ترجمه کردن',3],['patient','/ˈpeɪʃənt/','بیمار؛ صبور',3],['treatment','/ˈtriːtmənt/','درمان',3],['travel agent','/ˈtrævəl ˌeɪdʒənt/','کارمند آژانس مسافرتی',4],['vacation','/veɪˈkeɪʃən/','تعطیلات',4],['abroad','/əˈbrɔːd/','در خارج از کشور',4],['destination','/ˌdestɪˈneɪʃən/','مقصد',4],['culture','/ˈkʌltʃər/','فرهنگ',4],['embassy','/ˈembəsi/','سفارت',4],['historical','/hɪˈstɔːrɪkəl/','تاریخی',4],['comfortable','/ˈkʌmftəbəl/','راحت',4],['traditional','/trəˈdɪʃənəl/','سنتی',4],['safely','/ˈseɪfli/','به سلامت',4],['pilgrim','/ˈpɪlɡrɪm/','زائر',4]
@@ -491,7 +516,98 @@ const lessonWorldItems=[[{en:'Cheetah',fa:'یوزپلنگ',emoji:'🐆',key:'che
 const lessonWorldTitles=[['THE GREEN KINGDOM','The Secret Forest','به جنگل حفاظت از طبیعت خوش آمدی'],['THE HUMAN WONDER','Inside the Living World','به دنیای شگفت‌انگیز بدن و آفرینش خوش آمدی'],['THE WORLD OF DISCOVERY','The Inventors’ Lab','به آزمایشگاه دانش و کشف خوش آمدی'],['A JOURNEY AROUND EARTH','Explore the World','آماده‌ی سفر به فرهنگ‌ها و سرزمین‌ها هستی؟']];
 let activeWorldLesson=1,activeWorldStep=0;
 function openWorldItem(key){openWordBloom(key)}
-function renderLessonWorld(n){activeWorldLesson=n;activeWorldStep=0;const title=lessonWorldTitles[n-1],items=lessonWorldItems[n-1],forest=n===1;const scenery=forest?'<div class="world-sky"><div class="world-sun"></div><div class="world-cloud"></div><div class="world-cloud two"></div><div class="world-mountain one"></div><div class="world-mountain two"></div></div><div class="world-ground"></div><div class="world-tree t1" onclick="worldExplore()">🌲</div><div class="world-tree t2" onclick="worldExplore()">🌳</div><div class="world-tree t3" onclick="worldExplore()">🌲</div><div class="world-tree t4" onclick="worldExplore()">🌳</div><div class="world-floor"></div><div class="world-object" onclick="worldExplore()">🦋</div>':'<div class="world-sky"><div class="world-sun"></div><div class="world-cloud"></div><div class="world-cloud two"></div></div><div class="world-ground"></div><div class="world-floor"></div><div class="world-constellation">'+items.slice(0,4).map(x=>'<button class="world-token" onclick="openWorldItem(\''+x.key+'\')"><span>'+x.emoji+'</span><b>'+x.en+'</b></button>').join('')+'</div>';return '<div class="lesson-world" id="lessonWorld" data-world="'+n+'">'+scenery+'<div class="world-title"><small>'+title[0]+'</small><h3>'+title[1]+'</h3><p>'+title[2]+'</p></div><div class="world-animals" id="worldAnimals">'+items.map(x=>'<button class="world-animal" onclick="openWorldItem(\''+x.key+'\')"><span class="animal-art">'+x.emoji+'</span><b>'+x.en+'</b><small>'+x.fa+'</small></button>').join('')+'</div><div class="world-controls"><button class="primary" id="worldExploreBtn" onclick="worldExplore()">'+(forest?'🌿 ورود به جنگل':'✨ کشف این دنیا')+'</button><button id="worldBackBtn" onclick="worldOverview()" style="display:none">↶ نمای کلی</button><button onclick="worldNext()">⟶ بخش بعدی</button></div><div class="world-hint" id="worldHint">'+(forest?'روی «ورود به جنگل» بزن و حیوانات را کشف کن؛ برای یادگیری هر حیوان، کارت آن را لمس کن.':'روی هر نماد شناور بزن تا واژه‌اش را یاد بگیری؛ با دکمه‌ها در دنیا حرکت کن.')+'</div></div>'}
+
+function renderLessonWorld(n){
+ activeWorldLesson=n;activeWorldStep=0;
+ const title=lessonWorldTitles[n-1],items=lessonWorldItems[n-1],forest=n===1;
+ if(forest){
+  setTimeout(()=>initForest3D(),120);
+  return '<div class="lesson-world" id="lessonWorld" data-world="1"><div class="world-title"><small>'+title[0]+'</small><h3>'+title[1]+'</h3><p>'+title[2]+'</p></div><div class="forest3d-stage" id="forest3dStage" aria-label="Interactive 3D forest scene"></div><div class="world-animals" id="worldAnimals">'+items.map(x=>'<button class="world-animal" onclick="openWorldItem(\''+x.key+'\')"><b>'+x.en+'</b><small>'+x.fa+'</small></button>').join('')+'</div><div class="world-controls"><button class="primary" id="forestPauseBtn" onclick="toggleForestMotion()">Ⅱ توقف حرکت</button><button onclick="toggleForestFullscreen()">⛶ تمام‌صفحه</button></div><div class="world-hint" id="worldHint">حیوانات را در جنگل تماشا کن؛ روی هر حیوان یا نامش بزن تا واژه را یاد بگیری. برای چرخاندن منظره، انگشتت را روی تصویر بکش.</div></div>';
+ }
+ const scenery='<div class="world-sky"><div class="world-sun"></div><div class="world-cloud"></div><div class="world-cloud two"></div></div><div class="world-ground"></div><div class="world-floor"></div><div class="world-constellation">'+items.slice(0,4).map(x=>'<button class="world-token" onclick="openWorldItem(\''+x.key+'\')"><span>'+x.emoji+'</span><b>'+x.en+'</b></button>').join('')+'</div>';
+ return '<div class="lesson-world" id="lessonWorld" data-world="'+n+'">'+scenery+'<div class="world-title"><small>'+title[0]+'</small><h3>'+title[1]+'</h3><p>'+title[2]+'</p></div><div class="world-animals" id="worldAnimals">'+items.map(x=>'<button class="world-animal" onclick="openWorldItem(\''+x.key+'\')"><span class="animal-art">'+x.emoji+'</span><b>'+x.en+'</b><small>'+x.fa+'</small></button>').join('')+'</div><div class="world-controls"><button class="primary" onclick="worldExplore()">✨ کشف این دنیا</button><button onclick="worldNext()">⟶ بخش بعدی</button></div><div class="world-hint" id="worldHint">روی هر نماد شناور بزن تا واژه‌اش را یاد بگیری.</div></div>';
+}
+
+
+/* A small real-time 3D forest made from animated Three.js meshes (not stickers). */
+let forest3DState=null;
+function makeForestAnimal(T,kind,x,z,scale=1){
+ const root=new T.Group();root.position.set(x,0,z);root.scale.setScalar(scale);
+ const fur=kind==='elephant'?0x777d78:kind==='deer'?0xb77d42:kind==='bear'?0x76503b:0xc68a42;
+ const coat=new T.MeshStandardMaterial({color:fur,roughness:.9,flatShading:true});
+ const dark=new T.MeshStandardMaterial({color:kind==='elephant'?0x626b68:0x49382e,roughness:.95,flatShading:true});
+ const cream=new T.MeshStandardMaterial({color:kind==='deer'?0xe7d2a9:0xe9d8bb,roughness:1,flatShading:true});
+ const black=new T.MeshStandardMaterial({color:0x171b19,roughness:.35});
+ const body=new T.Mesh(new T.SphereGeometry(1,12,9),coat);body.scale.set(kind==='elephant'?.9:.78,.48,.38);body.position.set(0,1.05,0);body.castShadow=true;root.add(body);
+ const neck=new T.Group();neck.position.set(.48,1.12,0);root.add(neck);
+ const neckMesh=new T.Mesh(new T.SphereGeometry(1,10,8),coat);neckMesh.scale.set(kind==='elephant'?.31:.25,kind==='deer'?.48:.34,.25);neckMesh.position.set(.12,.13,0);neckMesh.castShadow=true;neck.add(neckMesh);
+ const headPivot=new T.Group();headPivot.position.set(.3,.35,0);neck.add(headPivot);
+ const head=new T.Mesh(new T.SphereGeometry(1,12,9),coat);head.scale.set(kind==='elephant'?.34:.29,.27,.27);head.castShadow=true;headPivot.add(head);
+ const muzzle=new T.Mesh(new T.SphereGeometry(1,10,8),kind==='elephant'?coat:cream);muzzle.scale.set(kind==='elephant'?.23:.22,.15,.19);muzzle.position.set(.22,-.08,0);headPivot.add(muzzle);
+ for(const side of [-1,1]){
+  const ear=new T.Mesh(new T.SphereGeometry(1,8,6),kind==='elephant'?coat:dark);ear.scale.set(.12,.2,.09);ear.position.set(-.12,.17,side*.22);headPivot.add(ear);
+  const eye=new T.Mesh(new T.SphereGeometry(.045,8,6),black);eye.position.set(.13,.045,side*.235);headPivot.add(eye);
+ }
+ if(kind==='elephant'){
+  const trunkCurve=new T.CatmullRomCurve3([new T.Vector3(.39,-.1,0),new T.Vector3(.52,-.28,0),new T.Vector3(.49,-.48,0),new T.Vector3(.34,-.54,0)]);
+  const trunk=new T.Mesh(new T.TubeGeometry(trunkCurve,12,.075,7,false),coat);trunk.name='trunk';headPivot.add(trunk);
+  const tusk=new T.Mesh(new T.ConeGeometry(.045,.22,7),cream);tusk.rotation.z=-1.2;tusk.position.set(.38,-.12,.17);headPivot.add(tusk);
+ }else if(kind==='deer'){
+  for(const side of [-1,1]){
+   const horn=new T.Group();horn.position.set(-.04,.22,side*.12);headPivot.add(horn);
+   const stem=new T.Mesh(new T.CylinderGeometry(.018,.035,.42,6),cream);stem.position.y=.2;stem.rotation.z=-.2;horn.add(stem);
+   for(let b=0;b<2;b++){const branch=new T.Mesh(new T.CylinderGeometry(.012,.02,.22,5),cream);branch.position.set(.03,.28+b*.12,side*.01);branch.rotation.z=-.7;horn.add(branch)}
+  }
+ }
+ const legs=[];
+ for(const lx of [-.48,.43])for(const lz of [-.23,.23]){
+  const leg=new T.Group();leg.position.set(lx,.84,lz);root.add(leg);
+  const upper=new T.Mesh(new T.CylinderGeometry(.075,.055,.43,7),coat);upper.position.y=-.2;upper.castShadow=true;leg.add(upper);
+  const lower=new T.Mesh(new T.CylinderGeometry(.05,.045,.38,7),kind==='elephant'?coat:dark);lower.position.set(.015,-.55,0);leg.add(lower);
+  const foot=new T.Mesh(new T.SphereGeometry(.095,8,6),dark);foot.scale.set(1,.45,1);foot.position.set(.05,-.75,0);leg.add(foot);legs.push(leg);
+ }
+ const tailCurve=new T.CatmullRomCurve3([new T.Vector3(-.68,1.15,0),new T.Vector3(-.95,1.04,0),new T.Vector3(-1.12,.82,.02)]);
+ const tail=new T.Mesh(new T.TubeGeometry(tailCurve,10,.035,6,false),coat);root.add(tail);
+ if(kind==='cheetah'||kind==='leopard'){
+  const spotMat=new T.MeshStandardMaterial({color:kind==='cheetah'?0x34251c:0x4b3427,roughness:1});
+  for(let i=0;i<16;i++){const a=(i%4)*.25-.35,b=Math.floor(i/4)*.14-.2;const spot=new T.Mesh(new T.SphereGeometry(.045,6,5),spotMat);spot.scale.set(1,.6,.35);spot.position.set(a,1.35+b,.34);root.add(spot)}
+ }
+ root.userData={kind,legs,headPivot,neck,tail,phase:Math.random()*6,baseX:x,baseZ:z,walkSpeed:kind==='cheetah'?.55:kind==='elephant'?.2:.28};
+ return root;
+}
+function initForest3D(){
+ const host=document.getElementById('forest3dStage');if(!host)return;
+ if(forest3DState&&forest3DState.renderer){cancelAnimationFrame(forest3DState.raf);try{forest3DState.renderer.dispose();forest3DState.renderer.domElement.remove()}catch(e){}}
+ if(!window.THREE){host.innerHTML='<p style="padding:40px;color:white;text-align:center">برای نمایش جنگل سه‌بعدی، اتصال اینترنت را بررسی کن و صفحه را دوباره باز کن.</p>';return}
+ const T=window.THREE,scene=new T.Scene();scene.background=new T.Color(0x9bcbd0);scene.fog=new T.Fog(0x9bcbd0,13,29);
+ const camera=new T.PerspectiveCamera(43,1,.1,80);camera.position.set(0,5.2,11.8);camera.lookAt(0,1,0);
+ const renderer=new T.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5));renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;host.appendChild(renderer.domElement);
+ scene.add(new T.HemisphereLight(0xe4f4e8,0x40523b,2.1));
+ const sun=new T.DirectionalLight(0xffedc7,2.5);sun.position.set(-5,9,5);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);scene.add(sun);
+ const ground=new T.Mesh(new T.PlaneGeometry(45,45),new T.MeshStandardMaterial({color:0x416c43,roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.y=-.04;ground.receiveShadow=true;scene.add(ground);
+ const path=new T.Mesh(new T.PlaneGeometry(4,24),new T.MeshStandardMaterial({color:0xb6a17a,roughness:1}));path.rotation.x=-Math.PI/2;path.position.set(0,.005,-1);path.receiveShadow=true;scene.add(path);
+ function tree(x,z,h=1){const g=new T.Group();g.position.set(x,0,z);const trunk=new T.Mesh(new T.CylinderGeometry(.13*h,.2*h,1.8*h,7),new T.MeshStandardMaterial({color:0x60452f,roughness:1}));trunk.position.y=.9*h;trunk.castShadow=true;g.add(trunk);for(let i=0;i<3;i++){const crown=new T.Mesh(new T.ConeGeometry((1.05-i*.18)*h,1.8*h,7),new T.MeshStandardMaterial({color:[0x28583b,0x356b43,0x477b49][i],roughness:1,flatShading:true}));crown.position.y=(1.9+i*.58)*h;crown.castShadow=true;g.add(crown)}scene.add(g)}
+ [[-6,-4,1.3],[-5,1,1.1],[-4,-7,1.5],[5,-5,1.4],[6,0,1.25],[4,-8,1.5],[-7,6,1.2],[7,5,1.3],[-2,-9,1.4],[2,-10,1.4]].forEach(a=>tree(...a));
+ const grassMat=new T.MeshStandardMaterial({color:0x6d9853,roughness:1});
+ for(let i=0;i<90;i++){const x=(Math.random()-.5)*18,z=(Math.random()-.5)*18;if(Math.abs(x)<2.5&&z>-5&&z<5)continue;const tuft=new T.Mesh(new T.ConeGeometry(.055,.3,4),grassMat);tuft.position.set(x,.13,z);tuft.rotation.z=(Math.random()-.5)*.5;scene.add(tuft)}
+ const animals=[makeForestAnimal(T,'cheetah',-3.0,-.8,.95),makeForestAnimal(T,'deer',-.9,-2.2,.9),makeForestAnimal(T,'elephant',1.6,-.9,1.0),makeForestAnimal(T,'leopard',3.1,-3.1,.9)];
+ animals.forEach((a,i)=>{a.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true}});a.userData.phase=i*1.8;scene.add(a)});
+ const raycaster=new T.Raycaster(),pointer=new T.Vector2();let downX=0,downY=0,dragged=false,paused=false,angle=0;
+ renderer.domElement.addEventListener('pointerdown',e=>{downX=e.clientX;downY=e.clientY;dragged=false});
+ renderer.domElement.addEventListener('pointermove',e=>{if(e.buttons){const dx=e.clientX-downX;if(Math.abs(dx)>4)dragged=true;angle+=dx*.002;camera.position.x=Math.sin(angle)*1.1;camera.lookAt(0,1,0);downX=e.clientX}});
+ renderer.domElement.addEventListener('pointerup',e=>{if(dragged)return;const rect=renderer.domElement.getBoundingClientRect();pointer.x=((e.clientX-rect.left)/rect.width)*2-1;pointer.y=-((e.clientY-rect.top)/rect.height)*2+1;raycaster.setFromCamera(pointer,camera);const hits=raycaster.intersectObjects(animals,true);if(hits.length){let obj=hits[0].object;while(obj.parent&&!obj.userData.kind)obj=obj.parent;const kind=obj.userData.kind;openWorldItem(kind==='deer'?'gazelle':kind)}});
+ const clock=new T.Clock();let raf=0;
+ function resize(){const w=Math.max(1,host.clientWidth),h=Math.max(1,host.clientHeight);camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h,false)}
+ resize();const ro=new ResizeObserver(resize);ro.observe(host);
+ function animate(){raf=requestAnimationFrame(animate);const t=clock.getElapsedTime();if(!paused){animals.forEach((a,i)=>{const d=a.userData,phase=t*d.walkSpeed+d.phase;d.legs.forEach((leg,j)=>{leg.rotation.x=Math.sin(phase+(j%2)*Math.PI)*.16});if(d.kind==='deer'){d.headPivot.rotation.x=.18+Math.max(0,Math.sin(t*.8+i))*.42;d.neck.rotation.z=Math.sin(t*.45+i)*.035}else if(d.kind==='elephant'){d.headPivot.rotation.x=Math.sin(t*.9+i)*.1;const trunk=d.headPivot.getObjectByName('trunk');if(trunk)trunk.rotation.z=Math.sin(t*1.1)*.18}else{d.headPivot.rotation.x=Math.sin(t*.7+i)*.055;d.tail.rotation.z=Math.sin(t*1.7+i)*.15}a.position.x=d.baseX+Math.sin(t*.22+i)*.11})}renderer.render(scene,camera)}
+ animate();
+ forest3DState={renderer,scene,camera,animals,raf:0,get raf(){return raf},setPaused(v){paused=v},isPaused(){return paused},resize,ro};
+}
+function toggleForestMotion(){if(!forest3DState)return;const paused=!forest3DState.isPaused();forest3DState.setPaused(paused);const b=document.getElementById('forestPauseBtn');if(b)b.textContent=paused?'▶ ادامه حرکت':'Ⅱ توقف حرکت'}
+async function toggleForestFullscreen(){const el=document.getElementById('lessonWorld');if(!el)return;const active=el.classList.toggle('is-fullscreen');if(active){document.body.style.overflow='hidden';try{if(el.requestFullscreen)await el.requestFullscreen()}catch(e){}}else{document.body.style.overflow='';try{if(document.fullscreenElement)await document.exitFullscreen()}catch(e){}}if(forest3DState)forest3DState.resize()}
+document.addEventListener('fullscreenchange',()=>{const el=document.getElementById('lessonWorld');if(el&&!document.fullscreenElement&&!el.classList.contains('is-fullscreen'))document.body.style.overflow=''});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){const el=document.getElementById('lessonWorld');if(el)el.classList.remove('is-fullscreen');document.body.style.overflow='';if(forest3DState)forest3DState.resize()}});
+
 function worldExplore(){const el=document.getElementById('lessonWorld');if(!el)return;el.classList.add('explore');activeWorldStep=1;document.getElementById('worldExploreBtn').textContent='🐾 دیدن جانوران';document.getElementById('worldBackBtn').style.display='inline-block';document.getElementById('worldHint').textContent='حالا روی هر حیوان بزن؛ کارت معنی و تلفظ انگلیسی‌اش باز می‌شود.'}
 function worldOverview(){const el=document.getElementById('lessonWorld');if(!el)return;el.classList.remove('explore');activeWorldStep=0;document.getElementById('worldExploreBtn').textContent=activeWorldLesson===1?'🌿 ورود به جنگل':'✨ کشف این دنیا';document.getElementById('worldBackBtn').style.display='none';document.getElementById('worldHint').textContent='نمای کلی دنیا؛ برای کشف جزئیات روی دکمه ورود بزن.'}
 function worldNext(){if(activeWorldStep===0)worldExplore();else worldOverview()}
