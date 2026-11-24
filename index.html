@@ -263,19 +263,7 @@
 
 #forest3dStage.motion-paused .local-art-stage svg{animation-play-state:paused!important}
 
-/* One continuous, locally-rendered illustrated environment per lesson */
-.unified-world{position:relative;overflow:hidden;border-radius:24px;background:#263b39;box-shadow:inset 0 0 0 1px #ffffff40,0 22px 48px #23172524}
-.unified-world-heading{position:absolute;z-index:2;top:15px;left:20px;display:flex;flex-direction:column;gap:4px;color:#fff;text-shadow:0 2px 9px #17232b99;direction:ltr}
-.unified-world-heading span{font-size:9px;letter-spacing:.2em;opacity:.8}
-.unified-world-heading b{font:600 19px Georgia,serif;letter-spacing:.06em}
-.unified-world-heading small{font:11px Tahoma,sans-serif;direction:rtl;text-align:left;color:#fff9}
-.unified-world-canvas{display:block;width:100%;height:auto;min-height:310px;max-height:570px}
-.unified-object{cursor:pointer;outline:none;transform-box:fill-box;transform-origin:center bottom;transition:filter .25s,opacity .25s}
-.unified-object:hover,.unified-object.is-selected{filter:drop-shadow(0 0 13px #fff9);transform:translateY(-8px)}
-.unified-object:focus-visible{filter:drop-shadow(0 0 15px #fff)}
-.unified-world-note{position:absolute;bottom:10px;right:15px;color:#fff;background:#17232bbd;border:1px solid #ffffff40;border-radius:20px;padding:7px 12px;font-size:11px;backdrop-filter:blur(8px)}
-@media(max-width:600px){.unified-world{border-radius:17px}.unified-world-canvas{min-height:240px}.unified-world-heading{top:9px;left:11px}.unified-world-heading b{font-size:14px}.unified-world-heading small{font-size:9px}.unified-world-note{font-size:9px;bottom:6px;right:7px;padding:5px 8px}}
-</style>
+.unified-world{position:relative;overflow:hidden;border-radius:18px;background:#263b39;box-shadow:inset 0 0 0 1px #ffffff40,0 12px 28px #23172520}.unified-world-heading{position:absolute;z-index:2;top:9px;left:14px;display:flex;flex-direction:column;gap:3px;color:#fff;text-shadow:0 2px 8px #17232b99;direction:ltr}.unified-world-heading span{font-size:8px;letter-spacing:.18em;opacity:.8}.unified-world-heading b{font:600 15px Georgia,serif;letter-spacing:.04em}.unified-world-canvas{display:block;width:100%;height:auto;min-height:0;max-height:none;aspect-ratio:1000/360}.unified-object{cursor:pointer;outline:none;transform-box:fill-box;transform-origin:center bottom;transition:filter .22s,transform .22s}.unified-object:hover,.unified-object.is-selected{filter:drop-shadow(0 0 10px #fff9);transform:translateY(-5px)}.unified-object:focus-visible{filter:drop-shadow(0 0 12px #fff)}.unified-world-note{position:absolute;bottom:7px;right:10px;color:#fff;background:#17232bbd;border:1px solid #ffffff40;border-radius:16px;padding:5px 9px;font-size:9px;backdrop-filter:blur(8px)}@media(max-width:600px){.unified-world{border-radius:13px}.unified-world-heading{top:6px;left:9px}.unified-world-heading b{font-size:12px}.unified-world-note{font-size:8px;bottom:5px;right:6px;padding:4px 7px}}</style>
 <body>
 <main class="wrap">
 <section id="home" class="page">
@@ -714,24 +702,40 @@ const lesson3DAssets={
   {key:'lion',name:'Lion',fa:'شیر'},
   {key:'elephant',name:'African Elephant',fa:'فیل آفریقایی'},
   {key:'giraffe',name:'Giraffe',fa:'زرافه'},
-  {key:'tiger',name:'Bengal Tiger',fa:'ببر بنگال'}
+  {key:'tiger',name:'Bengal Tiger',fa:'ببر بنگال'},
+  {key:'elephant',name:'African Elephant',fa:'فیل آفریقایی'},
+  {key:'giraffe',name:'Giraffe',fa:'زرافه'},
+  {key:'lion',name:'Lion',fa:'شیر'}
  ],
  2:[
-  {key:'human',name:'Human Anatomy Torso',fa:'تنه انسان با اندام‌های داخلی'},
+  {key:'human',name:'Human Anatomy',fa:'بدن انسان'},
   {key:'heart',name:'Human Heart',fa:'قلب انسان'},
   {key:'brain',name:'Human Brain',fa:'مغز انسان'},
-  {key:'planet',name:'Earth & Moon',fa:'زمین و ماه در منظومه شمسی'}
+  {key:'planet',name:'Earth & Moon',fa:'زمین و ماه'},
+  {key:'human',name:'Human Body',fa:'اندام‌های بدن'},
+  {key:'heart',name:'Blood Circulation',fa:'گردش خون'},
+  {key:'brain',name:'Nervous System',fa:'دستگاه عصبی'},
+  {key:'planet',name:'Solar System',fa:'منظومه شمسی'}
  ],
  3:[
-  {key:'laboratory',name:'Laboratory Bench',fa:'میز و فضای آزمایشگاه'},
-  {key:'microscope',name:'Compound Microscope',fa:'میکروسکوپ'},
-  {key:'experiment',name:'Erlenmeyer Flask',fa:'ارلن آزمایشگاهی'},
-  {key:'telescope',name:'Telescope',fa:'تلسکوپ'}
+  {key:'laboratory',name:'Laboratory',fa:'آزمایشگاه'},
+  {key:'microscope',name:'Microscope',fa:'میکروسکوپ'},
+  {key:'experiment',name:'Experiment Flask',fa:'ارلن آزمایش'},
+  {key:'telescope',name:'Telescope',fa:'تلسکوپ'},
+  {key:'experiment',name:'Glassware',fa:'ظروف شیشه‌ای'},
+  {key:'microscope',name:'Lens System',fa:'عدسی‌ها'},
+  {key:'laboratory',name:'Work Bench',fa:'میز کار'},
+  {key:'telescope',name:'Optical Instrument',fa:'ابزار نوری'}
  ],
  4:[
   {key:'planet',name:'Earth & Moon',fa:'زمین و ماه'},
   {key:'historical',name:'Roman Arch',fa:'طاق تاریخی رومی'},
-  {key:'culture',name:'Classical Museum',fa:'موزه با معماری کلاسیک'}
+  {key:'culture',name:'Classical Museum',fa:'موزه کلاسیک'},
+  {key:'historical',name:'Ancient Architecture',fa:'معماری باستان'},
+  {key:'culture',name:'Museum Hall',fa:'تالار موزه'},
+  {key:'historical',name:'Stone Monument',fa:'بنای سنگی'},
+  {key:'culture',name:'Ancient Artifacts',fa:'اشیای تاریخی'},
+  {key:'planet',name:'Ancient World Map',fa:'نقشه جهان'}
  ]
 };
 function localObjectArt(key){
@@ -766,21 +770,16 @@ function initOnlineModelGallery(n){
  paintOnlineModels(host,assets);
 }
 function paintOnlineModels(host,assets){
- const scene=document.getElementById('lessonWorld');if(!scene)return;
- const n=Number(scene.dataset.world)||1;
+ const scene=document.getElementById('lessonWorld');if(!scene)return;const n=Number(scene.dataset.world)||1;
  const titles=['','THE WILDLIFE RESERVE','THE COSMIC & HUMAN WORLD','THE RESEARCH LABORATORY','THE ANCIENT WORLD'];
  const count=assets.length,slot=1000/count;
- const art=assets.map((a,i)=>{
-  const x=i*slot+slot*.07,w=slot*.86,h=270,y=112;
-  const raw=localObjectArt(a.key),inner=raw.slice(raw.indexOf('>')+1,raw.lastIndexOf('</svg>'));
-  return '<g class="unified-object" data-key="'+a.key+'" tabindex="0" role="button" aria-label="'+a.name+'" onclick="focusWorldObject(\''+a.key+'\')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();focusWorldObject(\''+a.key+'\')}"><ellipse cx="'+(x+w/2)+'" cy="399" rx="'+(w*.34)+'" ry="15" fill="#18252b" opacity=".23"/><svg x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" viewBox="0 0 360 320" preserveAspectRatio="xMidYMid meet">'+inner+'</svg><rect x="'+(x+8)+'" y="390" width="'+(w-16)+'" height="44" rx="13" fill="#17232bd9" stroke="#ffffff55"/><text x="'+(x+w/2)+'" y="408" text-anchor="middle" fill="#fff" font-size="15" font-family="Georgia,serif" font-weight="700">'+a.name.replace(/&/g,'&amp;')+'</text><text x="'+(x+w/2)+'" y="425" text-anchor="middle" fill="#f5dce5" font-size="11" font-family="Tahoma,sans-serif">'+a.fa+'</text></g>';
- }).join('');
- let backdrop='';
- if(n===1)backdrop='<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#b9d7d0"/><stop offset=".65" stop-color="#e4e5cb"/><stop offset="1" stop-color="#7c9a70"/></linearGradient><linearGradient id="ground" x2="0" y2="1"><stop stop-color="#91a875"/><stop offset="1" stop-color="#405d43"/></linearGradient></defs><rect width="1000" height="520" fill="url(#sky)"/><circle cx="810" cy="88" r="48" fill="#fff2c9" opacity=".65"/><path d="M0 250Q150 180 300 245T620 230T1000 220V520H0Z" fill="#79967a"/><path d="M0 315Q180 260 360 305T700 292T1000 285V520H0Z" fill="url(#ground)"/>'+Array.from({length:18},(_,i)=>{let x=i*62-20,h=90+(i*37%75);return '<g opacity=".75"><path d="M'+x+' 290v-'+h+'" stroke="#604c37" stroke-width="13"/><path d="M'+(x-42)+' '+(290-h+35)+'q42 -95 84 0q-42 40 -84 0" fill="#426d4e"/><path d="M'+(x-32)+' '+(260-h)+'q32 -78 64 0q-32 35 -64 0" fill="#63875a"/></g>'}).join('');
- if(n===2)backdrop='<defs><linearGradient id="space" x2="0" y2="1"><stop stop-color="#10172f"/><stop offset=".7" stop-color="#34365e"/><stop offset="1" stop-color="#77738d"/></linearGradient><radialGradient id="nebula"><stop stop-color="#b18fc8" stop-opacity=".55"/><stop offset="1" stop-color="#8b83c5" stop-opacity="0"/></radialGradient></defs><rect width="1000" height="520" fill="url(#space)"/><ellipse cx="510" cy="150" rx="420" ry="180" fill="url(#nebula)"/>'+Array.from({length:100},(_,i)=>'<circle cx="'+((i*137)%1000)+'" cy="'+((i*71)%310)+'" r="'+(i%4===0?2:1)+'" fill="#fff" opacity="'+(.3+(i%6)*.1)+'"/>').join('')+'<path d="M0 355Q240 300 500 355T1000 340V520H0Z" fill="#252d4b"/><path d="M0 410Q250 365 500 405T1000 390V520H0Z" fill="#171f36"/>';
- if(n===3)backdrop='<defs><linearGradient id="labwall" x2="0" y2="1"><stop stop-color="#d9e7e3"/><stop offset="1" stop-color="#9eb9b5"/></linearGradient><linearGradient id="labfloor" x2="0" y2="1"><stop stop-color="#a7b9b4"/><stop offset="1" stop-color="#5e7776"/></linearGradient></defs><rect width="1000" height="520" fill="url(#labwall)"/><path d="M0 300H1000V520H0Z" fill="url(#labfloor)"/>'+Array.from({length:5},(_,i)=>'<g><rect x="'+(40+i*190)+'" y="48" width="150" height="155" rx="7" fill="#edf5f2" stroke="#78918d" stroke-width="7"/><path d="M'+(55+i*190)+' 178h120" stroke="#b2c9c1" stroke-width="5"/><path d="M'+(70+i*190)+' 65v95" stroke="#fff" stroke-width="4" opacity=".7"/></g>').join('')+'<path d="M0 310H1000" stroke="#526f6b" stroke-width="10"/>';
- if(n===4)backdrop='<defs><linearGradient id="ancient" x2="0" y2="1"><stop stop-color="#e6d4b5"/><stop offset="1" stop-color="#b69c77"/></linearGradient></defs><rect width="1000" height="520" fill="url(#ancient)"/><path d="M0 300L1000 300V520H0Z" fill="#b29a75"/><path d="M0 340H1000M0 420H1000" stroke="#e4d2ae" stroke-width="3" opacity=".55"/>'+Array.from({length:12},(_,i)=>'<path d="M'+(i*92)+' 70v210" stroke="#9e8765" stroke-width="2" opacity=".25"/>').join('')+'<circle cx="850" cy="92" r="54" fill="#fff0c9" opacity=".55"/>';
- host.innerHTML='<div class="unified-world world-scene-theme-'+n+'"><div class="unified-world-heading"><span>THE PINKLISH GARDEN · IMMERSIVE STUDY</span><b>'+titles[n]+'</b><small>یک محیط پیوسته · همه‌ی عناصر در یک صحنه‌ی مشترک</small></div><svg class="unified-world-canvas" viewBox="0 0 1000 520" role="img" aria-label="'+titles[n]+'">'+backdrop+art+'</svg><div class="unified-world-note">برای انتخاب هر عنصر، روی خود آن در محیط بزن.</div></div>';
+ const art=assets.map((a,i)=>{const w=Math.min(122,slot*.92),x=i*slot+(slot-w)/2,y=82,h=178;const raw=localObjectArt(a.key),inner=raw.slice(raw.indexOf('>')+1,raw.lastIndexOf('</svg>'));return '<g class="unified-object" data-key="'+a.key+'" tabindex="0" role="button" aria-label="'+a.name+'" onclick="focusWorldObject(\''+a.key+'\')"><ellipse cx="'+(x+w/2)+'" cy="270" rx="'+(w*.32)+'" ry="9" fill="#17232b" opacity=".25"/><svg x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" viewBox="0 0 360 320" preserveAspectRatio="xMidYMid meet">'+inner+'</svg><rect x="'+(x+2)+'" y="277" width="'+(w-4)+'" height="34" rx="10" fill="#17232bdc" stroke="#ffffff66"/><text x="'+(x+w/2)+'" y="291" text-anchor="middle" fill="#fff" font-size="11" font-family="Georgia,serif" font-weight="700">'+a.name.replace(/&/g,'&amp;')+'</text><text x="'+(x+w/2)+'" y="303" text-anchor="middle" fill="#f5dce5" font-size="9" font-family="Tahoma,sans-serif">'+a.fa+'</text></g>';}).join('');
+ let bg='';
+ if(n===1)bg='<defs><linearGradient id="s1sky" x2="0" y2="1"><stop stop-color="#b9d7d0"/><stop offset="1" stop-color="#dce4c8"/></linearGradient></defs><rect width="1000" height="360" fill="url(#s1sky)"/><circle cx="850" cy="65" r="34" fill="#fff0c1" opacity=".8"/><path d="M0 205Q180 155 350 203T700 190T1000 200V360H0Z" fill="#88a47d"/><path d="M0 260Q230 220 450 255T1000 240V360H0Z" fill="#577c55"/>'+Array.from({length:25},(_,i)=>{let x=i*43-12,h=45+(i*29%65);return '<g opacity=".8"><path d="M'+x+' 245v-'+h+'" stroke="#72543b" stroke-width="7"/><circle cx="'+x+'" cy="'+(245-h)+'" r="'+(17+i%3*4)+'" fill="'+(i%2?'#527c58':'#6c9163')+'"/></g>';}).join('')+'<path d="M0 320q100-18 200 0t200 0t200 0t200 0t200 0v40H0Z" fill="#456c49"/>';
+ if(n===2)bg='<defs><linearGradient id="s2sky" x2="0" y2="1"><stop stop-color="#111831"/><stop offset="1" stop-color="#49446f"/></linearGradient><radialGradient id="s2neb"><stop stop-color="#b18fc8" stop-opacity=".65"/><stop offset="1" stop-color="#8b83c5" stop-opacity="0"/></radialGradient></defs><rect width="1000" height="360" fill="url(#s2sky)"/><ellipse cx="500" cy="105" rx="430" ry="145" fill="url(#s2neb)"/>'+Array.from({length:120},(_,i)=>'<circle cx="'+((i*137)%1000)+'" cy="'+((i*71)%245)+'" r="'+(i%5===0?2:1)+'" fill="#fff" opacity=".55"/>').join('')+'<path d="M0 285Q230 250 500 286T1000 270V360H0Z" fill="#252c4a"/>';
+ if(n===3)bg='<defs><linearGradient id="s3wall" x2="0" y2="1"><stop stop-color="#d9e7e3"/><stop offset="1" stop-color="#a8c0bb"/></linearGradient></defs><rect width="1000" height="360" fill="url(#s3wall)"/>'+Array.from({length:7},(_,i)=>'<g><rect x="'+(18+i*142)+'" y="45" width="116" height="120" rx="5" fill="#eff7f4" stroke="#78918d" stroke-width="5"/><path d="M'+(32+i*142)+' 147h88" stroke="#b5ccc4" stroke-width="4"/></g>').join('')+'<path d="M0 240H1000V360H0Z" fill="#718e87"/><path d="M0 260H1000" stroke="#dce7dd" stroke-width="7"/>';
+ if(n===4)bg='<defs><linearGradient id="s4sky" x2="0" y2="1"><stop stop-color="#ead9b9"/><stop offset="1" stop-color="#c6ae87"/></linearGradient></defs><rect width="1000" height="360" fill="url(#s4sky)"/><circle cx="850" cy="65" r="36" fill="#fff0c9" opacity=".7"/><path d="M0 250H1000V360H0Z" fill="#b39a72"/>'+Array.from({length:14},(_,i)=>'<path d="M'+(i*78)+' 35v205" stroke="#a58c68" stroke-width="2" opacity=".3"/>').join('');
+ host.innerHTML='<div class="unified-world world-scene-theme-'+n+'"><div class="unified-world-heading"><span>THE PINKLISH GARDEN</span><b>'+titles[n]+'</b></div><svg class="unified-world-canvas" viewBox="0 0 1000 360" role="img" aria-label="'+titles[n]+'">'+bg+art+'</svg><div class="unified-world-note">روی هر عنصر بزن تا واژه و توضیحاتش را ببینی</div></div>';
 }
 function focusWorldObject(key){
  const host=document.getElementById('forest3dStage');
