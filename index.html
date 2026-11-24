@@ -334,7 +334,75 @@ function renderProgress(){let a=JSON.parse(localStorage.getItem('pg_tasks')||'[]
 const bloomEmoji={'avicenna':'🧑🏻‍🏫','leopard':'🐆','visitor':'🧳','die out':'🦤','elephant':'🐘','human':'🧑','endangered':'🐼','gazelle':'🦌','information':'📚','protect':'🛡️','destroy':'💥','wildlife':'🦒','nature':'🌿','zookeeper':'🧑🏻‍🌾','telescope':'🔭','microscope':'🔬','orbit':'🪐','planet':'🪐','neptune':'🔵','oxygen':'🫧','carbon dioxide':'⚗️','energy':'⚡','creation':'🌌','donate':'🎁','knowledge':'📖','value':'💎','scientist':'🧑🏻‍🔬','mathematics':'📐','medicine':'💊','experiment':'🧪','discover':'🔎','achievement':'🏆','effort':'💪','translate':'🌐','patient':'🧑‍⚕️','treatment':'🩺','travel agent':'🧭','vacation':'🏖️','abroad':'✈️','destination':'📍','culture':'🎭','embassy':'🏛️','historical':'🏺','comfortable':'🛋️','traditional':'🪕','safely':'🦺','pilgrim':'🕌'};
 let activeBloomWord=null;
 function persianPronunciation(word){const p={'leopard':'لِپِرد','elephant':'اِلِفِنت','gazelle':'گَزِل','tiger':'تایگِر','dolphin':'دالْفین','whale':'وِیل','bear':'بِر','bird':'بِرد','giraffe':'جِراف','wolf':'وولف','cheetah':'چی‌تا','panda':'پَندا','forest':'فارِست','nature':'نِیچِر','protect':'پِرُتِکت','destroy':'دیسترُی','endangered':'اِن‌دِینجِرد','telescope':'تِلِسکوپ','microscope':'مایکرُسکوپ','planet':'پْلَنِت','orbit':'اوربیت','neptune':'نِپتون','oxygen':'آکسِجِن','knowledge':'نالِج','scientist':'سایِنتیست','medicine':'مِدِسِن','vacation':'وِیکِیشن','abroad':'اَبراد','destination':'دِستینِیشن','avicenna':'اَویسِنا','carbon dioxide':'کاربِن دای‌آکساید'};return p[word.toLowerCase()]||word.split('').join('');}
-const pictureTitles={'avicenna':'Avicenna','die out':'Extinction','endangered':'Endangered species','wildlife':'Wildlife','zookeeper':'Zookeeper','carbon dioxide':'Carbon dioxide','travel agent':'Travel agent','abroad':'Study abroad','pilgrim':'Pilgrim'};function loadModalPicture(word){const img=document.getElementById('modalPicture'),emoji=document.getElementById('modalEmoji');img.hidden=true;img.removeAttribute('src');img.alt=word+' illustration';emoji.hidden=false;const title=pictureTitles[word.toLowerCase()]||word;const url='https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(title.replace(/ /g,'_'));fetch(url,{headers:{'Accept':'application/json'}}).then(r=>{if(!r.ok)throw new Error('image unavailable');return r.json()}).then(data=>{if(!activeBloomWord||activeBloomWord[0].toLowerCase()!==word.toLowerCase())return;if(data.thumbnail&&data.thumbnail.source&&data.thumbnail.width>=data.thumbnail.height*1.15){img.src=data.thumbnail.source;img.alt=data.title||word;img.hidden=false;emoji.hidden=true}}).catch(()=>{});}function openWordBloom(word){let w=words.find(x=>x[0].toLowerCase()===String(word).toLowerCase());if(!w)return;activeBloomWord=w;document.getElementById('modalWord').textContent=w[0];document.getElementById('modalPhonetic').textContent=w[1];document.getElementById('modalPersianPronunciation').textContent=persianPronunciation(w[0]);document.getElementById('modalMeaning').textContent=w[2];document.getElementById('modalEmoji').textContent=bloomEmoji[w[0].toLowerCase()]||'🌸';loadModalPicture(w[0]);const examples=wordExamplesFor(w[0]);document.getElementById('modalExample').textContent='1. '+examples[0];document.getElementById('modalExample2').textContent='2. '+examples[1];document.getElementById('wordModal').classList.add('open')}
+const pictureTitles={'avicenna':'Avicenna','die out':'Extinction','endangered':'Endangered species','wildlife':'Wildlife','zookeeper':'Zookeeper','carbon dioxide':'Carbon dioxide','travel agent':'Travel agent','abroad':'Study abroad','pilgrim':'Pilgrim'};
+const pictureSearchTerms={
+'avicenna':'Avicenna historical site statue',
+'visitor':'museum visitors',
+'die out':'wildlife extinction endangered species',
+'endangered':'endangered animal wildlife',
+'information':'information books learning',
+'protect':'wildlife conservation nature protection',
+'destroy':'environmental destruction deforestation',
+'wildlife':'wild animals in nature',
+'nature':'beautiful nature landscape',
+'zookeeper':'zookeeper feeding animals zoo',
+'telescope':'astronomical telescope observatory',
+'microscope':'microscope laboratory',
+'orbit':'planet orbit solar system illustration',
+'planet':'planet earth space',
+'neptune':'Neptune planet space',
+'oxygen':'oxygen molecule science',
+'carbon dioxide':'carbon dioxide molecule science',
+'energy':'renewable energy solar panels',
+'creation':'universe creation space nebula',
+'donate':'charity donation helping people',
+'knowledge':'library books knowledge',
+'value':'valuable antique object',
+'scientist':'scientist laboratory research',
+'mathematics':'mathematics geometry numbers',
+'medicine':'medical medicine laboratory',
+'experiment':'science experiment laboratory',
+'discover':'scientific discovery research',
+'achievement':'achievement success award',
+'effort':'hard work effort study',
+'translate':'translation languages dictionary',
+'patient':'patient hospital care',
+'treatment':'medical treatment hospital',
+'travel agent':'travel agency office',
+'vacation':'vacation beach travel',
+'abroad':'international travel city',
+'destination':'travel destination landscape',
+'culture':'traditional culture festival',
+'embassy':'embassy building',
+'historical':'historical architecture monument',
+'comfortable':'comfortable cozy room',
+'traditional':'traditional clothing culture',
+'safely':'road safety traffic',
+'pilgrim':'pilgrimage religious site'
+};
+function setBloomImage(img,emoji,word,url,alt){if(!activeBloomWord||activeBloomWord[0].toLowerCase()!==word.toLowerCase())return;img.onload=()=>{if(img.naturalWidth>=img.naturalHeight*1.12){img.hidden=false;emoji.hidden=true}else{img.hidden=true;emoji.hidden=false}};img.onerror=()=>{img.hidden=true;emoji.hidden=false};img.src=url;img.alt=alt||word+' photograph'}
+function loadModalPicture(word){
+ const img=document.getElementById('modalPicture'),emoji=document.getElementById('modalEmoji');
+ img.hidden=true;img.removeAttribute('src');img.onload=null;img.onerror=null;img.alt=word+' illustration';emoji.hidden=false;
+ const key=word.toLowerCase(),query=pictureSearchTerms[key]||word+' photograph';
+ const params=new URLSearchParams({action:'query',generator:'search',gsrsearch:'filetype:bitmap '+query,gsrnamespace:'6',gsrlimit:'30',prop:'imageinfo',iiprop:'url|size',iiurlwidth:'800',format:'json',origin:'*'});
+ fetch('https://commons.wikimedia.org/w/api.php?'+params.toString()).then(r=>{if(!r.ok)throw new Error('Commons search unavailable');return r.json()}).then(data=>{
+  if(!activeBloomWord||activeBloomWord[0].toLowerCase()!==key)return;
+  const pages=Object.values(data.query?.pages||{});
+  const candidates=pages.map(p=>({page:p,info:p.imageinfo?.[0]})).filter(x=>x.info?.thumburl&&x.info.width>=x.info.height*1.12&&x.info.width>=500).sort((a,b)=>(b.info.width/b.info.height)-(a.info.width/a.info.height));
+  if(candidates.length){const best=candidates[0];setBloomImage(img,emoji,word,best.info.thumburl,best.page.title.replace(/^File:/,''));return}
+  loadWikipediaLandscapeFallback(word,img,emoji);
+ }).catch(()=>loadWikipediaLandscapeFallback(word,img,emoji));
+}
+function loadWikipediaLandscapeFallback(word,img,emoji){
+ const title=pictureTitles[word.toLowerCase()]||word;
+ const url='https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(title.replace(/ /g,'_'));
+ fetch(url,{headers:{'Accept':'application/json'}}).then(r=>{if(!r.ok)throw new Error('image unavailable');return r.json()}).then(data=>{
+  if(!activeBloomWord||activeBloomWord[0].toLowerCase()!==word.toLowerCase())return;
+  if(data.thumbnail?.source&&data.thumbnail.width>=data.thumbnail.height*1.12)setBloomImage(img,emoji,word,data.thumbnail.source,data.title||word);
+ }).catch(()=>{img.hidden=true;emoji.hidden=false});
+}
+function openWordBloom(word){let w=words.find(x=>x[0].toLowerCase()===String(word).toLowerCase());if(!w)return;activeBloomWord=w;document.getElementById('modalWord').textContent=w[0];document.getElementById('modalPhonetic').textContent=w[1];document.getElementById('modalPersianPronunciation').textContent=persianPronunciation(w[0]);document.getElementById('modalMeaning').textContent=w[2];document.getElementById('modalEmoji').textContent=bloomEmoji[w[0].toLowerCase()]||'🌸';loadModalPicture(w[0]);const examples=wordExamplesFor(w[0]);document.getElementById('modalExample').textContent='1. '+examples[0];document.getElementById('modalExample2').textContent='2. '+examples[1];document.getElementById('wordModal').classList.add('open')}
 function closeWordModal(){document.getElementById('wordModal').classList.remove('open')}
 function speakModalWord(){if(!activeBloomWord)return;if(!('speechSynthesis'in window)){alert('پخش تلفظ در این مرورگر پشتیبانی نمی‌شود.');return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(activeBloomWord[0]);u.lang='en-US';u.rate=.82;speechSynthesis.speak(u)}
 function saveModalWord(){if(!activeBloomWord)return;learned.add(activeBloomWord[0]);saveSets();renderGarden();renderProgress();closeWordModal()}
