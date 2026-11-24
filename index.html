@@ -298,11 +298,35 @@
 .hero{background:radial-gradient(ellipse at 78% 20%,var(--rose) 0,transparent 35%),linear-gradient(115deg,var(--hero-a) 0%,var(--hero-b) 56%,var(--hero-c) 100%)}
 .tile:after{background:var(--tile-glow)}
 
-:root[data-site-font="tahoma"] body{font-family:Estedad,Tahoma,sans-serif}
-:root[data-site-font="arial"] body{font-family:Arial,Tahoma,sans-serif}
-:root[data-site-font="rounded"] body{font-family:"Trebuchet MS",Tahoma,sans-serif}
-:root[data-site-font="georgia"] body{font-family:Georgia,Tahoma,serif}
-.font-picker{border-top:1px solid var(--line);margin-top:13px;padding-top:12px}.font-picker-title{font-size:13px;font-weight:800;margin:0 0 8px}.font-options{display:grid;grid-template-columns:1fr 1fr;gap:7px}.font-choice{border:1px solid var(--line);border-radius:11px;background:transparent;color:var(--ink);padding:9px 7px;font-size:12px}.font-choice[aria-pressed="true"]{outline:2px solid var(--rose);background:var(--paper)}.font-choice[data-font-choice="georgia"]{font-family:Georgia,Tahoma,serif}.font-choice[data-font-choice="rounded"]{font-family:"Trebuchet MS",Tahoma,sans-serif}
+
+/* Make every selected palette visible across the whole learning interface */
+:root[data-theme="lavender"] .hero{background:radial-gradient(ellipse at 78% 20%,#d8c9f2 0,transparent 38%),linear-gradient(115deg,#34234f 0%,#65518a 56%,#aa96d0 100%)}
+:root[data-theme="lavender"] .tile,:root[data-theme="lavender"] .panel,:root[data-theme="lavender"] .word,:root[data-theme="lavender"] .stat{background:#fbf8ff;border-color:#e2d9f0}
+:root[data-theme="lavender"] .tile:after{background:#eee7fa}
+:root[data-theme="lavender"] .pill,:root[data-theme="lavender"] .tag,:root[data-theme="lavender"] .feedback{background:#eee7fa;color:#51406f}
+:root[data-theme="lavender"] .btn.soft,:root[data-theme="lavender"] .option,:root[data-theme="lavender"] .field{background:#f5f0fc;color:#51406f;border-color:#e2d9f0}
+:root[data-theme="lavender"] .flashcard{background:linear-gradient(145deg,#51406f,#a995d8)}
+:root[data-theme="lavender"] .progress span{background:linear-gradient(90deg,#8972bd,#c9b8eb)}
+:root[data-theme="mint"] .tile,:root[data-theme="mint"] .panel,:root[data-theme="mint"] .word,:root[data-theme="mint"] .stat{background:#f7fffb;border-color:#d4e9df}
+:root[data-theme="mint"] .pill,:root[data-theme="mint"] .tag,:root[data-theme="mint"] .feedback{background:#e1f3eb;color:#285d50}
+:root[data-theme="mint"] .btn.soft,:root[data-theme="mint"] .option,:root[data-theme="mint"] .field{background:#effaf4;color:#285d50}
+:root[data-theme="mint"] .flashcard{background:linear-gradient(145deg,#285d50,#72b9a3)}
+:root[data-theme="ocean"] .tile,:root[data-theme="ocean"] .panel,:root[data-theme="ocean"] .word,:root[data-theme="ocean"] .stat{background:#f6fbff;border-color:#d4e4f0}
+:root[data-theme="ocean"] .pill,:root[data-theme="ocean"] .tag,:root[data-theme="ocean"] .feedback{background:#e1eff8;color:#28577a}
+:root[data-theme="ocean"] .btn.soft,:root[data-theme="ocean"] .option,:root[data-theme="ocean"] .field{background:#eff7fc;color:#28577a}
+:root[data-theme="ocean"] .flashcard{background:linear-gradient(145deg,#28577a,#6ca9cf)}
+:root[data-theme="sunset"] .tile,:root[data-theme="sunset"] .panel,:root[data-theme="sunset"] .word,:root[data-theme="sunset"] .stat{background:#fffaf5;border-color:#eedbd0}
+:root[data-theme="sunset"] .pill,:root[data-theme="sunset"] .tag,:root[data-theme="sunset"] .feedback{background:#f9e9dd;color:#874c3b}
+:root[data-theme="sunset"] .btn.soft,:root[data-theme="sunset"] .option,:root[data-theme="sunset"] .field{background:#fff3e9;color:#874c3b}
+:root[data-theme="sunset"] .flashcard{background:linear-gradient(145deg,#874c3b,#e49a78)}
+:root[data-theme="midnight"] .tile,:root[data-theme="midnight"] .panel,:root[data-theme="midnight"] .word,:root[data-theme="midnight"] .stat{background:#2b2438;color:#e9e2f2;border-color:#493d5b}
+:root[data-theme="midnight"] .pill,:root[data-theme="midnight"] .tag,:root[data-theme="midnight"] .feedback{background:#493b60;color:#e9e2f2}
+:root[data-theme="midnight"] .btn.soft,:root[data-theme="midnight"] .option,:root[data-theme="midnight"] .field{background:#332940;color:#e9e2f2;border-color:#493d5b}
+:root[data-theme="midnight"] .flashcard{background:linear-gradient(145deg,#29213b,#695482)}
+:root[data-theme="pink"] .tile,:root[data-theme="pink"] .panel,:root[data-theme="pink"] .word,:root[data-theme="pink"] .stat{background:#fffdfb;border-color:#f4d0c8}
+:root[data-theme="pink"] .pill,:root[data-theme="pink"] .tag,:root[data-theme="pink"] .feedback{background:#fff0eb;color:#c76670}
+:root[data-theme="pink"] .btn.soft,:root[data-theme="pink"] .option,:root[data-theme="pink"] .field{background:#fff5f1;color:#c76670}
+:root[data-theme="pink"] .flashcard{background:linear-gradient(145deg,#c76670,#f2a79b)}
 
 /* Compact theme switcher */
 .theme-switcher{position:fixed;top:14px;left:14px;z-index:1000;direction:rtl;font-family:Estedad,Tahoma,sans-serif}
@@ -337,7 +361,6 @@
    <button class="theme-choice" type="button" data-theme-choice="sunset" aria-pressed="false" onclick="applyGardenTheme('sunset')"><span class="theme-dots"><i style="background:#fffaf5"></i><i style="background:#e49a78"></i><i style="background:#874c3b"></i></span><span>غروب هلویی</span></button>
    <button class="theme-choice" type="button" data-theme-choice="midnight" aria-pressed="false" onclick="applyGardenTheme('midnight')"><span class="theme-dots"><i style="background:#211c2b"></i><i style="background:#bd9bdc"></i><i style="background:#695482"></i></span><span>شب بنفش</span></button>
   </div>
-  <div class="font-picker"><p class="font-picker-title">فونت نوشته‌های سایت ✍️</p><div class="font-options"><button class="font-choice" type="button" data-font-choice="tahoma" aria-pressed="true" onclick="applyGardenFont('tahoma')">ساده و پیش‌فرض</button><button class="font-choice" type="button" data-font-choice="arial" aria-pressed="false" onclick="applyGardenFont('arial')">آریال</button><button class="font-choice" type="button" data-font-choice="rounded" aria-pressed="false" onclick="applyGardenFont('rounded')">گرد و دوستانه</button><button class="font-choice" type="button" data-font-choice="georgia" aria-pressed="false" onclick="applyGardenFont('georgia')">کلاسیک</button></div></div>
  </div>
 </div>
 <main class="wrap">
@@ -1253,9 +1276,8 @@ function pgNext(){if(!pgSolved)return;if(pgIndex<pgSet.length-1){pgIndex++;pgRen
 function showVocabMenu(){document.getElementById('vocabMenu').classList.remove('hidden');['bank','flash','spell'].forEach(k=>document.getElementById('vocabView-'+k).classList.add('hidden'));window.scrollTo({top:0,behavior:'smooth'})}
 function showVocabTool(tool){document.getElementById('vocabMenu').classList.add('hidden');['bank','flash','spell'].forEach(k=>document.getElementById('vocabView-'+k).classList.toggle('hidden',k!==tool));if(tool==='bank')renderWords();if(tool==='flash')resetFlash();if(tool==='spell')pgReset();window.scrollTo({top:0,behavior:'smooth'})}
 
-function applyGardenFont(font){const allowed=['tahoma','arial','rounded','georgia'];if(!allowed.includes(font))return;document.documentElement.dataset.siteFont=font;try{localStorage.setItem('pinklishGardenFont',font)}catch(e){}document.querySelectorAll('[data-font-choice]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.fontChoice===font)))}
 function toggleThemeMenu(){const p=document.getElementById('themePop'),b=document.querySelector('.theme-trigger');if(!p)return;const open=p.classList.toggle('open');b?.setAttribute('aria-expanded',String(open))}
 function applyGardenTheme(theme){const allowed=['pink','lavender','mint','ocean','sunset','midnight'];if(!allowed.includes(theme))return;document.documentElement.dataset.theme=theme;try{localStorage.setItem('pinklishGardenTheme',theme)}catch(e){}document.querySelectorAll('[data-theme-choice]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.themeChoice===theme)));const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=theme==='midnight'?'#211c2b':theme==='lavender'?'#fbf8ff':theme==='mint'?'#f7fffb':theme==='ocean'?'#f6fbff':theme==='sunset'?'#fffaf5':'#fff9f6'}
-(function(){let saved='pink',font='tahoma';try{saved=localStorage.getItem('pinklishGardenTheme')||'pink';font=localStorage.getItem('pinklishGardenFont')||'tahoma'}catch(e){}applyGardenTheme(saved);applyGardenFont(font);document.addEventListener('click',e=>{const root=document.getElementById('themeSwitcher');if(root&&!root.contains(e.target)){document.getElementById('themePop')?.classList.remove('open');document.querySelector('.theme-trigger')?.setAttribute('aria-expanded','false')}});document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('themePop')?.classList.remove('open');document.querySelector('.theme-trigger')?.setAttribute('aria-expanded','false')}})})();
+(function(){let saved='pink';try{saved=localStorage.getItem('pinklishGardenTheme')||'pink'}catch(e){}applyGardenTheme(saved);document.addEventListener('click',e=>{const root=document.getElementById('themeSwitcher');if(root&&!root.contains(e.target)){document.getElementById('themePop')?.classList.remove('open');document.querySelector('.theme-trigger')?.setAttribute('aria-expanded','false')}});document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('themePop')?.classList.remove('open');document.querySelector('.theme-trigger')?.setAttribute('aria-expanded','false')}})})();
 
 </script></body></html>
