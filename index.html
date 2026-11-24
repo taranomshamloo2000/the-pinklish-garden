@@ -73,12 +73,14 @@
 @keyframes arrowPulse{0%,100%{opacity:.45;transform:translateX(0)}50%{opacity:1;transform:translateX(-4px)}}
 @keyframes grammarReveal{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:650px){.grammar-academy-grid{grid-template-columns:1fr}.grammar-orbit{left:3%;opacity:.5;width:85px;height:85px}.grammar-hero{padding:25px 19px}.g-options{grid-template-columns:1fr 1fr}}
+
+/* Responsive page gutters and comfortable mobile width */
+.wrap{width:min(100%,1240px);margin-inline:auto;padding:26px clamp(14px,3.2vw,32px) 64px}
+@media(max-width:560px){.wrap{padding:18px 13px 42px}.hero,.panel,.grammar-hero{border-radius:22px}.grid{gap:11px}}
+.footer{width:100%;}
 </style>
-<span class="emoji">🍨</span><h3>پیشرفت من</h3><p>آمار یادگیری و نتیجه آزمون‌ها</p></button>
-</div>
-<div class="section-head"><div><h2>یک شکوفه برای امروز</h2><p>هر روز حتی یک واژه تازه هم ارزشمند است.</p></div></div>
-<div class="panel" style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap"><div><span class="pill">واژه پیشنهادی</span><h2 class="latin" style="font-size:32px;margin:10px 0 2px">protect</h2><div>محافظت کردن</div><small class="muted">/prəˈtekt/ · We should protect nature.</small></div><button class="btn soft" onclick="showPage('flash')">مرور فلش‌کارت‌ها</button></div>
-</section>
+<body>
+<main class="wrap">
 <section id="home" class="page">
 <div class="hero"><div class="hero-copy"><div class="eyebrow">A little garden for curious minds</div><h1>THE PINKLISH<br>GARDEN</h1><p>اینجا هر واژه یک شکوفه است؛ یاد بگیر، تمرین کن و قدم‌به‌قدم باغ دانش انگلیسی خودت را بساز.</p><button class="btn light" onclick="showPage('lessons')">شروع یادگیری <span>←</span></button></div><div class="hero-art">🌸</div></div>
 <div class="section-head"><div><h2>به کدام بخش می‌رویم؟</h2><p>همه‌چیز همین‌جاست؛ فقط یک کلیک تا شروع یادگیری فاصله داری.</p></div><span class="pill">۱۲ بخش آموزشی</span></div>
@@ -123,6 +125,7 @@
 <section id="about" class="page hidden"><h1 class="page-title">درباره باغ</h1><p class="sub">یک فضای آموزشی برای شکوفا شدن مهارت‌های زبان انگلیسی.</p></section>
 </main>
 <div class="modal3d" id="wordModal" onclick="if(event.target===this)closeWordModal()"><div class="modal-card"><button class="modal-close" onclick="closeWordModal()">×</button><span class="pill">WORD BLOOM · باغ واژگان</span><div class="modal-visual"><span id="modalEmoji">🌷</span></div><h2 id="modalWord">protect</h2><div class="phonetic" id="modalPhonetic">/prəˈtekt/</div><div class="meaning" id="modalMeaning">محافظت کردن</div><p class="example" id="modalExample">We should protect nature.</p><div class="actions"><button class="btn soft" onclick="speakModalWord()">🔊 شنیدن تلفظ</button><button class="btn" onclick="saveModalWord()">ذخیره در باغ 🌷</button></div></div></div>
+</main>
 <footer class="footer"><div class="latin">THE PINKLISH GARDEN</div><p>Where English blooms.</p><p>طراحی و ساخته‌شده با عشق به یادگیری توسط <b>ترنم شاملو</b></p><p><a href="mailto:taranomshamloo2000@gmail.com">taranomshamloo2000@gmail.com</a></p><p style="font-size:11px;opacity:.65">© THE PINKLISH GARDEN</p></footer>
 <script>
 const words=[
