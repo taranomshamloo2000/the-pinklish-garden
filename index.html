@@ -537,6 +537,22 @@
 .library-note{font-size:12px;line-height:1.9;color:var(--muted);background:var(--paper);border:1px dashed var(--line);border-radius:14px;padding:12px;margin:16px 0}
 @media(max-width:600px){.library-hero{padding:22px}.library-grid{grid-template-columns:1fr}.book-actions a{flex:1}}
 
+
+/* LOCAL CLASSIC BOOK READER + BROWSER TTS */
+.book-reader{display:none;margin:22px 0;padding:18px;border:1px solid var(--line);border-radius:22px;background:var(--paper);box-shadow:0 12px 35px #45283a12}
+.book-reader.active{display:block}
+.reader-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:14px}
+.reader-title{font:600 clamp(22px,3vw,32px)/1.25 'Playfair Display',Georgia,serif;color:var(--wine);direction:ltr;text-align:right}
+.reader-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.reader-controls button{border:0;border-radius:12px;padding:10px 14px;background:var(--wine);color:#fff;font:inherit;font-size:13px;cursor:pointer}
+.reader-controls button.light{background:transparent;color:var(--wine);border:1px solid var(--line)}
+.reader-speed{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.reader-speed input{width:105px}
+.reader-content{direction:ltr;text-align:left;font:17px/1.95 Georgia,'Times New Roman',serif;color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere;max-height:70vh;overflow:auto;padding:12px 5px}
+.reader-status{font-size:12px;color:var(--muted);margin:8px 0}
+.reader-meaning{direction:rtl;text-align:right;background:var(--soft, #f8edf2);border-radius:15px;padding:13px;margin:12px 0;font-size:13px;line-height:1.9}
+@media(max-width:600px){.book-reader{padding:12px}.reader-content{font-size:15px;max-height:65vh}.reader-controls button{flex:1}}
+
 </style>
 <body>
 
@@ -618,6 +634,18 @@
 <div class="library-hero"><span class="pill">THE CLASSIC READING ROOM · AGES 15–18</span><h2>THE PINKLISH LIBRARY</h2><p>ده داستان ماندگار برای خواندن، یادگیری واژگان و تقویت مهارت شنیداری؛ با متن اصلی انگلیسی و راهنمای فارسی.</p><div class="book-meta"><span class="book-tag">۱۰ کتاب منتخب</span><span class="book-tag">متن انگلیسی اصلی</span><span class="book-tag">معنی و واژگان فارسی</span><span class="book-tag">نسخه صوتی آزاد</span></div></div>
 <div class="library-tools"><input id="bookSearch" type="search" placeholder="جست‌وجوی نام کتاب یا نویسنده..." oninput="renderLibrary()"><select id="bookLevel" onchange="renderLibrary()" style="border:1px solid var(--line);border-radius:14px;padding:10px;background:var(--paper);color:var(--ink)"><option value="all">همه سطح‌ها</option><option value="easy">متوسط</option><option value="advanced">متوسط رو به پیشرفته</option></select></div>
 <div id="libraryGrid" class="library-grid"></div>
+<div id="bookReader" class="book-reader" aria-live="polite">
+ <div class="reader-top"><div><div class="pill">PINKLISH · READING ROOM</div><h2 id="readerBookTitle" class="reader-title">Classic Book</h2><div id="readerBookAuthor" class="book-author"></div></div><button class="light" onclick="closeBookReader()" style="border:1px solid var(--line);border-radius:12px;padding:9px 12px;background:transparent;color:var(--wine)">✕ بستن کتاب</button></div>
+ <div class="reader-controls">
+  <button onclick="playBookAudio()">▶ پخش متن انگلیسی</button>
+  <button class="light" onclick="pauseBookAudio()">Ⅱ مکث / ادامه</button>
+  <button class="light" onclick="stopBookAudio()">■ توقف</button>
+  <label class="reader-speed">سرعت <input id="readerRate" type="range" min="0.7" max="1.15" step="0.05" value="0.9" oninput="document.getElementById('readerRateValue').textContent=this.value+'×'"><b id="readerRateValue">0.9×</b></label>
+ </div>
+ <div id="readerStatus" class="reader-status">متن کامل کتاب داخل همین سایت بارگذاری می‌شود.</div>
+ <div id="readerMeaning" class="reader-meaning"></div>
+ <article id="readerText" class="reader-content">در حال بارگذاری متن کتاب...</article>
+</div>
 <div class="library-note">📌 نکته حق نشر: متن‌های اصلی این آثار کلاسیک از نسخه‌های مالکیت عمومی Project Gutenberg پیوند داده شده‌اند. برای شنیداری، به فهرست رسمی LibriVox می‌روید؛ ضبط‌های LibriVox در آمریکا مالکیت عمومی‌اند، اما وضعیت حقوقی ممکن است در کشورهای دیگر متفاوت باشد. کتابخانه متن یا فایل صوتی ناشران امروزی را کپی نمی‌کند. معنی‌ها و خلاصه‌های فارسی این بخش محتوای آموزشی اختصاصی‌اند.</div>
 </section>
 <section id="writing" class="page hidden"><button class="back" onclick="showPage('home')">← بازگشت به خانه</button><h1 class="page-title">نوشتن</h1><p class="sub">جمله یا پاراگراف خودت را بنویس و ذخیره کن.</p><div class="panel"><label>موضوع تمرین: Why should we protect nature?</label><textarea class="field" id="writingText" placeholder="Write your paragraph here..." style="margin-top:12px"></textarea><div class="actions" style="justify-content:flex-start"><button class="btn" onclick="saveWriting()">ذخیره نوشته</button><span id="writingMsg" class="muted"></span></div></div></section>
@@ -647,18 +675,79 @@ const classicBooks=[
 {title:"Anne of Green Gables",fa:"آن در گرین گیبلز",author:"L. M. Montgomery",id:45,level:"advanced",levelFa:"متوسط رو به پیشرفته",emoji:"🌿",en:"Imaginative orphan Anne arrives at Green Gables by mistake and slowly wins the hearts of the people around her with her energy and imagination.",faDesc:"آن، دختری یتیم و خیال‌پرداز، اشتباهی به گرین گیبلز فرستاده می‌شود و با شور زندگی، تخیل و شخصیت پرجنب‌وجوشش دل اطرافیان را به دست می‌آورد.",vocab:[["orphan","یتیم"],["imagination","تخیل"],["unexpected","غیرمنتظره"],["belong","تعلق داشتن"]]},
 {title:"Treasure Island",fa:"جزیره گنج",author:"Robert Louis Stevenson",id:120,level:"advanced",levelFa:"متوسط رو به پیشرفته",emoji:"🏴‍☠️",en:"Young Jim Hawkins finds a treasure map and joins a dangerous sea voyage filled with pirates, secrets and difficult choices.",faDesc:"جیم هاوکینز نوجوان نقشه گنجی پیدا می‌کند و وارد سفری دریایی پرخطر می‌شود؛ سفری پر از دزد دریایی، راز و تصمیم‌های دشوار.",vocab:[["treasure","گنج"],["voyage","سفر دریایی"],["crew","خدمه کشتی"],["betrayal","خیانت"]]},
 {title:"Peter and Wendy (Peter Pan)",fa:"پیتر پن",author:"J. M. Barrie",id:16,level:"advanced",levelFa:"متوسط رو به پیشرفته",emoji:"🧚",en:"Peter Pan takes Wendy and her brothers to Neverland, a place of pirates, fairies and adventures where growing up seems far away.",faDesc:"پیتر پن، وندی و برادرانش را به ناکجاآباد می‌برد؛ سرزمینی پر از دزدان دریایی، پری‌ها و ماجراجویی که در آن بزرگ شدن دور از ذهن به نظر می‌رسد.",vocab:[["fairy","پری"],["island","جزیره"],["imagination","خیال‌پردازی"],["growing up","بزرگ شدن"]]},
-{title:"Little Women",fa:"زنان کوچک",author:"Louisa May Alcott",id:514,level:"advanced",levelFa:"متوسط رو به پیشرفته",emoji:"🎀",en:"The four March sisters grow up during difficult times, learning about family, ambition, kindness and finding their own paths.",faDesc:"چهار خواهر خانواده مارچ در روزگاری دشوار بزرگ می‌شوند و درباره خانواده، آرزوها، مهربانی و پیدا کردن مسیر مستقل خود درس می‌گیرند.",vocab:[["ambition","جاه‌طلبی / آرزو"],["sacrifice","فداکاری"],["independent","مستقل"],["support","حمایت کردن"]]},
+{title:"The Railway Children",fa:"بچه‌های راه‌آهن",author:"E. Nesbit",id:1874,level:"easy",levelFa:"متوسط",emoji:"🚂",en:"Three siblings move to the countryside and become fascinated by the railway near their new home. Their kindness leads them into unexpected friendships and adventures.",faDesc:"سه خواهر و برادر به روستا نقل مکان می‌کنند و مجذوب راه‌آهن نزدیک خانه جدیدشان می‌شوند. مهربانی آن‌ها به دوستی‌ها و ماجراهای غیرمنتظره‌ای منجر می‌شود.",vocab:[["railway","راه‌آهن"],["countryside","منطقه روستایی"],["platform","سکوی ایستگاه"],["kindness","مهربانی"]]},
 {title:"Black Beauty",fa:"زیبای سیاه",author:"Anna Sewell",id:271,level:"easy",levelFa:"متوسط",emoji:"🐎",en:"A horse tells the story of his life and the people he meets, showing how kindness and cruelty shape the lives of animals.",faDesc:"اسب سیاهی داستان زندگی خود و انسان‌هایی را که می‌بیند روایت می‌کند و نشان می‌دهد مهربانی یا بی‌رحمی انسان‌ها چه تأثیری بر حیوانات دارد.",vocab:[["kindness","مهربانی"],["cruelty","بی‌رحمی"],["stable","اصطبل"],["care for","مراقبت کردن"]]},
 {title:"The Jungle Book",fa:"کتاب جنگل",author:"Rudyard Kipling",id:236,level:"advanced",levelFa:"متوسط رو به پیشرفته",emoji:"🐅",en:"Mowgli grows up among wolves in the Indian jungle and learns about friendship, survival and the laws of the wild.",faDesc:"ماگلی میان گرگ‌ها در جنگل هند بزرگ می‌شود و درباره دوستی، بقا و قوانین طبیعت چیزهای زیادی یاد می‌گیرد.",vocab:[["jungle","جنگل انبوه"],["survive","زنده ماندن"],["pack","گله"],["law","قانون"]]},
 {title:"The Adventures of Sherlock Holmes",fa:"ماجراهای شرلوک هولمز",author:"Arthur Conan Doyle",id:1661,level:"advanced",levelFa:"متوسط رو به پیشرفته",emoji:"🔎",en:"Brilliant detective Sherlock Holmes and Dr Watson solve unusual mysteries by observing details, asking questions and using logic.",faDesc:"کارآگاه نابغه، شرلوک هولمز، همراه دکتر واتسون با مشاهده جزئیات، پرسیدن سؤال و استفاده از منطق، معماهای عجیب را حل می‌کند.",vocab:[["detective","کارآگاه"],["evidence","مدرک"],["clue","سرنخ"],["investigate","تحقیق کردن"]]}
 ];
+const bookKeyById={11:'alice',55:'oz',113:'secret-garden',45:'anne',120:'treasure-island',16:'peter-pan',271:'black-beauty',236:'jungle-book',1661:'sherlock',1874:'railway-children'};
 function renderLibrary(){
  const grid=document.getElementById('libraryGrid');if(!grid)return;
  const q=(document.getElementById('bookSearch')?.value||'').trim().toLowerCase();
  const level=document.getElementById('bookLevel')?.value||'all';
  const list=classicBooks.filter(b=>(level==='all'||b.level===level)&&(!q||(b.title+' '+b.fa+' '+b.author).toLowerCase().includes(q)));
- grid.innerHTML=list.length?list.map((b,i)=>`<article class="book-card"><div class="book-cover">${b.emoji}</div><h3 class="book-title">${b.title}</h3><div class="book-author">${b.author}</div><div class="book-meta"><span class="book-tag">${b.fa}</span><span class="book-tag">${b.levelFa}</span><span class="book-tag">۱۵ تا ۱۸ سال</span></div><p class="book-en">${b.en}</p><p class="book-synopsis">${b.faDesc}</p><div class="book-vocab"><b>واژگان منتخب:</b><br>${b.vocab.map(v=>'<span dir="ltr" style="display:inline-block;margin-left:8px"><b>'+v[0]+'</b> — '+v[1]+'</span>').join(' · ')}</div><div class="book-actions"><a href="https://www.gutenberg.org/ebooks/${b.id}" target="_blank" rel="noopener">مطالعه متن انگلیسی ↗</a><a class="secondary" href="https://librivox.org/search?action=search" target="_blank" rel="noopener" title="در صفحه LibriVox نام کتاب را جست‌وجو کن">🎧 نسخه شنیداری ↗</a></div></article>`).join(''):'<div class="notice">کتابی با این جست‌وجو پیدا نشد.</div>';
+ grid.innerHTML=list.length?list.map(b=>`<article class="book-card"><div class="book-cover">${b.emoji}</div><h3 class="book-title">${b.title}</h3><div class="book-author">${b.author}</div><div class="book-meta"><span class="book-tag">${b.fa}</span><span class="book-tag">${b.levelFa}</span><span class="book-tag">۱۵ تا ۱۸ سال</span></div><p class="book-en">${b.en}</p><p class="book-synopsis">${b.faDesc}</p><div class="book-vocab"><b>واژگان منتخب:</b><br>${b.vocab.map(v=>'<span dir="ltr" style="display:inline-block;margin-left:8px"><b>'+v[0]+'</b> — '+v[1]+'</span>').join(' · ')}</div><div class="book-actions"><button type="button" onclick="openBook('${bookKeyById[b.id]}')">📖 مطالعه کامل داخل سایت</button><button type="button" class="secondary" onclick="openBook('${bookKeyById[b.id]}',true)">🎧 شنیدن متن انگلیسی</button></div></article>`).join(''):'<div class="notice">کتابی با این جست‌وجو پیدا نشد.</div>';
 }
+
+
+const bookReaderMeta={
+alice:{title:"Alice's Adventures in Wonderland",fa:"آلیس در سرزمین عجایب",author:"Lewis Carroll",meaning:"آلیس با دنبال کردن یک خرگوش سفید وارد دنیایی خیال‌انگیز می‌شود. داستان درباره کنجکاوی، تخیل، منطق و بزرگ شدن است."},
+oz:{title:"The Wonderful Wizard of Oz",fa:"جادوگر شگفت‌انگیز اُز",author:"L. Frank Baum",meaning:"دوروتی و دوستانش در سفری پرماجرا به دنبال خانه، شجاعت، خرد و قلبی مهربان می‌گردند."},
+"secret-garden":{title:"The Secret Garden",fa:"باغ مخفی",author:"Frances Hodgson Burnett",meaning:"داستان مری نشان می‌دهد طبیعت، دوستی و مراقبت می‌توانند امید و زندگی تازه‌ای به انسان ببخشند."},
+anne:{title:"Anne of Green Gables",fa:"آن در گرین گیبلز",author:"L. M. Montgomery",meaning:"آن با تخیل و انرژی خود زندگی خانواده‌ای در روستا را تغییر می‌دهد و درباره دوستی، تعلق و اعتمادبه‌نفس می‌آموزد."},
+"treasure-island":{title:"Treasure Island",fa:"جزیره گنج",author:"Robert Louis Stevenson",meaning:"جیم هاوکینز در سفری دریایی با دزدان دریایی، خطر، وفاداری و انتخاب‌های اخلاقی روبه‌رو می‌شود."},
+"peter-pan":{title:"Peter Pan",fa:"پیتر پن",author:"J. M. Barrie",meaning:"پیتر پن و کودکان به ناکجاآباد سفر می‌کنند؛ داستانی درباره خیال، کودکی، شجاعت و پذیرفتن بزرگ شدن."},
+"black-beauty":{title:"Black Beauty",fa:"زیبای سیاه",author:"Anna Sewell",meaning:"یک اسب داستان زندگی خود را روایت می‌کند و خواننده را به مهربانی و رفتار مسئولانه با حیوانات دعوت می‌کند."},
+"jungle-book":{title:"The Jungle Book",fa:"کتاب جنگل",author:"Rudyard Kipling",meaning:"ماگلی میان حیوانات جنگل بزرگ می‌شود و با قانون طبیعت، دوستی، هویت و بقا آشنا می‌شود."},
+sherlock:{title:"The Adventures of Sherlock Holmes",fa:"ماجراهای شرلوک هولمز",author:"Arthur Conan Doyle",meaning:"شرلوک هولمز و دکتر واتسون با مشاهده دقیق، استدلال و بررسی سرنخ‌ها معماهای پیچیده را حل می‌کنند."},
+"railway-children":{title:"The Railway Children",fa:"بچه‌های راه‌آهن",author:"E. Nesbit",meaning:"سه خواهر و برادر پس از نقل مکان به روستا، با مهربانی و شجاعت دوستی‌های تازه‌ای می‌سازند و درگیر ماجراهای راه‌آهن می‌شوند."}
+};
+let currentBookKey=null,currentBookText='',bookSpeechChunks=[],bookSpeechIndex=0;
+function openBook(key,autoplay=false){
+ const meta=bookReaderMeta[key];if(!meta)return;
+ currentBookKey=key;currentBookText='';
+ const panel=document.getElementById('bookReader');panel.classList.add('active');
+ document.getElementById('readerBookTitle').textContent=meta.title;
+ document.getElementById('readerBookAuthor').textContent=meta.author+' · '+meta.fa;
+ document.getElementById('readerMeaning').innerHTML='<b>معنی و راهنمای فارسی داستان:</b><br>'+meta.meaning;
+ document.getElementById('readerText').textContent='در حال بارگذاری متن کامل کتاب...';
+ document.getElementById('readerStatus').textContent='متن کامل از فایل داخلی سایت خوانده می‌شود.';
+ panel.scrollIntoView({behavior:'smooth',block:'start'});stopBookAudio();
+ fetch('books/'+key+'.txt').then(r=>{if(!r.ok)throw new Error('فایل کتاب پیدا نشد');return r.text();}).then(t=>{
+ currentBookText=t.replace(/^\uFEFF/,'').trim();
+ document.getElementById('readerText').textContent=currentBookText;
+ document.getElementById('readerStatus').textContent='متن کامل آماده است · '+currentBookText.length.toLocaleString('en-US')+' نویسه · متن انگلیسی';
+ if(autoplay)playBookAudio();
+ }).catch(e=>{document.getElementById('readerText').textContent='بارگذاری کتاب ناموفق بود. صفحه را تازه‌سازی کن.';document.getElementById('readerStatus').textContent=e.message;});
+}
+function closeBookReader(){stopBookAudio();document.getElementById('bookReader').classList.remove('active');}
+function chooseEnglishVoice(){
+ const voices=window.speechSynthesis?window.speechSynthesis.getVoices():[];
+ const en=voices.filter(v=>/^en([_-]|$)/i.test(v.lang));
+ return en.find(v=>/female|samantha|victoria|karen|zira|susan|aria|jenny|google us english|ava/i.test(v.name))||en.find(v=>/google|microsoft|natural/i.test(v.name))||en[0]||null;
+}
+function makeSpeechChunks(text,max=1400){
+ const sentences=text.replace(/\s+/g,' ').match(/[^.!?]+[.!?]+|[^.!?]+$/g)||[text];
+ const chunks=[];let part='';
+ for(const sentence of sentences){if((part+' '+sentence).length>max&&part){chunks.push(part.trim());part='';}part+=' '+sentence;if(part.length>max){chunks.push(part.trim());part='';}}
+ if(part.trim())chunks.push(part.trim());return chunks;
+}
+function playBookAudio(){
+ if(!currentBookText){document.getElementById('readerStatus').textContent='اول صبر کن متن کتاب بارگذاری شود.';return;}
+ if(!('speechSynthesis'in window)){document.getElementById('readerStatus').textContent='مرورگر این دستگاه پخش گفتار را پشتیبانی نمی‌کند.';return;}
+ const synth=window.speechSynthesis;if(synth.paused){synth.resume();return;}if(synth.speaking)synth.cancel();
+ bookSpeechChunks=makeSpeechChunks(currentBookText);bookSpeechIndex=0;speakNextBookChunk();
+}
+function speakNextBookChunk(){
+ const synth=window.speechSynthesis;if(!synth||bookSpeechIndex>=bookSpeechChunks.length){document.getElementById('readerStatus').textContent='خواندن کتاب به پایان رسید.';return;}
+ const utter=new SpeechSynthesisUtterance(bookSpeechChunks[bookSpeechIndex]);utter.lang='en-US';utter.rate=parseFloat(document.getElementById('readerRate').value||'0.9');utter.pitch=1.08;utter.volume=1;
+ const voice=chooseEnglishVoice();if(voice)utter.voice=voice;
+ utter.onend=()=>{bookSpeechIndex++;speakNextBookChunk();};
+ utter.onerror=()=>{document.getElementById('readerStatus').textContent='پخش صوت در مرورگر متوقف شد؛ دوباره دکمه پخش را بزن.';};
+ document.getElementById('readerStatus').textContent='در حال خواندن بخش '+(bookSpeechIndex+1)+' از '+bookSpeechChunks.length+' با صدای انگلیسی دستگاه...';synth.speak(utter);
+}
+function pauseBookAudio(){if(!('speechSynthesis'in window))return;const s=window.speechSynthesis;if(s.speaking&&!s.paused)s.pause();else if(s.paused)s.resume();}
+function stopBookAudio(){if('speechSynthesis'in window)window.speechSynthesis.cancel();bookSpeechChunks=[];bookSpeechIndex=0;}
 
 const words=[
 ['avicenna','/ˌævɪˈsenə/','ابن سینا',1],['leopard','/ˈlepərd/','پلنگ',1],['visitor','/ˈvɪzɪtər/','بازدیدکننده',1],['die out','/daɪ aʊt/','منقرض شدن',1],['elephant','/ˈelɪfənt/','فیل',1],['human','/ˈhjuːmən/','انسان',1],['endangered','/ɪnˈdeɪndʒərd/','در معرض انقراض',1],['gazelle','/ɡəˈzel/','غزال',1],['information','/ˌɪnfərˈmeɪʃən/','اطلاعات',1],['protect','/prəˈtekt/','محافظت کردن',1],['destroy','/dɪˈstrɔɪ/','نابود کردن',1],['wildlife','/ˈwaɪldlaɪf/','حیات وحش',1],['nature','/ˈneɪtʃər/','طبیعت',1],['zookeeper','/ˈzuːkiːpər/','نگهبان باغ‌وحش',1],['telescope','/ˈtelɪskoʊp/','تلسکوپ',2],['microscope','/ˈmaɪkrəˌskoʊp/','میکروسکوپ',2],['orbit','/ˈɔːrbɪt/','مدار',2],['planet','/ˈplænɪt/','سیاره',2],['Neptune','/ˈneptjuːn/','نپتون',2],['oxygen','/ˈɑːksɪdʒən/','اکسیژن',2],['carbon dioxide','/ˌkɑːrbən daɪˈɑːksaɪd/','دی‌اکسید کربن',2],['energy','/ˈenərdʒi/','انرژی',2],['creation','/kriˈeɪʃən/','آفرینش',2],['donate','/ˈdoʊneɪt/','اهدا کردن',2],['knowledge','/ˈnɑːlɪdʒ/','دانش',3],['value','/ˈvæljuː/','ارزش',3],['scientist','/ˈsaɪəntɪst/','دانشمند',3],['mathematics','/ˌmæθəˈmætɪks/','ریاضیات',3],['medicine','/ˈmedɪsɪn/','پزشکی',3],['experiment','/ɪkˈsperɪmənt/','آزمایش',3],['discover','/dɪˈskʌvər/','کشف کردن',3],['achievement','/əˈtʃiːvmənt/','دستاورد',3],['effort','/ˈefərt/','تلاش',3],['translate','/trænsˈleɪt/','ترجمه کردن',3],['patient','/ˈpeɪʃənt/','بیمار؛ صبور',3],['treatment','/ˈtriːtmənt/','درمان',3],['travel agent','/ˈtrævəl ˌeɪdʒənt/','کارمند آژانس مسافرتی',4],['vacation','/veɪˈkeɪʃən/','تعطیلات',4],['abroad','/əˈbrɔːd/','در خارج از کشور',4],['destination','/ˌdestɪˈneɪʃən/','مقصد',4],['culture','/ˈkʌltʃər/','فرهنگ',4],['embassy','/ˈembəsi/','سفارت',4],['historical','/hɪˈstɔːrɪkəl/','تاریخی',4],['comfortable','/ˈkʌmftəbəl/','راحت',4],['traditional','/trəˈdɪʃənəl/','سنتی',4],['safely','/ˈseɪfli/','به سلامت',4],['pilgrim','/ˈpɪlɡrɪm/','زائر',4]
