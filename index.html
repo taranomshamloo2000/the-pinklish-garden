@@ -736,19 +736,57 @@ function openLibraryDetail(key){
  const read=document.createElement('button');read.className='btn library-read-btn';read.type='button';read.textContent='مطالعه‌ی متن کامل کتاب';read.addEventListener('click',()=>openLibraryReader(book.key));
  detail.append(back,hero,title,author,label,summary,read);root.appendChild(detail);window.scrollTo({top:0,behavior:'smooth'});
 }
-function openLibraryReader(key){
+const libraryBookFiles={
+ alice:"books-data-01.js",
+ oz:"books-data-02.js",
+ "secret-garden":"books-data-03.js",
+ anne:"books-data-04.js",
+ "treasure-island":"books-data-05.js",
+ "peter-pan":"books-data-06.js",
+ "black-beauty":"books-data-07.js",
+ "jungle-book":"books-data-08.js",
+ sherlock:"books-data-09.js",
+ "railway-children":"books-data-10.js"
+};
+const libraryBookLoads={};
+function loadLibraryBookText(key){
+ const existing=window.PINKLISH_BOOK_TEXTS&&window.PINKLISH_BOOK_TEXTS[key];
+ if(typeof existing==="string"&&existing.trim())return Promise.resolve(existing);
+ const file=libraryBookFiles[key];
+ if(!file)return Promise.reject(new Error("فایل این کتاب مشخص نشده است."));
+ if(!libraryBookLoads[key]){
+  libraryBookLoads[key]=new Promise((resolve,reject)=>{
+   const script=document.createElement("script");
+   script.src=new URL(file+"?reload=1",document.baseURI).href;
+   script.onload=()=>{
+    const loaded=window.PINKLISH_BOOK_TEXTS&&window.PINKLISH_BOOK_TEXTS[key];
+    if(typeof loaded==="string"&&loaded.trim())resolve(loaded);
+    else reject(new Error("فایل بارگذاری شد اما متن کتاب در آن پیدا نشد."));
+   };
+   script.onerror=()=>reject(new Error("بارگذاری فایل کتاب ناموفق بود."));
+   document.head.appendChild(script);
+  }).catch(error=>{delete libraryBookLoads[key];throw error;});
+ }
+ return libraryBookLoads[key];
+}
+async function openLibraryReader(key){
  const book=libraryBooks.find(b=>b.key===key);if(!book)return;
- const text=(window.PINKLISH_BOOK_TEXTS&&window.PINKLISH_BOOK_TEXTS[key])||'متن این کتاب بارگذاری نشده است.';
  const root=document.getElementById('libraryTexts');root.innerHTML='';
  const reader=document.createElement('article');reader.className='book-reader';
  const top=document.createElement('div');top.className='book-reader-top';
  const back=document.createElement('button');back.className='back';back.type='button';back.textContent='← بازگشت به خلاصه';back.addEventListener('click',()=>openLibraryDetail(key));
  const title=document.createElement('div');title.className='book-reader-title';title.textContent=book.title;
  top.append(back,title);
- const body=document.createElement('pre');body.className='book-reader-text';body.textContent=text;
+ const body=document.createElement('pre');body.className='book-reader-text';body.textContent='در حال بارگذاری متن کامل کتاب…';
  reader.append(top,body);root.appendChild(reader);window.scrollTo({top:0,behavior:'smooth'});
+ try{
+  const fullText=await loadLibraryBookText(key);
+  body.textContent=fullText;
+ }catch(error){
+  body.textContent='متن کامل این کتاب بارگذاری نشد. لطفاً اتصال اینترنت را بررسی کن و دوباره تلاش کن.\n\nجزئیات: '+error.message;
+  const retry=document.createElement('button');retry.type='button';retry.className='btn library-read-btn';retry.textContent='تلاش دوباره برای بارگذاری';retry.addEventListener('click',()=>openLibraryReader(key));reader.appendChild(retry);
+ }
 }
-
 const words=[
 ['avicenna','/ˌævɪˈsenə/','ابن سینا',1],['leopard','/ˈlepərd/','پلنگ',1],['visitor','/ˈvɪzɪtər/','بازدیدکننده',1],['die out','/daɪ aʊt/','منقرض شدن',1],['elephant','/ˈelɪfənt/','فیل',1],['human','/ˈhjuːmən/','انسان',1],['endangered','/ɪnˈdeɪndʒərd/','در معرض انقراض',1],['gazelle','/ɡəˈzel/','غزال',1],['information','/ˌɪnfərˈmeɪʃən/','اطلاعات',1],['protect','/prəˈtekt/','محافظت کردن',1],['destroy','/dɪˈstrɔɪ/','نابود کردن',1],['wildlife','/ˈwaɪldlaɪf/','حیات وحش',1],['nature','/ˈneɪtʃər/','طبیعت',1],['zookeeper','/ˈzuːkiːpər/','نگهبان باغ‌وحش',1],['telescope','/ˈtelɪskoʊp/','تلسکوپ',2],['microscope','/ˈmaɪkrəˌskoʊp/','میکروسکوپ',2],['orbit','/ˈɔːrbɪt/','مدار',2],['planet','/ˈplænɪt/','سیاره',2],['Neptune','/ˈneptjuːn/','نپتون',2],['oxygen','/ˈɑːksɪdʒən/','اکسیژن',2],['carbon dioxide','/ˌkɑːrbən daɪˈɑːksaɪd/','دی‌اکسید کربن',2],['energy','/ˈenərdʒi/','انرژی',2],['creation','/kriˈeɪʃən/','آفرینش',2],['donate','/ˈdoʊneɪt/','اهدا کردن',2],['knowledge','/ˈnɑːlɪdʒ/','دانش',3],['value','/ˈvæljuː/','ارزش',3],['scientist','/ˈsaɪəntɪst/','دانشمند',3],['mathematics','/ˌmæθəˈmætɪks/','ریاضیات',3],['medicine','/ˈmedɪsɪn/','پزشکی',3],['experiment','/ɪkˈsperɪmənt/','آزمایش',3],['discover','/dɪˈskʌvər/','کشف کردن',3],['achievement','/əˈtʃiːvmənt/','دستاورد',3],['effort','/ˈefərt/','تلاش',3],['translate','/trænsˈleɪt/','ترجمه کردن',3],['patient','/ˈpeɪʃənt/','بیمار؛ صبور',3],['treatment','/ˈtriːtmənt/','درمان',3],['travel agent','/ˈtrævəl ˌeɪdʒənt/','کارمند آژانس مسافرتی',4],['vacation','/veɪˈkeɪʃən/','تعطیلات',4],['abroad','/əˈbrɔːd/','در خارج از کشور',4],['destination','/ˌdestɪˈneɪʃən/','مقصد',4],['culture','/ˈkʌltʃər/','فرهنگ',4],['embassy','/ˈembəsi/','سفارت',4],['historical','/hɪˈstɔːrɪkəl/','تاریخی',4],['comfortable','/ˈkʌmftəbəl/','راحت',4],['traditional','/trəˈdɪʃənəl/','سنتی',4],['safely','/ˈseɪfli/','به سلامت',4],['pilgrim','/ˈpɪlɡrɪm/','زائر',4]
 ];
