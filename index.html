@@ -779,9 +779,22 @@ async function translateLibrarySentence(sentence){
  if(!translated)throw new Error("ترجمه‌ای دریافت نشد.");
  return translated;
 }
+function prepareLibraryBookText(raw){
+ let text=String(raw||"").replace(/\r/g,"").replace(/\\n/g,"\n");
+ // Remove the publisher's table of contents; the real story begins at Chapter I.
+ text=text.replace(/\n\s*CONTENTS\s*\n[\s\S]*?(?=\n\s*CHAPTER\s+(?:[IVXLCDM]+|\d+)\b)/i,"\n\n");
+ // Remove chapter-number labels while keeping the chapter titles.
+ text=text.replace(/^\s*CHAPTER\s+(?:[IVXLCDM]+|\d+)\s*\n+/gim,"");
+ // Join artificial line wraps from ebook formatting, while preserving paragraph breaks.
+ text=text.replace(/-\n(?=\w)/g,"").replace(/(?<!\n)\n(?!\n)/g," ");
+ text=text.replace(/[ \t]+/g," ").replace(/ *\n */g,"\n").replace(/\n{3,}/g,"\n\n");
+ return text.trim();
+}
 function splitLibrarySentences(text){
- return text.split(/\n+/).flatMap(paragraph=>{
-  const parts=paragraph.match(/[^.!?]+[.!?]+|[^.!?]+$/g)||[];
+ return text.split(/\n\s*\n/).flatMap(paragraph=>{
+  const clean=paragraph.trim();
+  if(!clean)return [];
+  const parts=clean.match(/[^.!?]+(?:[.!?]+[”’\"')\]]*|$)/g)||[clean];
   return parts.map(x=>x.trim()).filter(Boolean);
  });
 }
@@ -846,7 +859,7 @@ async function openLibraryReader(key){
  const lines=document.createElement('div');lines.className='book-reader-lines en-only';
  reader.append(top,toolbar,status,lines);root.appendChild(reader);window.scrollTo({top:0,behavior:'smooth'});
  try{
-  const fullText=await loadLibraryBookText(key);
+  const fullText=prepareLibraryBookText(await loadLibraryBookText(key));
   const sentences=splitLibrarySentences(fullText);
   sentences.forEach(sentence=>{
    const line=document.createElement('div');line.className='book-line';line.dataset.english=sentence;
