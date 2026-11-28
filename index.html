@@ -646,7 +646,7 @@
  <div id="readerMeaning" class="reader-meaning"></div>
  <article id="readerText" class="reader-content">در حال بارگذاری متن کتاب...</article>
 </div>
-<div class="library-note">📌 نکته حق نشر: متن‌های اصلی این آثار کلاسیک از نسخه‌های مالکیت عمومی Project Gutenberg پیوند داده شده‌اند. برای شنیداری، به فهرست رسمی LibriVox می‌روید؛ ضبط‌های LibriVox در آمریکا مالکیت عمومی‌اند، اما وضعیت حقوقی ممکن است در کشورهای دیگر متفاوت باشد. کتابخانه متن یا فایل صوتی ناشران امروزی را کپی نمی‌کند. معنی‌ها و خلاصه‌های فارسی این بخش محتوای آموزشی اختصاصی‌اند.</div>
+<div class="library-note">📌 نکته حق نشر: متن کامل کتاب‌ها مستقیماً در همین صفحه و از فایل‌های داخلی کتابخانه نمایش داده می‌شود؛ هیچ پیوندی برای خواندن کتاب باز نمی‌شود. پخش صوتی با صدای انگلیسیِ موجود در دستگاه انجام می‌شود. معنی فارسی فعلاً به‌صورت راهنمای داستان و واژگان منتخب ارائه شده است.</div>
 </section>
 <section id="writing" class="page hidden"><button class="back" onclick="showPage('home')">← بازگشت به خانه</button><h1 class="page-title">نوشتن</h1><p class="sub">جمله یا پاراگراف خودت را بنویس و ذخیره کن.</p><div class="panel"><label>موضوع تمرین: Why should we protect nature?</label><textarea class="field" id="writingText" placeholder="Write your paragraph here..." style="margin-top:12px"></textarea><div class="actions" style="justify-content:flex-start"><button class="btn" onclick="saveWriting()">ذخیره نوشته</button><span id="writingMsg" class="muted"></span></div></div></section>
 <section id="quiz" class="page hidden"><button class="back" onclick="showPage('home')">← بازگشت به خانه</button><h1 class="page-title">مرکز آزمون و بانک سؤالات</h1><p class="sub">بانک جامع سؤالات چهار درس؛ بر اساس درس، نوع و مبحث مرتب کن یا همه را یک‌جا ببین.</p>
@@ -686,7 +686,7 @@ function renderLibrary(){
  const q=(document.getElementById('bookSearch')?.value||'').trim().toLowerCase();
  const level=document.getElementById('bookLevel')?.value||'all';
  const list=classicBooks.filter(b=>(level==='all'||b.level===level)&&(!q||(b.title+' '+b.fa+' '+b.author).toLowerCase().includes(q)));
- grid.innerHTML=list.length?list.map(b=>`<article class="book-card"><div class="book-cover">${b.emoji}</div><h3 class="book-title">${b.title}</h3><div class="book-author">${b.author}</div><div class="book-meta"><span class="book-tag">${b.fa}</span><span class="book-tag">${b.levelFa}</span><span class="book-tag">۱۵ تا ۱۸ سال</span></div><p class="book-en">${b.en}</p><p class="book-synopsis">${b.faDesc}</p><div class="book-vocab"><b>واژگان منتخب:</b><br>${b.vocab.map(v=>'<span dir="ltr" style="display:inline-block;margin-left:8px"><b>'+v[0]+'</b> — '+v[1]+'</span>').join(' · ')}</div><div class="book-actions"><button type="button" onclick="openBook('${bookKeyById[b.id]}')">📖 مطالعه کامل داخل سایت</button><button type="button" class="secondary" onclick="openBook('${bookKeyById[b.id]}',true)">🎧 شنیدن متن انگلیسی</button></div></article>`).join(''):'<div class="notice">کتابی با این جست‌وجو پیدا نشد.</div>';
+ grid.innerHTML=list.length?list.map(b=>`<article class="book-card"><div class="book-cover">${b.emoji}</div><h3 class="book-title">${b.title}</h3><div class="book-author">${b.author}</div><div class="book-meta"><span class="book-tag">${b.fa}</span><span class="book-tag">${b.levelFa}</span><span class="book-tag">۱۵ تا ۱۸ سال</span></div><p class="book-en">${b.en}</p><p class="book-synopsis">${b.faDesc}</p><div class="book-vocab"><b>واژگان منتخب:</b><br>${b.vocab.map(v=>'<span dir="ltr" style="display:inline-block;margin-left:8px"><b>'+v[0]+'</b> — '+v[1]+'</span>').join(' · ')}</div><div class="book-actions"><button type="button" onclick="event.preventDefault();event.stopPropagation();openBook('${bookKeyById[b.id]}',false)">📖 نمایش متن کامل همین‌جا</button><button type="button" class="secondary" onclick="event.preventDefault();event.stopPropagation();openBook('${bookKeyById[b.id]}',true)">🎧 نمایش و پخش متن</button></div></article>`).join(''):'<div class="notice">کتابی با این جست‌وجو پیدا نشد.</div>';
 }
 
 
@@ -703,22 +703,34 @@ sherlock:{title:"The Adventures of Sherlock Holmes",fa:"ماجراهای شرل�
 "railway-children":{title:"The Railway Children",fa:"بچه‌های راه‌آهن",author:"E. Nesbit",meaning:"سه خواهر و برادر پس از نقل مکان به روستا، با مهربانی و شجاعت دوستی‌های تازه‌ای می‌سازند و درگیر ماجراهای راه‌آهن می‌شوند."}
 };
 let currentBookKey=null,currentBookText='',bookSpeechChunks=[],bookSpeechIndex=0;
-function openBook(key,autoplay=false){
+async function openBook(key,autoplay=false){
  const meta=bookReaderMeta[key];if(!meta)return;
- currentBookKey=key;currentBookText='';
- const panel=document.getElementById('bookReader');panel.classList.add('active');
+ currentBookKey=key;currentBookText='';stopBookAudio();
+ const panel=document.getElementById('bookReader');
+ panel.classList.add('active');
  document.getElementById('readerBookTitle').textContent=meta.title;
  document.getElementById('readerBookAuthor').textContent=meta.author+' · '+meta.fa;
  document.getElementById('readerMeaning').innerHTML='<b>معنی و راهنمای فارسی داستان:</b><br>'+meta.meaning;
- document.getElementById('readerText').textContent='در حال بارگذاری متن کامل کتاب...';
- document.getElementById('readerStatus').textContent='متن کامل از فایل داخلی سایت خوانده می‌شود.';
- panel.scrollIntoView({behavior:'smooth',block:'start'});stopBookAudio();
- fetch('books/'+key+'.txt').then(r=>{if(!r.ok)throw new Error('فایل کتاب پیدا نشد');return r.text();}).then(t=>{
- currentBookText=t.replace(/^\uFEFF/,'').trim();
- document.getElementById('readerText').textContent=currentBookText;
- document.getElementById('readerStatus').textContent='متن کامل آماده است · '+currentBookText.length.toLocaleString('en-US')+' نویسه · متن انگلیسی';
- if(autoplay)playBookAudio();
- }).catch(e=>{document.getElementById('readerText').textContent='بارگذاری کتاب ناموفق بود. صفحه را تازه‌سازی کن.';document.getElementById('readerStatus').textContent=e.message;});
+ const reader=document.getElementById('readerText');
+ reader.textContent='در حال باز کردن متن کتاب در همین صفحه...';
+ document.getElementById('readerStatus').textContent='کتاب داخل خود سایت نمایش داده می‌شود؛ به صفحه یا سایت دیگری منتقل نمی‌شوی.';
+ panel.scrollIntoView({behavior:'smooth',block:'start'});
+ try{
+  const fileUrl='https://taranomshamloo2000.github.io/the-pinklish-garden/books/'+encodeURIComponent(key)+'.txt?v=34';
+  const response=await fetch(fileUrl,{cache:'no-store'});
+  if(!response.ok)throw new Error('دریافت متن کتاب با خطا روبه‌رو شد ('+response.status+').');
+  const text=await response.text();
+  if(!text||!text.trim())throw new Error('فایل متن این کتاب خالی است.');
+  if(currentBookKey!==key)return;
+  currentBookText=text.replace(/^\uFEFF/,'').trim();
+  reader.textContent=currentBookText;
+  document.getElementById('readerStatus').textContent='متن کامل کتاب همین‌جا نمایش داده شد · '+currentBookText.length.toLocaleString('en-US')+' نویسه';
+  reader.scrollTop=0;
+  if(autoplay)playBookAudio();
+ }catch(error){
+  reader.textContent='متأسفانه متن بارگذاری نشد. اتصال اینترنت را بررسی و دوباره روی دکمه نمایش متن بزن.';
+  document.getElementById('readerStatus').textContent=error.message;
+ }
 }
 function closeBookReader(){stopBookAudio();document.getElementById('bookReader').classList.remove('active');}
 function chooseEnglishVoice(){
