@@ -772,7 +772,7 @@ function loadLibraryBookText(key){
 async function openLibraryReader(key){
  const book=libraryBooks.find(b=>b.key===key);if(!book)return;
  const root=document.getElementById('libraryTexts');root.innerHTML='';
- const reader=document.createElement('article');reader.className='book-reader';
+ const reader=document.createElement('article');reader.className='book-reader active';
  const top=document.createElement('div');top.className='book-reader-top';
  const back=document.createElement('button');back.className='back';back.type='button';back.textContent='← بازگشت به خلاصه';back.addEventListener('click',()=>openLibraryDetail(key));
  const title=document.createElement('div');title.className='book-reader-title';title.textContent=book.title;
