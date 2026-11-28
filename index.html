@@ -787,7 +787,7 @@ function splitLibrarySentences(text){
 }
 async function renderLibraryTranslation(lines,mode,status){
  const needsFa=mode!=="en";
- if(!needsFa){lines.querySelectorAll(".book-line-fa").forEach(x=>x.remove());lines.className="book-reader-lines en-only";status.textContent="متن اصلی انگلیسی";return;}
+ if(!needsFa){lines.className="book-reader-lines en-only";status.textContent="متن اصلی انگلیسی";return;}
  lines.className="book-reader-lines "+(mode==="fa"?"fa-only":"bi-mode");
  const items=[...lines.querySelectorAll(".book-line")];
  const pending=items.filter(x=>!x.dataset.translated);
